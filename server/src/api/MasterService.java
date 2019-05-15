@@ -15,9 +15,10 @@ public interface MasterService {
      * Allows a player to join a specified game.
      * @param token The token of the game to join.
      * @param playerName The player's name.
-     * @param partialStatePreference The partial state preference of the player.
+     * @param partialStateWidth width of the preferred partial state.
+     * @param partialStateHeight height of the preferred partial state.
      * @return Returns a JSON formatted string containing the game session's UUID.
      */
-    String join(String token, String playerName, PartialStatePreference partialStatePreference);
+    String join(String token, String playerName, int partialStateWidth, int partialStateHeight);
 
 }

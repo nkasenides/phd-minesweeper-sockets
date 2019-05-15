@@ -4,9 +4,9 @@ import api.MasterService;
 import com.google.gson.JsonObject;
 import datastore.Datastore;
 import model.*;
-import respondx.ErrorResponse;
-import respondx.JsonConvert;
-import respondx.SuccessResponse;
+import response.ErrorResponse;
+import response.JsonConvert;
+import response.SuccessResponse;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -39,7 +39,7 @@ public class LocalMasterService implements MasterService {
     }
 
     @Override
-    public String join(String token, String playerName, PartialStatePreference partialStatePreference) {
+    public String join(String token, String playerName, int partialStateWidth, int partialStateHeight) {
 
         //Check the game token:
         Game referencedGame = Datastore.getGame(token);
@@ -67,6 +67,10 @@ public class LocalMasterService implements MasterService {
                 }
             }
         }
+
+        //TODO Check if the maximum number of players has been reached.
+
+        PartialStatePreference partialStatePreference = new PartialStatePreference(partialStateWidth, partialStateHeight);
 
         //Create a new session:
         String sessionID = Datastore.addSession(token, playerName, partialStatePreference);

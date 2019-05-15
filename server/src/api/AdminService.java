@@ -30,6 +30,6 @@ public interface AdminService {
      * @param gameToken The game's token.
      * @return Returns JSON formatted string with the partial board state and game state of the game.
      */
-    String viewGame(String password, String gameToken, PartialStatePreference partialStatePreference, int startX, int startY);
+    String viewGame(String password, String gameToken, int partialStateWidth, int partialStateHeight, int startX, int startY);
 
 }

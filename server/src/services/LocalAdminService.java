@@ -6,9 +6,10 @@ import com.google.gson.JsonObject;
 import datastore.Datastore;
 import exception.InvalidCellReferenceException;
 import model.*;
-import respondx.ErrorResponse;
-import respondx.Response;
-import respondx.SuccessResponse;
+import response.AuthErrorResponse;
+import response.ErrorResponse;
+import response.Response;
+import response.SuccessResponse;
 
 public class LocalAdminService implements AdminService {
 
@@ -89,7 +90,7 @@ public class LocalAdminService implements AdminService {
     }
 
     @Override
-    public String viewGame(String password, String gameToken, PartialStatePreference partialStatePreference, int startX, int startY) {
+    public String viewGame(String password, String gameToken, int partialStateWidth, int partialStateHeight, int startX, int startY) {
         //Authentication check:
         if (!Datastore.checkPassword(password)) {
             AuthErrorResponse errorResponse = new AuthErrorResponse();
@@ -102,6 +103,8 @@ public class LocalAdminService implements AdminService {
             ErrorResponse response = new ErrorResponse("Game not found", "Game with token '" + gameToken + "' not found.");
             return response.toJSON();
         }
+
+        PartialStatePreference partialStatePreference = new PartialStatePreference(partialStateWidth, partialStateHeight);
 
         try {
             PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), startX, startY, referencedGame.getFullBoardState());

@@ -6,9 +6,9 @@ import com.google.gson.JsonObject;
 import datastore.Datastore;
 import exception.InvalidCellReferenceException;
 import model.*;
-import respondx.ErrorResponse;
-import respondx.Response;
-import respondx.SuccessResponse;
+import response.ErrorResponse;
+import response.Response;
+import response.SuccessResponse;
 
 public class LocalUserService implements UserService {
 
@@ -186,6 +186,12 @@ public class LocalUserService implements UserService {
                     return response.toJSON();
                 }
 
+                //Check if the game has ended:
+                if (referencedGame.getGameState().isEnded()) {
+                    ErrorResponse response = new ErrorResponse("Game ended", "The game you tried to play has ended.");
+                    return response.toJSON();
+                }
+
                 //Check if the cell is revealed:
                 if (referencedGame.getFullBoardState().getCells()[x][y].getRevealState() != RevealState.COVERED) {
                     try {
@@ -270,6 +276,12 @@ public class LocalUserService implements UserService {
                 //Check if the game has started:
                 if (referencedGame.getGameState() == GameState.NOT_STARTED) {
                     ErrorResponse response = new ErrorResponse("Game not started", "The game you tried to play has not yet started.");
+                    return response.toJSON();
+                }
+
+                //Check if the game has ended:
+                if (referencedGame.getGameState().isEnded()) {
+                    ErrorResponse response = new ErrorResponse("Game ended", "The game you tried to play has ended.");
                     return response.toJSON();
                 }
 

@@ -1,7 +1,6 @@
-package model;
+package response;
 
-import respondx.Response;
-import respondx.ResponseStatus;
+import com.google.gson.JsonObject;
 
 public class AuthErrorResponse extends Response {
 
