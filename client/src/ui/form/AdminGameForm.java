@@ -108,7 +108,6 @@ public class AdminGameForm extends JFrame {
     }
 
     public void initialize() {
-
         gamePanel = new JPanel();
         gamePanel.setLayout(new GridLayout(partialStatePreference.getWidth(), partialStatePreference.getHeight()));
         for (int x = 0; x < partialStatePreference.getWidth(); x++) {
@@ -119,8 +118,11 @@ public class AdminGameForm extends JFrame {
             }
         }
         add(gamePanel);
+
         update();
         setVisible(true);
+        MinesweeperButton.setIconSize(buttons[0][0].getWidth() - 8);
+        MinesweeperButton.reloadIcons();
     }
 
     public void update() {

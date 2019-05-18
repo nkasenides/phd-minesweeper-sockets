@@ -8,22 +8,29 @@ import java.awt.*;
 public class MinesweeperButton extends JButton {
 
     public static final String RESOURCE_FOLDER = "res/";
-    public static final ImageIcon MINE;
-    public static final ImageIcon FLAG;
-    public static final ImageIcon ONE;
-    public static final ImageIcon TWO;
-    public static final ImageIcon THREE;
-    public static final ImageIcon FOUR;
-    public static final ImageIcon FIVE;
-    public static final ImageIcon SIX;
-    public static final ImageIcon SEVEN;
-    public static final ImageIcon EIGHT;
+    public static ImageIcon MINE;
+    public static ImageIcon FLAG;
+    public static ImageIcon ONE;
+    public static ImageIcon TWO;
+    public static ImageIcon THREE;
+    public static ImageIcon FOUR;
+    public static ImageIcon FIVE;
+    public static ImageIcon SIX;
+    public static ImageIcon SEVEN;
+    public static ImageIcon EIGHT;
 
-    public static final int ICON_SIZE = 64;
+    public static int ICON_SIZE = 64;
 
     public static final Border BUTTON_BORDER = new LineBorder(Color.BLACK, 1);
 
-    static {
+    public static void setIconSize(int iconSize) {
+        if (iconSize >= 10) ICON_SIZE = iconSize;
+    }
+
+    public static void reloadIcons() {
+
+        if (ICON_SIZE < 10) return;
+
         MINE = new ImageIcon(RESOURCE_FOLDER + "mine.png");
         MINE.setImage(MINE.getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH));
 
@@ -53,6 +60,10 @@ public class MinesweeperButton extends JButton {
 
         EIGHT = new ImageIcon(RESOURCE_FOLDER + "eight.png");
         EIGHT.setImage(EIGHT.getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH));
+    }
+
+    static {
+        reloadIcons();
     }
 
     public MinesweeperButton() {

@@ -54,8 +54,8 @@ public class AdminClient implements Runnable {
                 JsonObject object = new JsonObject();
                 object.addProperty("maxNumOfPlayers", "5");
                 object.addProperty("difficulty", Difficulty.HARD.toString());
-                object.addProperty("width", 10); //TODO Generalize
-                object.addProperty("height", 10); //TODO Generalize
+                object.addProperty("width", 20); //TODO Generalize
+                object.addProperty("height", 20); //TODO Generalize
                 object.addProperty("password", "1234");
                 Command command = new Command(CommandType.ADMIN_SERVICE, "createGame", object);
 
@@ -214,7 +214,7 @@ public class AdminClient implements Runnable {
         for(int i = 0; i < numOfClients; i++) {
             try {
                 final Socket socket = new Socket("localhost", SERVER_PORT);
-                clients[i] = new AdminClient(socket, "adminClient" + i, new PartialStatePreference(10, 10)); //TODO Generalize
+                clients[i] = new AdminClient(socket, "adminClient" + i, new PartialStatePreference(20, 20)); //TODO Generalize
                 new Thread(clients[i]).start();
             } catch (IOException ioe) {
                 throw new RuntimeException(ioe);

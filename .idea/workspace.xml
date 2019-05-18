@@ -2,33 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69a611ff-23d4-450c-bedc-1adc64208b5a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/eight.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/five.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/flag.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/four.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/mine.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/one.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/seven.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/six.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/three.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/res/two.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/AdminClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/clients/AdminClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/clients/PlayerClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/model/CommandType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/model/CommandType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/MasterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/MasterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/datastore/Datastore.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/datastore/Datastore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/model/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/model/Session.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/LocalAdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/LocalAdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/LocalMasterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/LocalMasterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/LocalUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/LocalUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/clients/AdminClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/clients/AdminClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/clients/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/clients/PlayerClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1530">
-              <caret line="127" column="62" selection-start-line="127" selection-start-column="62" selection-end-line="127" selection-end-column="62" />
+            <state relative-caret-position="416">
+              <caret line="122" column="25" lean-forward="true" selection-start-line="122" selection-start-column="25" selection-end-line="122" selection-end-column="25" />
               <folding>
                 <element signature="method#setPartialBoardState#0;class#AdminGameForm#0" />
               </folding>
@@ -57,8 +34,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="152" column="68" selection-start-line="152" selection-start-column="68" selection-end-line="152" selection-end-column="68" />
+            <state relative-caret-position="287">
+              <caret line="216" column="104" selection-start-line="216" selection-start-column="104" selection-end-line="216" selection-end-column="104" />
             </state>
           </provider>
         </entry>
@@ -75,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="97" column="46" selection-start-line="97" selection-start-column="46" selection-end-line="97" selection-end-column="46" />
+            <state relative-caret-position="29">
+              <caret line="118" column="57" lean-forward="true" selection-start-line="118" selection-start-column="57" selection-end-line="118" selection-end-column="57" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -102,8 +79,8 @@
       <find>got</find>
       <find>.toJSON();</find>
       <find>Random</find>
-      <find>update</find>
       <find>Got</find>
+      <find>update</find>
     </findStrings>
     <replaceStrings>
       <replace>;</replace>
@@ -150,10 +127,10 @@
         <option value="$PROJECT_DIR$/server/src/Server.java" />
         <option value="$PROJECT_DIR$/server/src/server/Server.java" />
         <option value="$PROJECT_DIR$/server/src/services/LocalUserService.java" />
-        <option value="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" />
+        <option value="$PROJECT_DIR$/client/src/clients/PlayerClient.java" />
         <option value="$PROJECT_DIR$/client/src/clients/AdminClient.java" />
         <option value="$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java" />
-        <option value="$PROJECT_DIR$/client/src/clients/PlayerClient.java" />
+        <option value="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" />
       </list>
     </option>
   </component>
@@ -211,6 +188,23 @@
             <path>
               <item name="Sockets" type="b2602c69:ProjectViewProjectNode" />
               <item name="Sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="form" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="form" type="462c0819:PsiDirectoryNode" />
+              <item name="AdminGameForm" type="e9f4de52:FormNode" />
+            </path>
+            <path>
+              <item name="Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -232,11 +226,6 @@
               <item name="common" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="response" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Sockets" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Sockets" type="b2602c69:ProjectViewProjectNode" />
@@ -392,15 +381,16 @@
       <workItem from="1557950545810" duration="10836000" />
       <workItem from="1558039754166" duration="59000" />
       <workItem from="1558092734219" duration="3905000" />
-      <workItem from="1558162715316" duration="8369000" />
+      <workItem from="1558162715316" duration="10351000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32528000" />
+    <option name="totallyTimeSpent" value="34510000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18869936" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -417,7 +407,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Application Servers" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32936078" />
@@ -562,9 +552,6 @@
     <entry file="file://$PROJECT_DIR$/client/src/ui/form/LocalMainForm.form" />
     <entry file="file://$PROJECT_DIR$/client/src/ui/form/LocalGameForm.java" />
     <entry file="file://$PROJECT_DIR$/client/src/ui/form/LocalSimulatedMain.java" />
-    <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/javafx-src.zip!/com/sun/media/jfxmedia/events/PlayerStateEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -695,12 +682,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="152" column="68" selection-start-line="152" selection-start-column="68" selection-end-line="152" selection-end-column="68" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.form">
+      <provider selected="true" editor-type-id="ui-designer" />
     </entry>
     <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -712,29 +695,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="118" column="57" lean-forward="true" selection-start-line="118" selection-start-column="57" selection-end-line="118" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="216" column="104" selection-start-line="216" selection-start-column="104" selection-end-line="216" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="40" lean-forward="true" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+        <state relative-caret-position="123">
+          <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
+          <folding>
+            <element signature="e#753#754#0" expanded="true" />
+            <element signature="e#809#810#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1530">
-          <caret line="127" column="62" selection-start-line="127" selection-start-column="62" selection-end-line="127" selection-end-column="62" />
+        <state relative-caret-position="416">
+          <caret line="122" column="25" lean-forward="true" selection-start-line="122" selection-start-column="25" selection-end-line="122" selection-end-column="25" />
           <folding>
             <element signature="method#setPartialBoardState#0;class#AdminGameForm#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="97" column="46" selection-start-line="97" selection-start-column="46" selection-end-line="97" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

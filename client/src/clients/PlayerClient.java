@@ -141,7 +141,7 @@ public class PlayerClient implements Runnable {
     }
 
     public static void main(String[] args) {
-        int numOfClients = 1;
+        int numOfClients = 2;
         PlayerClient[] clients = new PlayerClient[numOfClients];
         for(int i = 0; i < numOfClients; i++) {
             try {
