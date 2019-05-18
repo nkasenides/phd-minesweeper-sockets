@@ -2,6 +2,7 @@ package api;
 
 import model.Difficulty;
 import model.PartialStatePreference;
+import response.Response;
 
 public interface MasterService {
 
@@ -9,7 +10,7 @@ public interface MasterService {
      * Retrieves a list of all games.
      * @return Returns a JSON formatted string containing the created games' tokens.
      */
-    String listGames();
+    Response listGames();
 
     /**
      * Allows a player to join a specified game.
@@ -19,6 +20,6 @@ public interface MasterService {
      * @param partialStateHeight height of the preferred partial state.
      * @return Returns a JSON formatted string containing the game session's UUID.
      */
-    String join(String token, String playerName, int partialStateWidth, int partialStateHeight);
+    Response join(String token, String playerName, int partialStateWidth, int partialStateHeight);
 
 }

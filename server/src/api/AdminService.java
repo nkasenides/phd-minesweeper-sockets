@@ -2,6 +2,7 @@ package api;
 
 import model.Difficulty;
 import model.PartialStatePreference;
+import response.Response;
 
 public interface AdminService {
 
@@ -14,7 +15,7 @@ public interface AdminService {
      * @param difficulty The game's difficulty {@link Difficulty}.
      * @return Returns a JSON formatted string containing the created game's token as data.
      */
-    String createGame(String password, int maxNumOfPlayers, int width, int height, Difficulty difficulty);
+    Response createGame(String password, int maxNumOfPlayers, int width, int height, Difficulty difficulty);
 
     /**
      * Starts a game using its gameToken.
@@ -22,7 +23,7 @@ public interface AdminService {
      * @param gameToken The game's token.
      * @return Returns JSON formatted string with the status of the game.
      */
-    String startGame(String password, String gameToken);
+    Response startGame(String password, String gameToken);
 
     /**
      * Retrieves the state of a game using a gameToken.
@@ -30,6 +31,6 @@ public interface AdminService {
      * @param gameToken The game's token.
      * @return Returns JSON formatted string with the partial board state and game state of the game.
      */
-    String viewGame(String password, String gameToken, int partialStateWidth, int partialStateHeight, int startX, int startY);
+    Response viewGame(String password, String gameToken, int partialStateWidth, int partialStateHeight, int startX, int startY);
 
 }

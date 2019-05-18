@@ -1,10 +1,14 @@
+package server;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import model.Command;
-import model.Difficulty;
-import model.Direction;
+import datastore.Datastore;
+import exception.InvalidCellReferenceException;
+import model.*;
 import response.ErrorResponse;
+import response.Response;
+import response.ResponseStatus;
 import services.LocalAdminService;
 import services.LocalMasterService;
 import services.LocalUserService;
@@ -16,18 +20,20 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 
 public class Server implements Runnable {
 
     public static final int SERVER_PORT = 12345;
+    private static final LocalAdminService ADMIN_SERVICE = new LocalAdminService();
+    private static final LocalMasterService MASTER_SERVICE = new LocalMasterService();
+    private static final LocalUserService USER_SERVICE = new LocalUserService();
 
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
     private Socket socket;
 
-    private static final LocalAdminService ADMIN_SERVICE = new LocalAdminService();
-    private static final LocalMasterService MASTER_SERVICE = new LocalMasterService();
-    private static final LocalUserService USER_SERVICE = new LocalUserService();
+    private String clientSessionID;
 
     public Server(Socket socket) throws IOException {
         this.socket = socket;
@@ -54,6 +60,7 @@ public class Server implements Runnable {
                     return;
                 }
 
+                Response response;
                 String reply;
                 final String endpointName = receivedCommand.getEndpointName();
                 final JsonObject payload = receivedCommand.getPayload();
@@ -67,11 +74,11 @@ public class Server implements Runnable {
                                 int width = payload.get("width").getAsInt();
                                 int height = payload.get("height").getAsInt();
                                 Difficulty difficulty = Difficulty.valueOf(payload.get("difficulty").getAsString());
-                                reply = ADMIN_SERVICE.createGame(password, maxNumOfPlayers, width, height, difficulty);
+                                response = ADMIN_SERVICE.createGame(password, maxNumOfPlayers, width, height, difficulty);
                                 break;
                             case "startGame":
                                 String gameTokenStart = payload.get("gameToken").getAsString();
-                                reply = ADMIN_SERVICE.startGame(password, gameTokenStart);
+                                response  = ADMIN_SERVICE.startGame(password, gameTokenStart);
                                 break;
                             case "viewGame":
                                 String gameTokenView = payload.get("gameToken").getAsString();
@@ -79,29 +86,39 @@ public class Server implements Runnable {
                                 int partialStateHeight = payload.get("partialStateHeight").getAsInt();
                                 int startX = payload.get("startX").getAsInt();
                                 int startY = payload.get("startY").getAsInt();
-                                reply = ADMIN_SERVICE.viewGame(password, gameTokenView, partialStateWidth, partialStateHeight, startX, startY);
+                                response = ADMIN_SERVICE.viewGame(password, gameTokenView, partialStateWidth, partialStateHeight, startX, startY);
+                                break;
+                            case "subscribe":
+                                String gameTokenSubscribe = payload.get("token").getAsString();
+                                int partialStateWidthSubscribe = payload.get("partialStateWidth").getAsInt();
+                                int partialStateHeightSubscribe = payload.get("partialStateHeight").getAsInt();
+                                response = ADMIN_SERVICE.subscribe(password, gameTokenSubscribe, partialStateWidthSubscribe, partialStateHeightSubscribe);
+                                if (response.getStatus() == ResponseStatus.OK) {
+                                    clientSessionID = response.getData().get("sessionID").getAsString();
+                                }
                                 break;
                             default:
-                                ErrorResponse errorResponse = new ErrorResponse("Invalid endpoint", "The endpoint '" + endpointName + "' is not valid.");
-                                reply = errorResponse.toJSON();
+                                response = new ErrorResponse("Invalid endpoint", "The endpoint '" + endpointName + "' is not valid.");
                                 break;
                         }
                         break;
                     case MASTER_SERVICE:
                         switch (endpointName) {
                             case "listGames":
-                                reply = MASTER_SERVICE.listGames();
+                                response = MASTER_SERVICE.listGames();
                                 break;
                             case "join":
                                 String token = payload.get("token").getAsString();
                                 String playerName = payload.get("playerName").getAsString();
                                 int partialStateWidth = payload.get("partialStateWidth").getAsInt();
                                 int partialStateHeight = payload.get("partialStateHeight").getAsInt();
-                                reply = MASTER_SERVICE.join(token, playerName, partialStateWidth, partialStateHeight);
+                                response = MASTER_SERVICE.join(token, playerName, partialStateWidth, partialStateHeight);
+                                if (response.getStatus() == ResponseStatus.OK) {
+                                    clientSessionID = response.getData().get("sessionID").getAsString();
+                                }
                                 break;
                             default:
-                                ErrorResponse errorResponse = new ErrorResponse("Invalid endpoint", "The endpoint '" + endpointName + "' is not valid.");
-                                reply = errorResponse.toJSON();
+                                response = new ErrorResponse("Invalid endpoint", "The endpoint '" + endpointName + "' is not valid.");
                                 break;
                         }
                         break;
@@ -109,36 +126,34 @@ public class Server implements Runnable {
                         final String sessionID = payload.get("sessionID").getAsString();
                         switch (endpointName) {
                             case "getPartialState":
-                                reply = USER_SERVICE.getPartialState(sessionID);
+                                response = USER_SERVICE.getPartialState(sessionID);
                                 break;
                             case "move":
                                 Direction direction = Direction.valueOf(payload.get("direction").getAsString());
                                 int unitOfMovement = payload.get("unitOfMovement").getAsInt();
-                                reply = USER_SERVICE.move(sessionID, direction, unitOfMovement);
+                                response = USER_SERVICE.move(sessionID, direction, unitOfMovement);
                                 break;
                             case "reveal":
                                 int xReveal = payload.get("x").getAsInt();
                                 int yReveal = payload.get("y").getAsInt();
-                                reply = USER_SERVICE.reveal(sessionID, xReveal, yReveal);
+                                response = USER_SERVICE.reveal(sessionID, xReveal, yReveal);
                                 break;
                             case "flag":
                                 int xFlag = payload.get("x").getAsInt();
                                 int yFlag = payload.get("y").getAsInt();
-                                reply = USER_SERVICE.flag(sessionID, xFlag, yFlag);
+                                response = USER_SERVICE.flag(sessionID, xFlag, yFlag);
                                 break;
                             default:
-                                ErrorResponse errorResponse = new ErrorResponse("Invalid endpoint", "The endpoint '" + endpointName + "' is not valid.");
-                                reply = errorResponse.toJSON();
+                                response = new ErrorResponse("Invalid endpoint", "The endpoint '" + endpointName + "' is not valid.");
                                 break;
                         }
                         break;
                     default:
-                        ErrorResponse errorResponse = new ErrorResponse("Invalid service", "The service '" + receivedCommand.getCommandType() + "' is not a valid service.");
-                        reply = errorResponse.toJSON();
+                        response = new ErrorResponse("Invalid service", "The service '" + receivedCommand.getCommandType() + "' is not a valid service.");
                         break;
                 }
 
-                printWriter.println(reply);
+                printWriter.println(response.toJSON());
                 printWriter.flush();
 
             }
@@ -149,22 +164,75 @@ public class Server implements Runnable {
         }
     }
 
+    public PrintWriter getPrintWriter() {
+        return printWriter;
+    }
+
+    public static ArrayList<Server> serverInstances = new ArrayList<>();
+
+    /**
+     * Find when serverInstances need an update and send the appropriate partial game state back to them.
+     * This method should be called just before returning from a state-changing API call such as reveal & flag.
+     * updaterSessionID --> do not re-update the player who initiated the update.
+     */
+    public static void updateClients(String gameToken, String updaterSessionID) {
+        for (Server serverInstance : serverInstances) {
+            Session session = Datastore.getSession(serverInstance.clientSessionID);
+            if (session == null) throw new RuntimeException("The server instance has an invalid session ID '" + serverInstance.clientSessionID + "'.");
+            if (session.getGameToken().equals(gameToken) && !session.getSessionID().equals(updaterSessionID)) {
+
+                //Get the referenced game:
+                Game game = Datastore.getGame(gameToken);
+
+                //Get the partial state for this session:
+                PartialStatePreference partialStatePreference = session.getPartialStatePreference();
+                PartialBoardState partialBoardState;
+                try {
+                    partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), session.getPositionX(), session.getPositionY(), game.getFullBoardState());
+                }
+                catch (InvalidCellReferenceException e) {
+                    throw new RuntimeException(e.getMessage());
+                }
+
+                //Send the update in format:
+                /*
+                    ...
+                    "payload": {
+                        "gameState": ...
+                        "partialBoardState": ...
+                    }
+                 */
+
+                Gson gson = new Gson();
+                JsonObject payload = new JsonObject();
+                payload.add("gameState", gson.toJsonTree(game.getGameState()));
+                payload.add("partialBoardState", gson.toJsonTree(partialBoardState));
+                Command command = new Command(CommandType.CLIENT_UPDATE_SERVICE, "", payload);
+                String commandJSON = gson.toJson(command);
+                serverInstance.getPrintWriter().println(commandJSON);
+                serverInstance.getPrintWriter().flush();
+            }
+        }
+    }
+
     public static void main(String[] args) {
         try {
-
             System.out.println("Starting server...");
             System.out.println("Creating server socket at: " + SERVER_PORT);
             final ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
             System.out.println("Socket created, port " + SERVER_PORT);
 
-            while(true) {
+            while (true) {
                 System.out.println("Waiting for inbound connection...");
                 Socket socket = serverSocket.accept();
                 System.out.println("New connection from: " + socket.getInetAddress() + ":" + socket.getPort());
-                new Thread(new Server(socket)).start();
+                Server server = new Server(socket);
+                serverInstances.add(server);
+                new Thread(server).start();
             }
         } catch (IOException ioe) {
             throw new RuntimeException(ioe);
         }
     }
+
 }

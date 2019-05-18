@@ -7,17 +7,19 @@ public class Session {
     private final String sessionID;
     private final PartialStatePreference partialStatePreference;
     private final String playerName;
-    private final String gameID;
+    private final String gameToken;
     private int positionX;
     private int positionY;
+    private final boolean spectator;
 
-    public Session(PartialStatePreference partialStatePreference, String playerName, String gameID) {
+    public Session(PartialStatePreference partialStatePreference, String playerName, String gameToken, boolean spectator) {
         this.sessionID = UUID.randomUUID().toString();
         this.partialStatePreference = partialStatePreference;
         this.playerName = playerName;
-        this.gameID = gameID;
+        this.gameToken = gameToken;
         this.positionX = 0;
         this.positionY = 0;
+        this.spectator = spectator;
     }
 
     public String getSessionID() {
@@ -32,8 +34,8 @@ public class Session {
         return playerName;
     }
 
-    public String getGameID() {
-        return gameID;
+    public String getGameToken() {
+        return gameToken;
     }
 
     public int getPositionX() {
@@ -52,4 +54,7 @@ public class Session {
         this.positionY = positionY;
     }
 
+    public boolean isSpectator() {
+        return spectator;
+    }
 }

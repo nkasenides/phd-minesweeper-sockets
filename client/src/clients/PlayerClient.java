@@ -1,3 +1,5 @@
+package clients;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -89,11 +91,13 @@ public class PlayerClient implements Runnable {
 
             //While the game is not over, keep making moves:
             while (true) {
+
+                //TODO Generalize
                 JsonObject object = new JsonObject();
                 Random random = new Random();
                 int randomX = random.nextInt(games.get(0).getWidth()); //TODO Algorithm would ideally only try to solve cells on the partial state...
                 int randomY = random.nextInt(games.get(0).getHeight()); //TODO Algorithm would ideally only try to solve cells on the partial state...
-                String moveEndpoint = random.nextInt(2) > 0 ? "flag" : "reveal";
+                String moveEndpoint = random.nextInt(10) > 6 ? "flag" : "reveal";
 
                 System.out.println(name + ": Decided to make move '" + moveEndpoint + "' at cell (" + randomX + "," + randomY + ").");
 
@@ -108,10 +112,12 @@ public class PlayerClient implements Runnable {
 //                System.out.println("Sending request --> " +moveCommandJSON);
                 printWriter.flush();
 
+                Thread.sleep(500); //TODO Generalize
+
                 //Wait for and print reply:
 //                System.out.println("Waiting for reply...");
                 String reply = bufferedReader.readLine();
-                System.out.println("Got: '" + reply + "'");
+                System.out.println("[" + name + "] Got: '" + reply + "'");
 
                 Response playResponse = gson.fromJson(reply, Response.class);
                 if (playResponse.getStatus() == OK) {
@@ -135,7 +141,7 @@ public class PlayerClient implements Runnable {
     }
 
     public static void main(String[] args) {
-        int numOfClients = 5;
+        int numOfClients = 1;
         PlayerClient[] clients = new PlayerClient[numOfClients];
         for(int i = 0; i < numOfClients; i++) {
             try {

@@ -39,10 +39,10 @@ public class Datastore {
         return gameID;
     }
 
-    public static String addSession(String gameID, String playerName, PartialStatePreference partialStatePreference) {
+    public static String addSession(String gameID, String playerName, PartialStatePreference partialStatePreference, boolean spectator) {
         Game referencedGame = games.get(gameID);
         if (referencedGame == null) return null;
-        Session session = new Session(partialStatePreference, playerName, gameID);
+        Session session = new Session(partialStatePreference, playerName, gameID, spectator);
         sessions.put(session.getSessionID(), session);
         return session.getSessionID();
     }
