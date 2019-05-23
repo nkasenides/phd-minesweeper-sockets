@@ -35,7 +35,7 @@ public class Server implements Runnable {
 
     private String clientSessionID;
 
-    public Server(Socket socket) throws IOException {
+    public  Server(Socket socket) throws IOException {
         this.socket = socket;
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         printWriter = new PrintWriter(socket.getOutputStream());
@@ -61,7 +61,6 @@ public class Server implements Runnable {
                 }
 
                 Response response;
-                String reply;
                 final String endpointName = receivedCommand.getEndpointName();
                 final JsonObject payload = receivedCommand.getPayload();
 

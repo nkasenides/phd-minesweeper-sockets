@@ -32,7 +32,6 @@ public class AdminGameForm extends JFrame {
     private int yShift = 0;
 
     //Other
-    private final Gson gson = new Gson();
     private AdminClient client;
 
     public AdminGameForm(String gameToken, int totalWidth, int totalHeight, PartialStatePreference partialStatePreference, AdminClient client) {
@@ -139,12 +138,9 @@ public class AdminGameForm extends JFrame {
                 break;
             case ENDED_WON:
                 updateButtons();
-//                JOptionPane.showMessageDialog(null, "Players won!", "Success", JOptionPane.WARNING_MESSAGE);
-//                dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
                 break;
             case ENDED_LOST:
                 updateButtons();
-//                JOptionPane.showMessageDialog(null, "Players lost", "Fail", JOptionPane.WARNING_MESSAGE);
                 break;
         }
     }

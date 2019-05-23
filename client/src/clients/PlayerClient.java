@@ -141,6 +141,13 @@ public class PlayerClient implements Runnable {
     }
 
     public static void main(String[] args) {
+
+        /**
+         * Parameter format:    PlayerClient <NUM_OF_CLIENTS> <SERVER_IP_ADDRESS>
+         */
+
+        //TODO
+
         int numOfClients = 2;
         PlayerClient[] clients = new PlayerClient[numOfClients];
         for(int i = 0; i < numOfClients; i++) {
