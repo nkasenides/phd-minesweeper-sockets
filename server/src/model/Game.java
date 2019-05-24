@@ -93,6 +93,7 @@ public class Game {
     }
 
     public void computeGameState() {
+
         if (gameState == GameState.STARTED) {
             int covered = 0;
             final int flaggedMines = countFlaggedMines();
@@ -102,6 +103,7 @@ public class Game {
                 for (int y = 0; y < fullBoardState.getHeight(); y++) {
 
                     if (fullBoardState.getCells()[x][y].isMined() && fullBoardState.getCells()[x][y].getRevealState() == RevealState.REVEALED_MINE) {
+                        //TODO 4) The game state should not become ENDED_LOST when the player reveals a mine (for simulation purposes). Instead, subtract points from the specific session.
                         gameState = GameState.ENDED_LOST;
                         return;
                     }

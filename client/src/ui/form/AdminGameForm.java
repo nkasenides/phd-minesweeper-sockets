@@ -21,29 +21,15 @@ public class AdminGameForm extends JFrame {
     private MinesweeperButton[][] buttons;
     private static final int WINDOW_SIZE = 800;
 
-    //State
-    private final int totalWidth;
-    private final int totalHeight;
-    private final PartialStatePreference partialStatePreference;
-    private final String gameToken;
-    private GameState gameState;
-    private PartialBoardState partialBoardState;
-    private int xShift = 0;
-    private int yShift = 0;
-
     //Other
     private AdminClient client;
 
-    public AdminGameForm(String gameToken, int totalWidth, int totalHeight, PartialStatePreference partialStatePreference, AdminClient client) {
+    public AdminGameForm(AdminClient client) {
 
         //Initialize UI:
         setTitle("View Game | Minesweeper");
         this.client = client;
-        this.totalWidth = totalWidth;
-        this.totalHeight = totalHeight;
-        this.gameToken = gameToken;
-        this.partialStatePreference = partialStatePreference;
-        this.buttons = new MinesweeperButton[partialStatePreference.getWidth()][partialStatePreference.getHeight()];
+        this.buttons = new MinesweeperButton[client.getPartialStatePreference().getWidth()][client.getPartialStatePreference().getHeight()];
         setSize(WINDOW_SIZE, WINDOW_SIZE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,33 +45,33 @@ public class AdminGameForm extends JFrame {
                         Direction direction = null;
                         switch (e.getKeyCode()) {
                             case KeyEvent.VK_UP:
-                                if (xShift - 1 >= 0) {
+                                if (client.xShift - 1 >= 0) {
                                     direction = Direction.UP;
-                                    xShift--;
+                                    client.xShift--;
                                 }
                                 break;
                             case KeyEvent.VK_DOWN:
-                                if (xShift + partialStatePreference.getWidth() < totalWidth) {
+                                if (client.xShift + client.getPartialStatePreference().getWidth() < client.getGameWidth()) {
                                     direction = Direction.DOWN;
-                                    xShift++;
+                                    client.xShift++;
                                 }
                                 break;
                             case KeyEvent.VK_LEFT:
-                                if (yShift - 1 >= 0) {
+                                if (client.yShift - 1 >= 0) {
                                     direction = Direction.LEFT;
-                                    yShift--;
+                                    client.yShift--;
                                 }
                                 break;
                             case KeyEvent.VK_RIGHT:
-                                if (yShift + partialStatePreference.getHeight() < totalHeight) {
+                                if (client.yShift + client.getPartialStatePreference().getHeight() < client.getGameHeight()) {
                                     direction = Direction.RIGHT;
-                                    yShift++;
+                                    client.yShift++;
                                 }
                                 break;
                         }
-//                        System.out.println("cX: " + xShift + ", cY: " + yShift);
+//                        System.out.println("cX: " + client.xShift + ", cY: " + client.yShift);
                         if (direction != null) {
-                            client.viewGame(xShift, yShift);
+                            client.viewGame(client.xShift, client.yShift);
                             update();
                         }
                     }
@@ -98,19 +84,11 @@ public class AdminGameForm extends JFrame {
 
     }
 
-    public void setGameState(GameState gameState) {
-        this.gameState = gameState;
-    }
-
-    public void setPartialBoardState(PartialBoardState partialBoardState) {
-        this.partialBoardState = partialBoardState;
-    }
-
     public void initialize() {
         gamePanel = new JPanel();
-        gamePanel.setLayout(new GridLayout(partialStatePreference.getWidth(), partialStatePreference.getHeight()));
-        for (int x = 0; x < partialStatePreference.getWidth(); x++) {
-            for (int y = 0; y < partialStatePreference.getHeight(); y++) {
+        gamePanel.setLayout(new GridLayout(client.getPartialStatePreference().getWidth(), client.getPartialStatePreference().getHeight()));
+        for (int x = 0; x < client.getPartialStatePreference().getWidth(); x++) {
+            for (int y = 0; y < client.getPartialStatePreference().getHeight(); y++) {
                 MinesweeperButton button = new MinesweeperButton();
                 buttons[x][y] = button;
                 gamePanel.add(button);
@@ -126,9 +104,9 @@ public class AdminGameForm extends JFrame {
 
     public void update() {
 
-        System.out.println("gameForm.update() -> " + gameState);
+        System.out.println("gameForm.update() -> " + client.getGameState());
 
-        switch (gameState) {
+        switch (client.getGameState()) {
             case NOT_STARTED:
                 JOptionPane.showMessageDialog(null, "Game not started", "Error", JOptionPane.WARNING_MESSAGE);
                 dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -146,17 +124,17 @@ public class AdminGameForm extends JFrame {
     }
 
     private void updateButtons() {
-        for (int x = 0; x < partialBoardState.getWidth(); x++) {
-            for (int y = 0; y < partialBoardState.getHeight(); y++) {
+        for (int x = 0; x < client.getPartialBoardState().getWidth(); x++) {
+            for (int y = 0; y < client.getPartialBoardState().getHeight(); y++) {
 
                 //Set background:
-                switch (gameState) {
+                switch (client.getGameState()) {
                     case NOT_STARTED:
                         break;
                     case STARTED:
                         buttons[x][y].setBackground(Color.LIGHT_GRAY);
                         //Set the background of blank revealed cells to a darker gray:
-                        if (partialBoardState.getCells()[x][y].getRevealState() == RevealState.REVEALED_0) {
+                        if (client.getPartialBoardState().getCells()[x][y].getRevealState() == RevealState.REVEALED_0) {
                             buttons[x][y].setBackground(Color.GRAY);
                         }
                         break;
@@ -169,7 +147,7 @@ public class AdminGameForm extends JFrame {
                 }
 
                 //Set the icon:
-                switch (partialBoardState.getCells()[x][y].getRevealState()) {
+                switch (client.getPartialBoardState().getCells()[x][y].getRevealState()) {
                     case COVERED:
                     case REVEALED_0:
                         buttons[x][y].setIcon(null);

@@ -19,17 +19,28 @@ import static response.ResponseStatus.OK;
 public class PlayerClient implements Runnable {
 
     public static final int SERVER_PORT = 12345;
-    public static final long DELAY = 1000L;
     private ArrayList<GameSpecification> games = null;
     private GameSpecification gameSpecification = null;
-    private String sessionID = null;
 
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
     private String name;
+    private final int turnInterval;
+    private final PartialStatePreference partialStatePreference;
 
-    public PlayerClient(Socket socket, String name) throws IOException {
+    private String sessionID = null;
+    private int gameWidth;
+    private int gameHeight;
+
+    private int xShift = 0;
+    private int yShift = 0;
+    private GameState gameState;
+    private PartialBoardState partialBoardState;
+
+    public PlayerClient(Socket socket, String name, int turnInterval, PartialStatePreference partialStatePreference) throws IOException {
         this.name = name;
+        this.turnInterval = turnInterval;
+        this.partialStatePreference = partialStatePreference;
         printWriter = new PrintWriter(socket.getOutputStream());
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
@@ -45,10 +56,8 @@ public class PlayerClient implements Runnable {
             Gson gson = new Gson();
             String commandJSON = gson.toJson(listGamesCommand);
             printWriter.println(commandJSON);
-//            System.out.println("Sending request --> " + commandJSON);
             printWriter.flush();
             String listReply = bufferedReader.readLine();
-//            System.out.println("Got: '" + listReply + "'");
             Response listResponse = gson.fromJson(listReply, Response.class);
             if (listResponse.getStatus() == OK) {
                 JsonArray gamesArray = listResponse.getData().get("games").getAsJsonArray();
@@ -71,28 +80,33 @@ public class PlayerClient implements Runnable {
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("token", games.get(0).getToken());
             jsonObject.addProperty("playerName", name);
-            jsonObject.addProperty("partialStateWidth", 10);
-            jsonObject.addProperty("partialStateHeight", 10);
+            jsonObject.addProperty("partialStateWidth", partialStatePreference.getWidth());
+            jsonObject.addProperty("partialStateHeight", partialStatePreference.getHeight());
             Command joinGameCommand = new Command(CommandType.MASTER_SERVICE, "join", jsonObject);
             String joinCommandJSON = gson.toJson(joinGameCommand);
             printWriter.println(joinCommandJSON);
-//            System.out.println("Sending request --> " + joinCommandJSON);
             printWriter.flush();
             String joinReply = bufferedReader.readLine();
-//            System.out.println("Got: '" + joinReply + "'");
             Response joinResponse = gson.fromJson(joinReply, Response.class);
             if (joinResponse.getStatus() == OK) {
                 gameSpecification = games.get(0);
                 sessionID = joinResponse.getData().get("sessionID").getAsString();
+                gameWidth = joinResponse.getData().get("totalWidth").getAsInt();
+                gameHeight = joinResponse.getData().get("totalHeight").getAsInt();
                 System.out.println(name + ": Joined game with token '" + games.get(0).getToken() + " with session ID '" + sessionID + "'.");
             }
 
-            System.out.println("Starting to play!");
+            System.out.println(name + ": Starting to play!");
 
             //While the game is not over, keep making moves:
             while (true) {
 
-                //TODO Generalize
+                /**
+                 * TODO 1) Make the players check the partial board state version of the cell they try to play on. If revealed, choose another cell.
+                 * TODO 2) Use the partial board state to play
+                 * TODO 3) Make the players to shift position automatically when there are no unrevealed cells in board state.
+                 */
+
                 JsonObject object = new JsonObject();
                 Random random = new Random();
                 int randomX = random.nextInt(games.get(0).getWidth()); //TODO Algorithm would ideally only try to solve cells on the partial state...
@@ -109,13 +123,9 @@ public class PlayerClient implements Runnable {
                 //Convert to JSON and send:
                 String moveCommandJSON = gson.toJson(command);
                 printWriter.println(moveCommandJSON);
-//                System.out.println("Sending request --> " +moveCommandJSON);
                 printWriter.flush();
 
-                Thread.sleep(500); //TODO Generalize
-
                 //Wait for and print reply:
-//                System.out.println("Waiting for reply...");
                 String reply = bufferedReader.readLine();
                 System.out.println("[" + name + "] Got: '" + reply + "'");
 
@@ -130,7 +140,7 @@ public class PlayerClient implements Runnable {
                     }
                 }
 
-                Thread.sleep(DELAY);
+                Thread.sleep(turnInterval);
             }
 
         } catch (IOException | InterruptedException e) {
@@ -142,18 +152,50 @@ public class PlayerClient implements Runnable {
 
     public static void main(String[] args) {
 
-        /**
-         * Parameter format:    PlayerClient <NUM_OF_CLIENTS> <SERVER_IP_ADDRESS>
-         */
+        final String USAGE = "Use: PlayerClient <SERVER_IP_ADDRESS> <NUM_OF_CLIENTS> <PARTIAL_STATE_WIDTH> <PARTIAL_STATE_HEIGHT> <TURN_INTERVAL>";
 
-        //TODO
+        if (args.length < 5) {
+            System.out.println(USAGE);
+        }
 
-        int numOfClients = 2;
+        String ipAddress = args[0];
+        int numOfClients;
+        int partialStateWidth;
+        int partialStateHeight;
+        int turnInterval;
+        try {
+            numOfClients = Integer.parseInt(args[1]);
+            partialStateWidth = Integer.parseInt(args[2]);
+            partialStateHeight = Integer.parseInt(args[3]);
+            turnInterval = Integer.parseInt(args[4]);
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+        if (numOfClients < 1) {
+            System.out.println("Invalid number of clients. The value must be more than or equal to 1.");
+            return;
+        }
+
+        if (partialStateWidth < 5) {
+            System.out.println("Invalid partial state width. The value must be more than or equal to 5.");
+            return;
+        }
+
+        if (partialStateHeight < 5) {
+            System.out.println("Invalid partial state height. The value must be more than or equal to 5.");
+            return;
+        }
+
+        if (turnInterval < 0) {
+            System.out.println("Invalid turn interval. The value must be more than or equal to 0 and provided in milliseconds.");
+        }
+
         PlayerClient[] clients = new PlayerClient[numOfClients];
         for(int i = 0; i < numOfClients; i++) {
             try {
-                final Socket socket = new Socket("localhost", SERVER_PORT);
-                clients[i] = new PlayerClient(socket, "player" + (i + 1));
+                final Socket socket = new Socket(ipAddress, SERVER_PORT);
+                clients[i] = new PlayerClient(socket, "player" + (i + 1), turnInterval, new PartialStatePreference(partialStateWidth, partialStateHeight));
                 new Thread(clients[i]).start();
             } catch (IOException ioe) {
                 throw new RuntimeException(ioe);
