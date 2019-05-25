@@ -143,8 +143,8 @@ public class AdminClient implements Runnable {
                 Response response = gson.fromJson(reply, Response.class);
                 if (response.getStatus() == OK) {
                     sessionID = response.getData().get("sessionID").getAsString();
-                    int totalWidth = response.getData().get("totalWidth").getAsInt();
-                    int totalHeight = response.getData().get("totalHeight").getAsInt();
+//                    int totalWidth = response.getData().get("totalWidth").getAsInt();
+//                    int totalHeight = response.getData().get("totalHeight").getAsInt();
                     if (GUI) {
                         gameForm = new AdminGameForm(this);
                     }
@@ -167,7 +167,6 @@ public class AdminClient implements Runnable {
                     GameState gameState = gson.fromJson(gameStateElement, GameState.class);
                     JsonElement partialBoardStateElement = payload.get("partialBoardState");
                     PartialBoardState partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
-
                     this.gameState = gameState;
                     this.partialBoardState = partialBoardState;
 
@@ -175,11 +174,10 @@ public class AdminClient implements Runnable {
                     System.out.println(gson.toJson(gameState));
                     System.out.println(gson.toJson(partialBoardState));
 
-                    if (GUI) {
-                        this.gameState = gameState;
-                        this.partialBoardState = partialBoardState;
-                        gameForm.update();
-                    }
+                    this.gameState = gameState;
+                    this.partialBoardState = partialBoardState;
+
+                    if (GUI) gameForm.update();
 
                 }
             }
@@ -190,7 +188,7 @@ public class AdminClient implements Runnable {
     }
 
     public void viewGame(int startX, int startY) {
-        System.out.println("Viewing game with token '" + token + "'.");
+        System.out.println("Viewing game with token '" + token + "' at position (" + startX + "," + startY + ").");
 
         //Create request object:
         JsonObject object = new JsonObject();
@@ -210,6 +208,7 @@ public class AdminClient implements Runnable {
         String reply = null;
         try {
             reply = bufferedReader.readLine();
+            System.out.println("viewGame reply: " + reply);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -220,15 +219,13 @@ public class AdminClient implements Runnable {
             GameState gameState = gson.fromJson(gameStateElement, GameState.class);
             JsonElement partialBoardStateElement = data.get("partialBoardState");
             PartialBoardState partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
-            if (GUI) {
-                this.gameState = gameState;
-                this.partialBoardState = partialBoardState;
-                if (!stateInitialized) {
-                    gameForm.initialize();
-                    stateInitialized = true;
-                }
-                gameForm.update();
+            this.gameState = gameState;
+            this.partialBoardState = partialBoardState;
+            if (!stateInitialized) {
+                if (GUI) gameForm.initialize();
+                stateInitialized = true;
             }
+            if (GUI) gameForm.update();
         }
     }
 

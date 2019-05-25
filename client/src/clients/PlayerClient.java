@@ -101,24 +101,83 @@ public class PlayerClient implements Runnable {
             //While the game is not over, keep making moves:
             while (true) {
 
-                /**
-                 * TODO 1) Make the players check the partial board state version of the cell they try to play on. If revealed, choose another cell.
-                 * TODO 2) Use the partial board state to play
-                 * TODO 3) Make the players to shift position automatically when there are no unrevealed cells in board state.
-                 */
+                //Scan all the cells from partial state and save those who are RevealState.COVERED:
+                class UnrevealedCell {
+                    public int x;
+                    public int y;
+                    public UnrevealedCell(int x, int y) { this.x = x; this.y = y; }
+                }
+                ArrayList<UnrevealedCell> unrevealedCells = new ArrayList<>();
+                for (int i = 0; i < partialBoardState.getCells().length; i++) {
+                    for (int j = 0; j < partialBoardState.getCells()[i].length; j++) {
+                        if (partialBoardState.getCells()[i][j].getRevealState() == RevealState.COVERED) {
+                            unrevealedCells.add(new UnrevealedCell(i, j));
+                        }
+                    }
+                }
 
+                //Command attributes:
                 JsonObject object = new JsonObject();
-                Random random = new Random();
-                int randomX = random.nextInt(games.get(0).getWidth()); //TODO Algorithm would ideally only try to solve cells on the partial state...
-                int randomY = random.nextInt(games.get(0).getHeight()); //TODO Algorithm would ideally only try to solve cells on the partial state...
-                String moveEndpoint = random.nextInt(10) > 6 ? "flag" : "reveal";
-
-                System.out.println(name + ": Decided to make move '" + moveEndpoint + "' at cell (" + randomX + "," + randomY + ").");
-
-                object.addProperty("x", randomX);
-                object.addProperty("y", randomY);
                 object.addProperty("sessionID", sessionID);
-                Command command = new Command(CommandType.USER_SERVICE, moveEndpoint, object);
+                Command command;
+                String moveEndpoint;
+
+                //Check if there are any unrevealed cells, if not then the player has to shift position:
+                if (unrevealedCells.size() < 1) {
+
+                    int cellsRight = gameWidth - (partialBoardState.getStartingX() + partialBoardState.getWidth());
+
+                    //If there are enough cells, completely shift to a brand new partial state:
+                    if (cellsRight >= partialBoardState.getWidth()) {
+                        object.addProperty("direction", Direction.RIGHT.toString());
+                        object.addProperty("unitOfMovement", partialBoardState.getWidth());
+                    }
+                    //Otherwise shift just enough to reach the right end of the grid:
+                    else if (cellsRight > 0) {
+                        object.addProperty("direction", Direction.RIGHT.toString());
+                        object.addProperty("unitOfMovement", cellsRight);
+                    }
+                    //If no more cells left on x-axis, shift to the start of the x-axis and then shift downwards:
+                    else {
+                        object.addProperty("direction", Direction.LEFT.toString());
+                        object.addProperty("unitOfMovement", partialBoardState.getStartingX());
+                        int cellsDown = gameHeight - (partialBoardState.getStartingY() + partialBoardState.getHeight());
+                        //If enough cells, completely shift to a brand new partial state, moving downwards:
+                        if (cellsDown >= partialBoardState.getHeight()) {
+                            object.addProperty("direction", Direction.DOWN.toString());
+                            object.addProperty("unitOfMovement", partialBoardState.getHeight());
+                        }
+                        //Otherwise shift just enough to reach the bottom end of the grid:
+                        else {
+                            object.addProperty("direction", Direction.DOWN.toString());
+                            object.addProperty("unitOfMovement", cellsDown);
+                        }
+                    }
+
+                    command = new Command(CommandType.USER_SERVICE, "move", object);
+
+                }
+
+                //Otherwise, select a random cell from unrevealedCells with a random move and play it:
+                else {
+
+                    //If there are unrevealed cells, choose a random one out of the list:
+                    Random random = new Random();
+                    int randomCellIndex = random.nextInt(unrevealedCells.size());
+                    int randomX = unrevealedCells.get(randomCellIndex).x;
+                    int randomY = unrevealedCells.get(randomCellIndex).y;
+
+                    //Choose which move to make. Currently a 60% reveal vs 40% flag chance.
+                    moveEndpoint = random.nextInt(10) > 6 ? "flag" : "reveal";
+                    System.out.println(name + ": Decided to make move '" + moveEndpoint + "' at cell (" + randomX + "," + randomY + ").");
+
+                    //Package the move into a command, convert to JSON and send:
+                    object.addProperty("x", randomX);
+                    object.addProperty("y", randomY);
+                    object.addProperty("sessionID", sessionID);
+                    command = new Command(CommandType.USER_SERVICE, moveEndpoint, object);
+
+                }
 
                 //Convert to JSON and send:
                 String moveCommandJSON = gson.toJson(command);
@@ -129,18 +188,22 @@ public class PlayerClient implements Runnable {
                 String reply = bufferedReader.readLine();
                 System.out.println("[" + name + "] Got: '" + reply + "'");
 
+                //Parse reply and refresh the local state:
                 Response playResponse = gson.fromJson(reply, Response.class);
                 if (playResponse.getStatus() == OK) {
-                    System.out.println(name + ": Made move '" + moveEndpoint + "' at cell (" + randomX + "," + randomY + ").");
+                    JsonElement partialBoardStateElement = playResponse.getData().get("partialBoardState");
                     JsonElement gameStateElement = playResponse.getData().get("gameState");
                     GameState gameState = gson.fromJson(gameStateElement, GameState.class);
+                    PartialBoardState partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
+                    this.gameState = gameState;
+                    this.partialBoardState = partialBoardState;
                     if (gameState.isEnded()) {
                         System.out.println(name + ": GAME ENDED (" + gameState + ")");
                         return;
                     }
                 }
 
-                Thread.sleep(turnInterval);
+                if (turnInterval > 0) Thread.sleep(turnInterval);
             }
 
         } catch (IOException | InterruptedException e) {

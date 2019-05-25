@@ -11,6 +11,7 @@ public class Session {
     private int positionX;
     private int positionY;
     private final boolean spectator;
+    private int points;
 
     public Session(PartialStatePreference partialStatePreference, String playerName, String gameToken, boolean spectator) {
         this.sessionID = UUID.randomUUID().toString();
@@ -20,6 +21,15 @@ public class Session {
         this.positionX = 0;
         this.positionY = 0;
         this.spectator = spectator;
+        this.points = 0;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void changePoints(int points) {
+        this.points += points;
     }
 
     public String getSessionID() {

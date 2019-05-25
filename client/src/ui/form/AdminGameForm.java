@@ -1,13 +1,7 @@
 package ui.form;
 
 import clients.AdminClient;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import model.*;
-import response.Response;
-import response.ResponseStatus;
 import ui.component.MinesweeperButton;
 import javax.swing.*;
 import java.awt.*;
@@ -43,6 +37,7 @@ public class AdminGameForm extends JFrame {
                 if (isActive()) {
                     if (e.getID() == KeyEvent.KEY_PRESSED) {
                         Direction direction = null;
+                        System.out.println("Key press -> " + e.getKeyCode());
                         switch (e.getKeyCode()) {
                             case KeyEvent.VK_UP:
                                 if (client.xShift - 1 >= 0) {
@@ -72,7 +67,6 @@ public class AdminGameForm extends JFrame {
 //                        System.out.println("cX: " + client.xShift + ", cY: " + client.yShift);
                         if (direction != null) {
                             client.viewGame(client.xShift, client.yShift);
-                            update();
                         }
                     }
                 }
@@ -96,10 +90,10 @@ public class AdminGameForm extends JFrame {
         }
         add(gamePanel);
 
-        update();
+        updateButtons();
         setVisible(true);
         MinesweeperButton.setIconSize(buttons[0][0].getWidth() - 8);
-        MinesweeperButton.reloadIcons();
+        MinesweeperButton.resizeIcons();
     }
 
     public void update() {
@@ -112,11 +106,7 @@ public class AdminGameForm extends JFrame {
                 dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
                 break;
             case STARTED:
-                updateButtons();
-                break;
             case ENDED_WON:
-                updateButtons();
-                break;
             case ENDED_LOST:
                 updateButtons();
                 break;

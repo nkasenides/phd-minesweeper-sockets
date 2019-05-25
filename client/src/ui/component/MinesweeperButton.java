@@ -27,7 +27,7 @@ public class MinesweeperButton extends JButton {
         if (iconSize >= 10) ICON_SIZE = iconSize;
     }
 
-    public static void reloadIcons() {
+    public static void resizeIcons() {
 
         if (ICON_SIZE < 10) return;
 
@@ -63,7 +63,7 @@ public class MinesweeperButton extends JButton {
     }
 
     static {
-        reloadIcons();
+        resizeIcons();
     }
 
     public MinesweeperButton() {

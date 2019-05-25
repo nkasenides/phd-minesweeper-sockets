@@ -154,8 +154,7 @@ public class LocalUserService implements UserService {
 
         //If session not valid, return error:
         if (referencedSession == null) {
-            Response response = new ErrorResponse("Session not found", "Could not find session with ID '" + sessionID + "'");
-            return response;
+            return new ErrorResponse("Session not found", "Could not find session with ID '" + sessionID + "'");
         }
 
         //If session valid, try to get the referenced game:
@@ -166,28 +165,24 @@ public class LocalUserService implements UserService {
 
             //If game not found for this session, return error:
             if (referencedGame == null) {
-                Response response = new ErrorResponse("Game not found", "Could not find a game for the session with ID '" + sessionID + "'");
-                return response;
+                return new ErrorResponse("Game not found", "Could not find a game for the session with ID '" + sessionID + "'");
             }
 
             //If session is spectator, return error:
             if (referencedSession.isSpectator()) {
-                Response response = new ErrorResponse("Spectator-only session", "The session with ID '" + sessionID + "' can only specatate the game.");
-                return response;
+                return new ErrorResponse("Spectator-only session", "The session with ID '" + sessionID + "' can only specatate the game.");
             }
 
             FullBoardState state = referencedGame.getFullBoardState();
 
             //Check the coordinates for validity:
             if (x >= state.getWidth() || y >= state.getHeight() || x < 0 || y < 0) {
-                ErrorResponse response = new ErrorResponse("Invalid coordinates", "The coordinates (" + x + "," + y + ") are out of bounds.");
-                return response;
+                return new ErrorResponse("Invalid coordinates", "The coordinates (" + x + "," + y + ") are out of bounds.");
             }
 
             //Check if the game has started:
             if (referencedGame.getGameState() == GameState.NOT_STARTED) {
-                ErrorResponse response = new ErrorResponse("Game not started", "The game you tried to play has not yet started.");
-                return response;
+                return new ErrorResponse("Game not started", "The game you tried to play has not yet started.");
             }
 
             //Check if the cell is revealed:
@@ -200,22 +195,37 @@ public class LocalUserService implements UserService {
                     data.add("partialBoardState", gson.toJsonTree(partialBoardState));
                     data.add("gameState", gson.toJsonTree(referencedGame.getGameState()));
                     data.add("revealState", gson.toJsonTree(referencedGame.getFullBoardState().getCells()[x][y].getRevealState()));
+                    data.addProperty("points", referencedSession.getPoints());
                     response.setData(data);
                     Server.updateClients(referencedSession.getGameToken(), sessionID);
                     return response;
                 } catch (InvalidCellReferenceException e) {
-                    ErrorResponse errorResponse = new ErrorResponse("Failed to fetch partial state", "The cell (" + x + "," + y + ") has been already revealed, but failed to load partial state: " + e.getMessage());
-                    return errorResponse;
+                    return new ErrorResponse("Failed to fetch partial state", "The cell (" + x + "," + y + ") has been already revealed, but failed to load partial state: " + e.getMessage());
                 }
-
             }
 
-            //Reveal and return partial state:
-            referencedGame.reveal(x, y);
+            //Reveal, change points and return partial state:
+            RevealState revealState = referencedGame.reveal(x, y);
+            switch (revealState) {
+                case REVEALED_0:
+                case REVEALED_1:
+                case REVEALED_2:
+                case REVEALED_3:
+                case REVEALED_4:
+                case REVEALED_5:
+                case REVEALED_6:
+                case REVEALED_7:
+                case REVEALED_8:
+                    referencedSession.changePoints(10);
+                    break;
+                case REVEALED_MINE:
+                    referencedSession.changePoints(-5);
+                    break;
+            }
+
 
             //If the game has ended (player won or lost), reveal all of the cells:
-            if (referencedGame.getGameState() == GameState.ENDED_LOST ||
-                    referencedGame.getGameState() == GameState.ENDED_WON) {
+            if (referencedGame.getGameState() == GameState.ENDED_LOST || referencedGame.getGameState() == GameState.ENDED_WON) {
                 referencedGame.revealAll();
             }
 
@@ -225,13 +235,13 @@ public class LocalUserService implements UserService {
                 JsonObject data = new JsonObject();
                 data.add("partialBoardState", gson.toJsonTree(partialBoardState));
                 data.add("gameState", gson.toJsonTree(referencedGame.getGameState()));
+                data.addProperty("points", referencedSession.getPoints());
                 SuccessResponse response = new SuccessResponse("Cell revealed", "Cell (" + x + "," + y + ") revealed successfully.");
                 response.setData(data);
                 Server.updateClients(referencedSession.getGameToken(), sessionID);
                 return response;
             } catch (InvalidCellReferenceException e) {
-                ErrorResponse errorResponse = new ErrorResponse("Cell revealed, failed to fetch partial state", "The cell (" + x + "," + y + ") has been revealed, but failed to load partial state: " + e.getMessage());
-                return errorResponse;
+                return new ErrorResponse("Cell revealed, failed to fetch partial state", "The cell (" + x + "," + y + ") has been revealed, but failed to load partial state: " + e.getMessage());
             }
         }
     }
@@ -243,14 +253,12 @@ public class LocalUserService implements UserService {
 
         //If session not valid, return error:
         if (referencedSession == null) {
-            Response response = new ErrorResponse("Session not found", "Could not find session with ID '" + sessionID + "'");
-            return response;
+            return new ErrorResponse("Session not found", "Could not find session with ID '" + sessionID + "'");
         }
 
         //If session is spectator, return error:
         if (referencedSession.isSpectator()) {
-            Response response = new ErrorResponse("Spectator-only session", "The session with ID '" + sessionID + "' can only specatate the game.");
-            return response;
+            return new ErrorResponse("Spectator-only session", "The session with ID '" + sessionID + "' can only specatate the game.");
         }
 
         //Find the game of this session:
@@ -259,8 +267,7 @@ public class LocalUserService implements UserService {
 
         //If game not found for this session, return error:
         if (referencedGame == null) {
-            Response response = new ErrorResponse("Game not found", "Could not find a game for the session with ID '" + sessionID + "'");
-            return response;
+            return new ErrorResponse("Game not found", "Could not find a game for the session with ID '" + sessionID + "'");
         }
 
         //If game found, attempt a flag action:
@@ -269,14 +276,12 @@ public class LocalUserService implements UserService {
 
             //Check the coordinates for validity:
             if (x >= state.getWidth() || y >= state.getHeight() || x < 0 || y < 0) {
-                ErrorResponse response = new ErrorResponse("Invalid coordinates", "The coordinates (" + x + "," + y + ") are out of bounds.");
-                return response;
+                return new ErrorResponse("Invalid coordinates", "The coordinates (" + x + "," + y + ") are out of bounds.");
             }
 
             //Check if the game has started:
             if (referencedGame.getGameState() == GameState.NOT_STARTED) {
-                ErrorResponse response = new ErrorResponse("Game not started", "The game you tried to play has not yet started.");
-                return response;
+                return new ErrorResponse("Game not started", "The game you tried to play has not yet started.");
             }
 
             //Check if the cell is already flagged and unflag it:
@@ -293,8 +298,7 @@ public class LocalUserService implements UserService {
                     Server.updateClients(referencedSession.getGameToken(), sessionID);
                     return successResponse;
                 } catch (InvalidCellReferenceException e) {
-                    ErrorResponse errorResponse = new ErrorResponse("Cell unflagged, failed to fetch partial state", "The cell (" + x + "," + y + ") has been unflagged, but failed to load partial state: " + e.getMessage());
-                    return errorResponse;
+                    return new ErrorResponse("Cell unflagged, failed to fetch partial state", "The cell (" + x + "," + y + ") has been unflagged, but failed to load partial state: " + e.getMessage());
                 }
             }
 
@@ -324,8 +328,7 @@ public class LocalUserService implements UserService {
                 Server.updateClients(referencedSession.getGameToken(), sessionID);
                 return response;
             } catch (InvalidCellReferenceException e) {
-                ErrorResponse errorResponse = new ErrorResponse("Cell flagged, failed to fetch partial state", "The cell (" + x + "," + y + ") has been flagged, but failed to load partial state: " + e.getMessage());
-                return errorResponse;
+                return new ErrorResponse("Cell flagged, failed to fetch partial state", "The cell (" + x + "," + y + ") has been flagged, but failed to load partial state: " + e.getMessage());
             }
 
         }

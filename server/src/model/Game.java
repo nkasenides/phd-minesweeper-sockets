@@ -102,11 +102,12 @@ public class Game {
             for (int x = 0; x < fullBoardState.getWidth(); x++) {
                 for (int y = 0; y < fullBoardState.getHeight(); y++) {
 
-                    if (fullBoardState.getCells()[x][y].isMined() && fullBoardState.getCells()[x][y].getRevealState() == RevealState.REVEALED_MINE) {
-                        //TODO 4) The game state should not become ENDED_LOST when the player reveals a mine (for simulation purposes). Instead, subtract points from the specific session.
-                        gameState = GameState.ENDED_LOST;
-                        return;
-                    }
+                    //NOTE: Commented out for simulation purposes (to run the simulation for a longer time). This should be uncommented in a "normal" minesweeper game.
+
+//                    if (fullBoardState.getCells()[x][y].isMined() && fullBoardState.getCells()[x][y].getRevealState() == RevealState.REVEALED_MINE) {
+//                        gameState = GameState.ENDED_LOST;
+//                        return;
+//                    }
 
                     if (fullBoardState.getCells()[x][y].getRevealState() == RevealState.COVERED) {
                         covered++;
@@ -139,17 +140,21 @@ public class Game {
         }
     }
 
-    public void reveal(int x, int y) {
+    public RevealState reveal(int x, int y) {
         CellState referencedCell = fullBoardState.getCells()[x][y];
         if (referencedCell.getRevealState() == RevealState.COVERED) {
             if (referencedCell.isMined()) {
                 referencedCell.setRevealState(RevealState.REVEALED_MINE);
+                computeGameState();
+                return RevealState.REVEALED_MINE;
             }
             else {
                 int adjacentMines = fullBoardState.countAdjacentMines(x, y);
                 if (adjacentMines > 0) {
                     RevealState revealState = RevealState.getRevealStateFromNumberOfAdjacentMines(adjacentMines);
                     referencedCell.setRevealState(revealState);
+                    computeGameState();
+                    return revealState;
                 }
                 else {
 
@@ -157,7 +162,6 @@ public class Game {
                     referencedCell.setRevealState(RevealState.REVEALED_0);
 
                     //Scan adjacent cells, recursively:
-
                     if (fullBoardState.isValidCell(x - 1, y)) {
                         if (!fullBoardState.getCells()[x - 1][y].isMined()) {
                             reveal(x - 1, y);
@@ -205,11 +209,14 @@ public class Game {
                             reveal(x + 1, y - 1);
                         }
                     }
+                    computeGameState();
+                    return RevealState.REVEALED_0;
 
                 }
             }
         }
         computeGameState();
+        return referencedCell.getRevealState();
     }
 
     public void flag(int x, int y) {
