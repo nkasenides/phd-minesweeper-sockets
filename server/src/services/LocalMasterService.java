@@ -1,8 +1,10 @@
 package services;
 
 import api.MasterService;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import datastore.Datastore;
+import exception.InvalidCellReferenceException;
 import model.*;
 import response.ErrorResponse;
 import response.JsonConvert;
@@ -82,11 +84,25 @@ public class LocalMasterService implements MasterService {
 
         //Create a new session:
         String sessionID = Datastore.addSession(token, playerName, partialStatePreference, false);
+        Session session = Datastore.getSession(sessionID);
+        PartialBoardState partialBoardState;
+
+        try {
+            partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), session.getPositionX(), session.getPositionY(), referencedGame.getFullBoardState());
+        }
+        //If failed to get the partial state, return error:
+        catch (InvalidCellReferenceException e) {
+            return new ErrorResponse("Error fetching partial state for session '" + sessionID + "'.", e.getMessage());
+        }
+
         SuccessResponse successResponse = new SuccessResponse("Game joined", "Successfully joined game with ID '" + token + "'.");
         JsonObject data = new JsonObject();
+        Gson gson = new Gson();
         data.addProperty("sessionID", sessionID);
         data.addProperty("totalWidth", referencedGame.getGameSpecification().getWidth());
         data.addProperty("totalHeight", referencedGame.getGameSpecification().getHeight());
+        data.add("partialBoardState", gson.toJsonTree(partialBoardState));
+        data.add("gameState", gson.toJsonTree(referencedGame.getGameState()));
         successResponse.setData(data);
         return successResponse;
     }

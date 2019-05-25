@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69a611ff-23d4-450c-bedc-1adc64208b5a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/clients/AdminClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/clients/AdminClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/clients/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/clients/PlayerClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/model/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/model/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/services/LocalMasterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/LocalMasterService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/services/LocalUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/LocalUserService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -26,9 +23,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="382">
-              <caret line="68" column="41" selection-start-line="68" selection-start-column="41" selection-end-line="68" selection-end-column="41" />
+            <state relative-caret-position="365">
+              <caret line="77" column="5" lean-forward="true" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
               <folding>
+                <element signature="method#initialize#0;class#AdminGameForm#0" />
+                <element signature="method#update#0;class#AdminGameForm#0" />
                 <element signature="method#updateButtons#0;class#AdminGameForm#0" />
               </folding>
             </state>
@@ -36,58 +35,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
+        <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1792">
-              <caret line="216" column="44" selection-start-line="216" selection-start-column="44" selection-end-line="216" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="110">
+              <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="210" column="57" selection-start-line="210" selection-start-column="57" selection-end-line="210" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="205" column="38" selection-start-line="205" selection-start-column="38" selection-end-line="205" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/services/LocalUserService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1309">
-              <caret line="129" column="61" lean-forward="true" selection-start-line="129" selection-start-column="61" selection-end-line="129" selection-end-column="61" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#getPartialState#0;class#LocalUserService#0" />
-                <element signature="method#reveal#0;class#LocalUserService#0" />
-                <element signature="method#flag#0;class#LocalUserService#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/model/Game.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="379">
-              <caret line="163" column="55" selection-start-line="163" selection-start-column="55" selection-end-line="163" selection-end-column="55" />
+            <state relative-caret-position="280">
+              <caret line="162" column="187" selection-start-line="162" selection-start-column="187" selection-end-line="162" selection-end-column="187" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -98,11 +58,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/src/services/LocalMasterService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
+            <state relative-caret-position="144">
+              <caret line="91" column="9" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#listGames#0;class#LocalMasterService#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/services/LocalUserService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="419">
+              <caret line="52" column="16" lean-forward="true" selection-start-line="52" selection-start-column="16" selection-end-line="55" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#move#0;class#LocalUserService#0" />
+                <element signature="method#reveal#0;class#LocalUserService#0" />
+                <element signature="method#flag#0;class#LocalUserService#0" />
               </folding>
             </state>
           </provider>
@@ -123,7 +98,6 @@
       <find>got</find>
       <find>.toJSON();</find>
       <find>Random</find>
-      <find>Got</find>
       <find>update</find>
       <find>partialStatePreference</find>
       <find>xShift</find>
@@ -133,6 +107,9 @@
       <find>stateInitialize</find>
       <find>initialize</find>
       <find>if (GUI)</find>
+      <find>.update</find>
+      <find>Got</find>
+      <find>System.out</find>
     </findStrings>
     <replaceStrings>
       <replace>;</replace>
@@ -181,13 +158,13 @@
         <option value="$PROJECT_DIR$/server/src/Server.java" />
         <option value="$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java" />
         <option value="$PROJECT_DIR$/server/src/server/Server.java" />
-        <option value="$PROJECT_DIR$/server/src/services/LocalMasterService.java" />
         <option value="$PROJECT_DIR$/server/src/model/Session.java" />
-        <option value="$PROJECT_DIR$/server/src/services/LocalUserService.java" />
         <option value="$PROJECT_DIR$/server/src/model/Game.java" />
-        <option value="$PROJECT_DIR$/client/src/clients/PlayerClient.java" />
-        <option value="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" />
+        <option value="$PROJECT_DIR$/server/src/services/LocalUserService.java" />
+        <option value="$PROJECT_DIR$/server/src/services/LocalMasterService.java" />
         <option value="$PROJECT_DIR$/client/src/clients/AdminClient.java" />
+        <option value="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" />
+        <option value="$PROJECT_DIR$/client/src/clients/PlayerClient.java" />
       </list>
     </option>
   </component>
@@ -328,16 +305,16 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.AdminClient">
-    <configuration name="AdminClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.PlayerClient">
+    <configuration name="AdminClient" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="clients.AdminClient" />
       <module name="client" />
-      <option name="PROGRAM_PARAMETERS" value="localhost 20 20 EASY 3 10 10 gui" />
+      <option name="PROGRAM_PARAMETERS" value="localhost 20 20 EASY 3 20 20 gui" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlayerClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="PlayerClient" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="clients.PlayerClient" />
       <module name="client" />
       <option name="PROGRAM_PARAMETERS" value="localhost 2 10 10 1000" />
@@ -345,7 +322,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Server" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.Server" />
       <module name="server" />
       <method v="2">
@@ -353,17 +330,10 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Server" />
       <item itemvalue="Application.AdminClient" />
+      <item itemvalue="Application.Server" />
       <item itemvalue="Application.PlayerClient" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.AdminClient" />
-        <item itemvalue="Application.Server" />
-        <item itemvalue="Application.PlayerClient" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -385,12 +355,12 @@
       <workItem from="1558039754166" duration="59000" />
       <workItem from="1558092734219" duration="3905000" />
       <workItem from="1558162715316" duration="10351000" />
-      <workItem from="1558769879042" duration="6856000" />
+      <workItem from="1558769879042" duration="9891000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46016000" />
+    <option name="totallyTimeSpent" value="49051000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -415,7 +385,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34669557" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.51137596" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
@@ -440,17 +410,14 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java</url>
-          <line>36</line>
-          <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>partialBoardState</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Test.java" />
@@ -532,13 +499,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="747" column="19" selection-start-line="747" selection-start-column="19" selection-end-line="747" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -672,17 +632,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/services/LocalMasterService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="55" column="19" selection-start-line="55" selection-start-column="19" selection-end-line="55" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#listGames#0;class#LocalMasterService#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/model/Session.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -713,44 +662,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/services/LocalUserService.java">
+    <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1309">
-          <caret line="129" column="61" lean-forward="true" selection-start-line="129" selection-start-column="61" selection-end-line="129" selection-end-column="61" />
+        <state relative-caret-position="-122">
+          <caret line="176" column="23" selection-start-line="176" selection-start-column="23" selection-end-line="176" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getPartialState#0;class#LocalUserService#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/services/LocalUserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="419">
+          <caret line="52" column="16" lean-forward="true" selection-start-line="52" selection-start-column="16" selection-end-line="55" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#move#0;class#LocalUserService#0" />
             <element signature="method#reveal#0;class#LocalUserService#0" />
             <element signature="method#flag#0;class#LocalUserService#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
+    <entry file="file://$PROJECT_DIR$/server/src/services/LocalMasterService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1792">
-          <caret line="216" column="44" selection-start-line="216" selection-start-column="44" selection-end-line="216" selection-end-column="44" />
+        <state relative-caret-position="144">
+          <caret line="91" column="9" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="205" column="38" selection-start-line="205" selection-start-column="38" selection-end-line="205" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#listGames#0;class#LocalMasterService#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="68" column="41" selection-start-line="68" selection-start-column="41" selection-end-line="68" selection-end-column="41" />
+        <state relative-caret-position="365">
+          <caret line="77" column="5" lean-forward="true" selection-start-line="77" selection-start-column="5" selection-end-line="77" selection-end-column="5" />
           <folding>
+            <element signature="method#initialize#0;class#AdminGameForm#0" />
+            <element signature="method#update#0;class#AdminGameForm#0" />
             <element signature="method#updateButtons#0;class#AdminGameForm#0" />
           </folding>
         </state>
@@ -758,8 +710,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="210" column="57" selection-start-line="210" selection-start-column="57" selection-end-line="210" selection-end-column="57" />
+        <state relative-caret-position="110">
+          <caret line="67" lean-forward="true" selection-start-line="67" selection-end-line="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="747" selection-start-line="747" selection-end-line="747" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="162" column="187" selection-start-line="162" selection-start-column="187" selection-end-line="162" selection-end-column="187" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

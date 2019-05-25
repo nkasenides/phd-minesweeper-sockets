@@ -32,8 +32,6 @@ public class PlayerClient implements Runnable {
     private int gameWidth;
     private int gameHeight;
 
-    private int xShift = 0;
-    private int yShift = 0;
     private GameState gameState;
     private PartialBoardState partialBoardState;
 
@@ -93,6 +91,10 @@ public class PlayerClient implements Runnable {
                 sessionID = joinResponse.getData().get("sessionID").getAsString();
                 gameWidth = joinResponse.getData().get("totalWidth").getAsInt();
                 gameHeight = joinResponse.getData().get("totalHeight").getAsInt();
+                JsonElement gameStateElement = joinResponse.getData().get("gameState");
+                gameState = gson.fromJson(gameStateElement, GameState.class);
+                JsonElement partialBoardStateElement = joinResponse.getData().get("partialBoardState");
+                partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
                 System.out.println(name + ": Joined game with token '" + games.get(0).getToken() + " with session ID '" + sessionID + "'.");
             }
 
@@ -139,8 +141,11 @@ public class PlayerClient implements Runnable {
                     }
                     //If no more cells left on x-axis, shift to the start of the x-axis and then shift downwards:
                     else {
+
+                        //TODO IMPORTANT -- This movement is not executed (replaced by the commands below) -- REVISE.
                         object.addProperty("direction", Direction.LEFT.toString());
                         object.addProperty("unitOfMovement", partialBoardState.getStartingX());
+
                         int cellsDown = gameHeight - (partialBoardState.getStartingY() + partialBoardState.getHeight());
                         //If enough cells, completely shift to a brand new partial state, moving downwards:
                         if (cellsDown >= partialBoardState.getHeight()) {
@@ -155,6 +160,7 @@ public class PlayerClient implements Runnable {
                     }
 
                     command = new Command(CommandType.USER_SERVICE, "move", object);
+                    System.out.println(name + ": " + "move " + command.getPayload().get("direction").getAsString() + " " + command.getPayload().get("unitOfMovement").getAsInt() + " units.");
 
                 }
 
@@ -169,7 +175,7 @@ public class PlayerClient implements Runnable {
 
                     //Choose which move to make. Currently a 60% reveal vs 40% flag chance.
                     moveEndpoint = random.nextInt(10) > 6 ? "flag" : "reveal";
-                    System.out.println(name + ": Decided to make move '" + moveEndpoint + "' at cell (" + randomX + "," + randomY + ").");
+                    System.out.println(name + ": " + moveEndpoint + "' at cell (" + randomX + "," + randomY + ").");
 
                     //Package the move into a command, convert to JSON and send:
                     object.addProperty("x", randomX);
@@ -186,7 +192,7 @@ public class PlayerClient implements Runnable {
 
                 //Wait for and print reply:
                 String reply = bufferedReader.readLine();
-                System.out.println("[" + name + "] Got: '" + reply + "'");
+//                System.out.println("[" + name + "] Got: '" + reply + "'");
 
                 //Parse reply and refresh the local state:
                 Response playResponse = gson.fromJson(reply, Response.class);

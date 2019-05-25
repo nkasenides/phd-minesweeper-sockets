@@ -37,7 +37,6 @@ public class AdminGameForm extends JFrame {
                 if (isActive()) {
                     if (e.getID() == KeyEvent.KEY_PRESSED) {
                         Direction direction = null;
-                        System.out.println("Key press -> " + e.getKeyCode());
                         switch (e.getKeyCode()) {
                             case KeyEvent.VK_UP:
                                 if (client.xShift - 1 >= 0) {
@@ -97,9 +96,6 @@ public class AdminGameForm extends JFrame {
     }
 
     public void update() {
-
-        System.out.println("gameForm.update() -> " + client.getGameState());
-
         switch (client.getGameState()) {
             case NOT_STARTED:
                 JOptionPane.showMessageDialog(null, "Game not started", "Error", JOptionPane.WARNING_MESSAGE);

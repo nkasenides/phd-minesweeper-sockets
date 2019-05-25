@@ -161,27 +161,45 @@ public class AdminClient implements Runnable {
                 System.out.println("[" + name + "] Got: '" + reply + "'");
                 Gson gson = new Gson();
                 Command command = gson.fromJson(reply, Command.class);
-                if (command.getCommandType() == CommandType.CLIENT_UPDATE_SERVICE) {
-                    JsonObject payload = command.getPayload();
-                    JsonElement gameStateElement = payload.get("gameState");
-                    GameState gameState = gson.fromJson(gameStateElement, GameState.class);
-                    JsonElement partialBoardStateElement = payload.get("partialBoardState");
-                    PartialBoardState partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
-                    this.gameState = gameState;
-                    this.partialBoardState = partialBoardState;
 
-                    //DEBUGGING:
-                    System.out.println(gson.toJson(gameState));
-                    System.out.println(gson.toJson(partialBoardState));
+                if (command.getCommandType() != null) {
+                    if (command.getCommandType() == CommandType.CLIENT_UPDATE_SERVICE) {
+                        JsonObject payload = command.getPayload();
+                        JsonElement gameStateElement = payload.get("gameState");
+                        GameState gameState = gson.fromJson(gameStateElement, GameState.class);
+                        JsonElement partialBoardStateElement = payload.get("partialBoardState");
+                        PartialBoardState partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
+                        this.gameState = gameState;
+                        this.partialBoardState = partialBoardState;
 
-                    this.gameState = gameState;
-                    this.partialBoardState = partialBoardState;
+                        //DEBUGGING:
+                        System.out.println(gson.toJson(gameState));
+                        System.out.println(gson.toJson(partialBoardState));
 
-                    if (GUI) gameForm.update();
+                        this.gameState = gameState;
+                        this.partialBoardState = partialBoardState;
 
+                        if (GUI) gameForm.update();
+                    }
+                }
+                else {
+                    Response response = gson.fromJson(reply, Response.class);
+                    if (response.getStatus() == OK) {
+                        JsonObject data = response.getData();
+                        JsonElement gameStateElement = data.get("gameState");
+                        GameState gameState = gson.fromJson(gameStateElement, GameState.class);
+                        JsonElement partialBoardStateElement = data.get("partialBoardState");
+                        PartialBoardState partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
+                        this.gameState = gameState;
+                        this.partialBoardState = partialBoardState;
+                        if (!stateInitialized) {
+                            if (GUI) gameForm.initialize();
+                            stateInitialized = true;
+                        }
+                        if (GUI) gameForm.update();
+                    }
                 }
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -205,28 +223,6 @@ public class AdminClient implements Runnable {
         String commandJSON = gson.toJson(command);
         printWriter.println(commandJSON);
         printWriter.flush();
-        String reply = null;
-        try {
-            reply = bufferedReader.readLine();
-            System.out.println("viewGame reply: " + reply);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Response response = gson.fromJson(reply, Response.class);
-        if (response.getStatus() == OK) {
-            JsonObject data = response.getData();
-            JsonElement gameStateElement = data.get("gameState");
-            GameState gameState = gson.fromJson(gameStateElement, GameState.class);
-            JsonElement partialBoardStateElement = data.get("partialBoardState");
-            PartialBoardState partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
-            this.gameState = gameState;
-            this.partialBoardState = partialBoardState;
-            if (!stateInitialized) {
-                if (GUI) gameForm.initialize();
-                stateInitialized = true;
-            }
-            if (GUI) gameForm.update();
-        }
     }
 
     public static void main(String[] args) {

@@ -52,8 +52,7 @@ public class LocalUserService implements UserService {
 
                 //If failed to get the partial state, return error:
                 catch (InvalidCellReferenceException e) {
-                    Response response = new ErrorResponse("Error fetching partial state for session '" + sessionID + "'.", e.getMessage());
-                    return response;
+                    return new ErrorResponse("Error fetching partial state for session '" + sessionID + "'.", e.getMessage());
                 }
             }
         }
