@@ -102,7 +102,7 @@ public class Game {
             for (int x = 0; x < fullBoardState.getWidth(); x++) {
                 for (int y = 0; y < fullBoardState.getHeight(); y++) {
 
-                    //NOTE: Commented out for simulation purposes (to run the simulation for a longer time). This should be uncommented in a "normal" minesweeper game.
+                    //IMPORTANT NOTE: Commented out for simulation purposes (to run the simulation for a longer time). This should be uncommented in a "normal" minesweeper game.
 
 //                    if (fullBoardState.getCells()[x][y].isMined() && fullBoardState.getCells()[x][y].getRevealState() == RevealState.REVEALED_MINE) {
 //                        gameState = GameState.ENDED_LOST;
@@ -117,6 +117,12 @@ public class Game {
             }
 
             if (covered == 0 && flaggedMines == totalMines ) {
+                gameState = GameState.ENDED_WON;
+                return;
+            }
+
+            //IMPORTANT NOTE: For simulation purposes ONLY! This will end the game as a win once all cells have been revealed:
+            if (covered < 1) {
                 gameState = GameState.ENDED_WON;
                 return;
             }

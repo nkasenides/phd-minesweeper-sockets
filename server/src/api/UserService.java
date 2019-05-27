@@ -13,13 +13,13 @@ public interface UserService {
     Response getPartialState(String sessionID);
 
     /**
-     * Performs a move (shift of partial state position) for a given player toward a given direction.
+     * Performs a move (shift of partial state position) for a given player to a given cell.
      * @param sessionID The session's UUID
-     * @param direction The direction to move towards.
-     * @param unitOfMovement The number of units to move.
+     * @param x The new starting x of the player's partial state.
+     * @param y The new starting y of the player's partial state.
      * @return Returns a JSON formatted string containing the new partial state of the game as data.
      */
-    Response move(String sessionID, Direction direction, int unitOfMovement);
+    Response move(String sessionID, int x, int y);
 
     //Performs a reveal action for the specified player
 

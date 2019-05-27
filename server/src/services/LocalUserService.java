@@ -59,15 +59,14 @@ public class LocalUserService implements UserService {
     }
 
     @Override
-    public Response move(String sessionID, Direction direction, int unitOfMovement) {
+    public Response move(String sessionID, int x, int y) {
 
         //Retrieve referenced session and check if valid:
         Session referencedSession = Datastore.getSession(sessionID);
 
         //If session not valid, return error:
         if (referencedSession == null) {
-            Response response = new ErrorResponse("Session not found", "Could not find session with ID '" + sessionID + "'");
-            return response;
+            return new ErrorResponse("Session not found", "Could not find session with ID '" + sessionID + "'");
         }
 
         //If session valid, try to get the referenced game:
@@ -77,71 +76,40 @@ public class LocalUserService implements UserService {
 
             //If game not found for this session, return error:
             if (referencedGame == null) {
-                Response response = new ErrorResponse("Game not found", "Could not find a game for the session with ID '" + sessionID + "'");
-                return response;
+                return new ErrorResponse("Game not found", "Could not find a game for the session with ID '" + sessionID + "'");
             }
 
-            //If game found, attempt a shift/move action:
-            else {
-
-                //Check units:
-                if (unitOfMovement < 1) {
-                    ErrorResponse errorResponse = new ErrorResponse("Invalid move", "Unit of movement must be 1 or more.");
-                    return errorResponse;
-                }
-
-                final int currentX = referencedSession.getPositionX();
-                final int currentY = referencedSession.getPositionY();
-                boolean shifted = false;
-                switch (direction) {
-                    case UP:
-                        if (currentX - unitOfMovement >= 0) {
-                            referencedSession.setPositionX(currentX - unitOfMovement);
-                            shifted = true;
-                        }
-                        break;
-                    case DOWN:
-                        if (currentX + unitOfMovement <= referencedGame.getGameSpecification().getWidth() - 1) {
-                            referencedSession.setPositionX(currentX + unitOfMovement);
-                            shifted = true;
-                        }
-                        break;
-                    case LEFT:
-                        if (currentY - unitOfMovement >= 0) {
-                            referencedSession.setPositionY(currentY - unitOfMovement);
-                            shifted = true;
-                        }
-                        break;
-                    case RIGHT:
-                        if (currentY + unitOfMovement <= referencedGame.getGameSpecification().getHeight() - 1) {
-                            referencedSession.setPositionY(currentY + unitOfMovement);
-                            shifted = true;
-                        }
-                        break;
-                }
-
-                if (shifted) {
-                    PartialStatePreference partialStatePreference = referencedSession.getPartialStatePreference();
-                    try {
-                        PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionX(), referencedSession.getPositionY(), referencedGame.getFullBoardState());
-                        Gson gson  = new Gson();
-                        JsonObject data = new JsonObject();
-                        data.add("partialBoardState", gson.toJsonTree(partialBoardState));
-                        data.add("gameState", gson.toJsonTree(referencedGame.getGameState()));
-                        SuccessResponse response = new SuccessResponse("Position shifted", "The position was shifted by " + unitOfMovement + " cells " + direction.getName() + "wards.");
-                        response.setData(data);
-                        return response;
-                    } catch (InvalidCellReferenceException e) {
-                        ErrorResponse errorResponse = new ErrorResponse("Position not shifted", "Could not shift position: " + e.getMessage());
-                        return errorResponse;
-                    }
-                }
-                else {
-                    ErrorResponse response = new ErrorResponse("Position not shifted", "Failed to shift position by " + unitOfMovement + " cells " + direction.getName() + "wards. The intended position is not valid.");
-                    return response;
-                }
-
+            //Check if game is started:
+            if (referencedGame.getGameState().isEnded()) {
+                return new ErrorResponse("Game ended", "The game with token '" + referencedGame.getGameSpecification().getToken() + "' has ended.");
             }
+
+//            //Check for valid points:
+//            if (x + referencedSession.getPartialStatePreference().getWidth() > referencedGame.getGameSpecification().getWidth() || x < 0
+//            || y + referencedSession.getPartialStatePreference().getHeight() > referencedGame.getGameSpecification().getHeight() || y < 0) {
+//                return new ErrorResponse("Invalid move", "The move shift to cell (" + x + ", " + y + ") is out of bounds.");
+//            }
+
+            //Extract board state:
+            PartialStatePreference partialStatePreference = referencedSession.getPartialStatePreference();
+            PartialBoardState partialBoardState;
+            try {
+                partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), x, y, referencedGame.getFullBoardState());
+            } catch (InvalidCellReferenceException e) {
+                return new ErrorResponse("Invalid move", "The move shift to cell (" + x + ", " + y + ") is out of bounds.");
+            }
+
+            //Set the position of the session:
+            referencedSession.setPositionX(x);
+            referencedSession.setPositionY(y);
+
+            //Reply:
+            Gson gson = new Gson();
+            JsonObject data = new JsonObject();
+            data.add("partialBoardState", gson.toJsonTree(partialBoardState));
+            data.add("gameState", gson.toJsonTree(referencedGame.getGameState()));
+            return new SuccessResponse("Moved successfully", "The move shift to cell (" + x + ", " + y + ") was successful.", data);
+
         }
 
     }

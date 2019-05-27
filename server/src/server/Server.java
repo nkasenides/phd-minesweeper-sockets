@@ -128,9 +128,9 @@ public class Server implements Runnable {
                                 response = USER_SERVICE.getPartialState(sessionID);
                                 break;
                             case "move":
-                                Direction direction = Direction.valueOf(payload.get("direction").getAsString());
-                                int unitOfMovement = payload.get("unitOfMovement").getAsInt();
-                                response = USER_SERVICE.move(sessionID, direction, unitOfMovement);
+                                final int x = payload.get("x").getAsInt();
+                                final int y = payload.get("y").getAsInt();
+                                response = USER_SERVICE.move(sessionID, x, y);
                                 break;
                             case "reveal":
                                 int xReveal = payload.get("x").getAsInt();
