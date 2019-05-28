@@ -25,6 +25,7 @@ import java.util.ArrayList;
 public class Server implements Runnable {
 
     public static final int SERVER_PORT = 12345;
+    private static final boolean DEBUG = true;
     private static final LocalAdminService ADMIN_SERVICE = new LocalAdminService();
     private static final LocalMasterService MASTER_SERVICE = new LocalMasterService();
     private static final LocalUserService USER_SERVICE = new LocalUserService();
@@ -48,7 +49,7 @@ public class Server implements Runnable {
             while ((input = bufferedReader.readLine()) != null) {
 
                 //Receive request:
-                System.out.println("Got request by '" + socket.getInetAddress() + ":" + socket.getPort() + "' --> " + input);
+                if (DEBUG) System.out.println("Got request by '" + socket.getInetAddress() + ":" + socket.getPort() + "' --> " + input);
 
                 //Parse command from JSON:
                 Command receivedCommand = null;
@@ -222,9 +223,9 @@ public class Server implements Runnable {
             System.out.println("Socket created, port " + SERVER_PORT);
 
             while (true) {
-                System.out.println("Waiting for inbound connection...");
+                if (DEBUG) System.out.println("Waiting for inbound connection...");
                 Socket socket = serverSocket.accept();
-                System.out.println("New connection from: " + socket.getInetAddress() + ":" + socket.getPort());
+                if (DEBUG) System.out.println("New connection from: " + socket.getInetAddress() + ":" + socket.getPort());
                 Server server = new Server(socket);
                 serverInstances.add(server);
                 new Thread(server).start();

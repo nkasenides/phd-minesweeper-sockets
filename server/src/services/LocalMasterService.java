@@ -22,8 +22,7 @@ public class LocalMasterService implements MasterService {
 
         //Check if games exist:
         if (games.size() < 1) {
-            SuccessResponse successResponse = new SuccessResponse("No games found", "No games have been found.");
-            return successResponse;
+            return new SuccessResponse("No games found", "No games have been found.");
         }
         else {
             SuccessResponse successResponse = new SuccessResponse("Games retrieved", games.size() + " games retrieved.");

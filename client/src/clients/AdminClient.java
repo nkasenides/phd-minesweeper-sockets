@@ -20,8 +20,9 @@ import static response.ResponseStatus.OK;
 
 public class AdminClient implements Runnable {
 
-    public static final int SERVER_PORT = 12345;
-    public static final String PASSWORD = "1234";
+    private static final int SERVER_PORT = 12345;
+    private static final String PASSWORD = "1234";
+    private static final boolean DEBUG = true;
 
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
@@ -66,7 +67,7 @@ public class AdminClient implements Runnable {
             //--Create game:
             {
 
-                System.out.println("Creating game...");
+                if (DEBUG) System.out.println("Creating game...");
 
                 //Create request object:
                 JsonObject object = new JsonObject();
@@ -89,14 +90,14 @@ public class AdminClient implements Runnable {
                 Response createResponse = gson.fromJson(reply, Response.class);
                 if (createResponse.getStatus() == OK) {
                     token = createResponse.getData().get("gameToken").getAsString();
-                    System.out.println("Game with token '" + token + "' created.");
+                    if (DEBUG) System.out.println("Game with token '" + token + "' created.");
                 }
             }
 
             //--Start game:
             {
 
-                System.out.println("Starting game with token '" + token + "'.");
+                if (DEBUG) System.out.println("Starting game with token '" + token + "'.");
 
                 //Create request object:
                 JsonObject object = new JsonObject();
@@ -115,13 +116,13 @@ public class AdminClient implements Runnable {
 
                 Response startResponse = gson.fromJson(reply, Response.class);
                 if (startResponse.getStatus() == OK) {
-                    System.out.println("Game with token '" + token + "' started.");
+                    if (DEBUG) System.out.println("Game with token '" + token + "' started.");
                 }
             }
 
             //--Subscribe to the game
             {
-                System.out.println("Subscribing to game with token '" + token + "'.");
+                if (DEBUG) System.out.println("Subscribing to game with token '" + token + "'.");
 
                 //Create request object:
                 JsonObject object = new JsonObject();
@@ -148,7 +149,7 @@ public class AdminClient implements Runnable {
                     if (GUI) {
                         gameForm = new AdminGameForm(this);
                     }
-                    System.out.println("Subscribed to game with token '" + token + "' with session ID '" + sessionID + "'.");
+                    if (DEBUG) System.out.println("Subscribed to game with token '" + token + "' with session ID '" + sessionID + "'.");
                 }
             }
 
@@ -158,7 +159,7 @@ public class AdminClient implements Runnable {
             //Wait for a state-update message from the server:
             while (true) {
                 String reply = bufferedReader.readLine();
-                System.out.println("[" + name + "] Got: '" + reply + "'");
+                if (DEBUG) System.out.println("[" + name + "] Got: '" + reply + "'");
                 Gson gson = new Gson();
                 Command command = gson.fromJson(reply, Command.class);
 
@@ -173,8 +174,10 @@ public class AdminClient implements Runnable {
                         this.partialBoardState = partialBoardState;
 
                         //DEBUGGING:
-                        System.out.println(gson.toJson(gameState));
-                        System.out.println(gson.toJson(partialBoardState));
+                        if (DEBUG) {
+                            System.out.println(gson.toJson(gameState));
+                            System.out.println(gson.toJson(partialBoardState));
+                        }
 
                         this.gameState = gameState;
                         this.partialBoardState = partialBoardState;
@@ -206,7 +209,7 @@ public class AdminClient implements Runnable {
     }
 
     public void viewGame(int startRow, int startCol) {
-        System.out.println("Viewing game with token '" + token + "' at position (" + startRow + "," + startCol + ").");
+        if (DEBUG) System.out.println("Viewing game with token '" + token + "' at position (" + startRow + "," + startCol + ").");
 
         //Create request object:
         JsonObject object = new JsonObject();
@@ -230,7 +233,7 @@ public class AdminClient implements Runnable {
         final String USAGE = "Use: AdminClient <SERVER_IP_ADDRESS> <GAME_WIDTH> <GAME_HEIGHT> <DIFFICULTY> <MAX_PLAYERS> <PARTIAL_STATE_WIDTH> <PARTIAL_STATE_HEIGHT> <UI>";
 
         if (args.length < 7) {
-            System.out.println(USAGE);
+            if (DEBUG) System.out.println(USAGE);
         }
 
         String ipAddress = args[0];

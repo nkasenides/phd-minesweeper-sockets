@@ -18,32 +18,27 @@ public class LocalAdminService implements AdminService {
 
         //Authentication check:
         if (!Datastore.checkPassword(password)) {
-            AuthErrorResponse errorResponse = new AuthErrorResponse();
-            return errorResponse;
+            return new AuthErrorResponse();
         }
 
         //Check parameters:
         if (maxNumOfPlayers < 1) {
-            ErrorResponse errorResponse = new ErrorResponse("Invalid maxNumOfPlayers", "The maximum number of players must be 1 or more.");
-            return errorResponse;
+            return new ErrorResponse("Invalid maxNumOfPlayers", "The maximum number of players must be 1 or more.");
         }
 
         if (width < 5) {
-            ErrorResponse errorResponse = new ErrorResponse("Invalid width", "The width of a game must be 5 cells or more.");
-            return errorResponse;
+            return new ErrorResponse("Invalid width", "The width of a game must be 5 cells or more.");
         }
 
         if (height < 5) {
-            ErrorResponse errorResponse = new ErrorResponse("Invalid height", "The height of a game must be 5 cells or more.");
-            return errorResponse;
+            return new ErrorResponse("Invalid height", "The height of a game must be 5 cells or more.");
         }
 
         //Create the game:
         String gameToken = Datastore.addGame(maxNumOfPlayers, width, height, difficulty);
 
         if (gameToken == null) {
-            ErrorResponse errorResponse = new ErrorResponse("Game creation failed", "Failed to create game (unknown).");
-            return errorResponse;
+            return new ErrorResponse("Game creation failed", "Failed to create game (unknown).");
         }
 
         SuccessResponse successResponse = new SuccessResponse("Game created", "A game with the specified configuration was successfully created.");
@@ -58,15 +53,13 @@ public class LocalAdminService implements AdminService {
 
         //Authentication check:
         if (!Datastore.checkPassword(password)) {
-            AuthErrorResponse errorResponse = new AuthErrorResponse();
-            return errorResponse;
+            return new AuthErrorResponse();
         }
 
         //Find the game:
         Game referencedGame = Datastore.getGame(gameToken);
         if (referencedGame == null) {
-            ErrorResponse response = new ErrorResponse("Game not found", "Game with token '" + gameToken + "' not found.");
-            return response;
+            return new ErrorResponse("Game not found", "Game with token '" + gameToken + "' not found.");
         }
 
         //Start the game:
@@ -93,15 +86,13 @@ public class LocalAdminService implements AdminService {
     public Response viewGame(String password, String gameToken, int partialStateWidth, int partialStateHeight, int startRow, int startCol) {
         //Authentication check:
         if (!Datastore.checkPassword(password)) {
-            AuthErrorResponse errorResponse = new AuthErrorResponse();
-            return errorResponse;
+            return new AuthErrorResponse();
         }
 
         //Find the game:
         Game referencedGame = Datastore.getGame(gameToken);
         if (referencedGame == null) {
-            ErrorResponse response = new ErrorResponse("Game not found", "Game with token '" + gameToken + "' not found.");
-            return response;
+            return new ErrorResponse("Game not found", "Game with token '" + gameToken + "' not found.");
         }
 
         PartialStatePreference partialStatePreference = new PartialStatePreference(partialStateWidth, partialStateHeight);
@@ -119,8 +110,7 @@ public class LocalAdminService implements AdminService {
 
         //If failed to get the partial state, return error:
         catch (InvalidCellReferenceException e) {
-            Response response = new ErrorResponse("Game state not retrieved", e.getMessage());
-            return response;
+            return new ErrorResponse("Game state not retrieved", e.getMessage());
         }
 
     }

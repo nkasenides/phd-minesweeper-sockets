@@ -21,8 +21,7 @@ public class LocalUserService implements UserService {
 
         //If session not valid, return error:
         if (referencedSession == null) {
-            Response response = new ErrorResponse("Session not found", "Could not find session with ID '" + sessionID + "'");
-            return response;
+            return new ErrorResponse("Session not found", "Could not find session with ID '" + sessionID + "'");
         }
 
         //If session valid, try to get the referenced game:
@@ -32,8 +31,7 @@ public class LocalUserService implements UserService {
 
             //If game not found for this session, return error:
             if (referencedGame == null) {
-                Response response = new ErrorResponse("Game not found", "Could not find a game for the session with ID '" + sessionID + "'");
-                return response;
+                return new ErrorResponse("Game not found", "Could not find a game for the session with ID '" + sessionID + "'");
             }
 
             //If game found, return its partial state:

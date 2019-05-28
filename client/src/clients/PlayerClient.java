@@ -18,7 +18,8 @@ import static response.ResponseStatus.OK;
 
 public class PlayerClient implements Runnable {
 
-    public static final int SERVER_PORT = 12345;
+    private static final int SERVER_PORT = 12345;
+    private static final boolean DEBUG = true;
     private ArrayList<GameSpecification> games = null;
     private GameSpecification gameSpecification = null;
 
@@ -47,7 +48,7 @@ public class PlayerClient implements Runnable {
     public void run() {
         try {
 
-            System.out.println(name + ": Acquiring a list of games...");
+            if (DEBUG) System.out.println(name + ": Acquiring a list of games...");
 
             //List the games:
             Command listGamesCommand = new Command(CommandType.MASTER_SERVICE, "listGames", null);
@@ -66,13 +67,13 @@ public class PlayerClient implements Runnable {
                 }
             }
 
-            System.out.println(name + ": Games fetched.");
+            if (DEBUG) System.out.println(name + ": Games fetched.");
 
             if (games.size() < 1) {
                 throw new RuntimeException("Error - No games found");
             }
 
-            System.out.println(name + ": Joining game with token '" + games.get(0).getToken() + "'...");
+            if (DEBUG) System.out.println(name + ": Joining game with token '" + games.get(0).getToken() + "'...");
 
             //Try to join the game:
             JsonObject jsonObject = new JsonObject();
@@ -95,19 +96,19 @@ public class PlayerClient implements Runnable {
                 gameState = gson.fromJson(gameStateElement, GameState.class);
                 JsonElement partialBoardStateElement = joinResponse.getData().get("partialBoardState");
                 partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
-                System.out.println(name + ": Joined game with token '" + games.get(0).getToken() + " with session ID '" + sessionID + "'.");
+                if (DEBUG) System.out.println(name + ": Joined game with token '" + games.get(0).getToken() + " with session ID '" + sessionID + "'.");
             }
 
-            System.out.println(name + ": Starting to play!");
+            if (DEBUG) System.out.println(name + ": Starting to play!");
 
             //While the game is not over, keep making moves:
             while (true) {
 
-                System.out.println();
-                System.out.println();
+                if (DEBUG) System.out.println();
+                if (DEBUG) System.out.println();
 
                 Command command = makeMove();
-                System.out.println("[" + name + "]: Decided to make move '" + command.getEndpointName() + "' at cell (" +
+                if (DEBUG) System.out.println("[" + name + "]: Decided to make move '" + command.getEndpointName() + "' at cell (" +
                         command.getPayload().get("row").getAsInt() + "," + command.getPayload().get("col").getAsInt() + ")");
 
                 //Convert to JSON and send:
@@ -117,7 +118,7 @@ public class PlayerClient implements Runnable {
 
                 //Wait for and print reply:
                 String reply = bufferedReader.readLine();
-                System.out.println("[" + name + "]: " + reply);
+                if (DEBUG) System.out.println("[" + name + "]: " + reply);
 
                 //Parse reply and refresh the local state, if a response from server:
                 Response playResponse = gson.fromJson(reply, Response.class);
@@ -144,7 +145,7 @@ public class PlayerClient implements Runnable {
                 }
 
                 if (gameState.isEnded()) {
-                    System.out.println(name + ": GAME ENDED (" + gameState + ")");
+                    if (DEBUG) System.out.println(name + ": GAME ENDED (" + gameState + ")");
                     return;
                 }
 
@@ -161,9 +162,9 @@ public class PlayerClient implements Runnable {
     private Command makeMove() {
         //Scan all the cells from partial state and save those who are RevealState.COVERED:
         class UnrevealedCell {
-            public int row;
-            public int col;
-            public UnrevealedCell(int row, int col) { this.row = row; this.col = col; }
+            private int row;
+            private int col;
+            private UnrevealedCell(int row, int col) { this.row = row; this.col = col; }
         }
         ArrayList<UnrevealedCell> unrevealedCells = new ArrayList<>();
         for (int row = 0; row < partialBoardState.getCells().length; row++) {
@@ -184,9 +185,10 @@ public class PlayerClient implements Runnable {
             final String moveEndpoint = "move";
             final CommandType commandType = CommandType.USER_SERVICE;
 
-            System.out.println("*** NO MORE UNREVEALED CELLS IN RANGE (" + partialBoardState.getStartingRow() + "," + partialBoardState.getStartingCol() +
+            if (DEBUG) System.out.println("*** NO MORE UNREVEALED CELLS IN RANGE (" + partialBoardState.getStartingRow() + "," + partialBoardState.getStartingCol() +
                     ") to (" + (partialBoardState.getStartingRow() + partialBoardState.getHeight()) + "," + (partialBoardState.getStartingCol() + partialBoardState.getWidth()) + ")***");
 
+            //Rightward shifting:
             final int cellsRight = gameWidth - (partialBoardState.getStartingCol() + partialBoardState.getWidth());
 
             if (cellsRight >= partialBoardState.getWidth()) {
@@ -200,6 +202,8 @@ public class PlayerClient implements Runnable {
                 return new Command(commandType, moveEndpoint, object);
             }
             else {
+
+                //Downward shifting:
                 final int cellsDown = gameHeight - (partialBoardState.getStartingRow() + partialBoardState.getHeight());
                 if (cellsDown >= partialBoardState.getHeight()) {
                     object.addProperty("row", partialBoardState.getStartingRow() + partialBoardState.getHeight());
@@ -217,7 +221,7 @@ public class PlayerClient implements Runnable {
         //Otherwise, select a random cell from unrevealedCells with a random move and play it:
         else {
 
-            System.out.println("*** FOUND " + unrevealedCells.size() + " UNREVEALED CELLS IN RANGE (" + partialBoardState.getStartingRow() + "," + partialBoardState.getStartingCol() +
+            if (DEBUG) System.out.println("*** FOUND " + unrevealedCells.size() + " UNREVEALED CELLS IN RANGE (" + partialBoardState.getStartingRow() + "," + partialBoardState.getStartingCol() +
                     ") to (" + (partialBoardState.getStartingRow() + partialBoardState.getHeight()) + "," + (partialBoardState.getStartingCol() + partialBoardState.getWidth()) + ")***");
 
             //If there are unrevealed cells, choose a random one out of the list:
@@ -228,7 +232,7 @@ public class PlayerClient implements Runnable {
 
             //Choose which move to make. Currently a 60% reveal vs 40% flag chance.
 //            moveEndpoint = random.nextInt(10) > 6 ? "flag" : "reveal";
-            final String moveEndpoint = "reveal"; //TODO CHANGE
+            final String moveEndpoint = "reveal"; //TODO CHANGE TO ABOVE
 
             //Remove the cell from the unrevealedCells:
             unrevealedCells.remove(randomCellIndex);
