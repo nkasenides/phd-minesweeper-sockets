@@ -24,12 +24,10 @@ public class MinesweeperButton extends JButton {
     public static final Border BUTTON_BORDER = new LineBorder(Color.BLACK, 1);
 
     public static void setIconSize(int iconSize) {
-        if (iconSize >= 10) ICON_SIZE = iconSize;
+        ICON_SIZE = iconSize;
     }
 
     public static void resizeIcons() {
-
-        if (ICON_SIZE < 10) return;
 
         MINE = new ImageIcon(RESOURCE_FOLDER + "mine.png");
         MINE.setImage(MINE.getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH));

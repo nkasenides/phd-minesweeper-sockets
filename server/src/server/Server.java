@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class Server implements Runnable {
 
     public static final int SERVER_PORT = 12345;
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private static final LocalAdminService ADMIN_SERVICE = new LocalAdminService();
     private static final LocalMasterService MASTER_SERVICE = new LocalMasterService();
     private static final LocalUserService USER_SERVICE = new LocalUserService();

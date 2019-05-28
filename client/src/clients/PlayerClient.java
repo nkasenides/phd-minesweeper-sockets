@@ -19,7 +19,7 @@ import static response.ResponseStatus.OK;
 public class PlayerClient implements Runnable {
 
     private static final int SERVER_PORT = 12345;
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private ArrayList<GameSpecification> games = null;
     private GameSpecification gameSpecification = null;
 

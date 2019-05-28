@@ -5,6 +5,8 @@ import model.*;
 import ui.component.MinesweeperButton;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 
@@ -74,6 +76,14 @@ public class AdminGameForm extends JFrame {
             }
         };
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(keyEventDispatcher);
+
+        //Resizing:
+        addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent componentEvent) {
+                MinesweeperButton.setIconSize(buttons[0][0].getWidth() - 8);
+                MinesweeperButton.resizeIcons();
+            }
+        });
 
     }
 
