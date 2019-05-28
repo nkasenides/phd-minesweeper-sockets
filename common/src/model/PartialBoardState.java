@@ -9,44 +9,44 @@ public class PartialBoardState extends BoardState {
     public static final int DEFAULT_STARTING_X = 0;
     public static final int DEFAULT_STARTING_Y = 0;
 
-    private final int startingX;
-    private final int startingY;
+    private final int startingCol;
+    private final int startingRow;
 
-    public PartialBoardState(int width, int height, int startingX, int startingY, FullBoardState entireFullGameState) throws InvalidCellReferenceException {
+    public PartialBoardState(int width, int height, int startingRow, int startingCol, FullBoardState entireFullGameState) throws InvalidCellReferenceException {
 
         super(width, height);
 
-        if (startingX + width > entireFullGameState.getWidth() || startingY + height > entireFullGameState.getHeight()
-                || startingX < 0 || startingY < 0) {
-            throw new InvalidCellReferenceException("The partial state with x: " + startingX + ", y: " + startingY + ", width: " + width + ", height: " + height + " is not valid.");
+        if (startingCol + width > entireFullGameState.getWidth() || startingRow + height > entireFullGameState.getHeight()
+                || startingCol < 0 || startingRow < 0) {
+            throw new InvalidCellReferenceException("The partial state with row: " + startingRow + ", col: " + startingCol+ ", width: " + width + ", height: " + height + " is not valid.");
         }
 
-        this.cells = new CellState[width][height];
-        this.startingX = startingX;
-        this.startingY = startingY;
+        this.cells = new CellState[height][width];
+        this.startingCol = startingCol;
+        this.startingRow = startingRow;
 
         //Copy the partial state from the full state:
-        for (int x = startingX; (x < startingX + width); x++) {
-            for (int y = startingY; (y < startingY + height); y++) {
-                cells[x - startingX][y - startingY] = entireFullGameState.getCells()[x][y];
+        for (int row = startingRow; (row < startingRow + height); row++) {
+            for (int col = startingCol; (col < startingCol + width); col++) {
+                cells[row - startingRow][col - startingCol] = entireFullGameState.getCells()[row][col];
             }
         }
     }
 
-    public PartialBoardState(int startingX, int startingY, FullBoardState entireFullGameState) throws InvalidCellReferenceException {
-        this(DEFAULT_WIDTH, DEFAULT_HEIGHT, startingX, startingY, entireFullGameState);
+    public PartialBoardState(int startingCol, int startingRow, FullBoardState entireFullGameState) throws InvalidCellReferenceException {
+        this(DEFAULT_WIDTH, DEFAULT_HEIGHT, startingCol, startingRow, entireFullGameState);
     }
 
     public PartialBoardState(FullBoardState entireFullGameState) throws InvalidCellReferenceException {
         this(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_STARTING_X, DEFAULT_STARTING_Y, entireFullGameState);
     }
 
-    public int getStartingX() {
-        return startingX;
+    public int getStartingCol() {
+        return startingCol;
     }
 
-    public int getStartingY() {
-        return startingY;
+    public int getStartingRow() {
+        return startingRow;
     }
 
 }

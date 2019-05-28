@@ -8,8 +8,8 @@ public class Session {
     private final PartialStatePreference partialStatePreference;
     private final String playerName;
     private final String gameToken;
-    private int positionX;
-    private int positionY;
+    private int positionCol;
+    private int positionRow;
     private final boolean spectator;
     private int points;
 
@@ -18,8 +18,8 @@ public class Session {
         this.partialStatePreference = partialStatePreference;
         this.playerName = playerName;
         this.gameToken = gameToken;
-        this.positionX = 0;
-        this.positionY = 0;
+        this.positionCol = 0;
+        this.positionRow = 0;
         this.spectator = spectator;
         this.points = 0;
     }
@@ -48,20 +48,20 @@ public class Session {
         return gameToken;
     }
 
-    public int getPositionX() {
-        return positionX;
+    public int getPositionCol() {
+        return positionCol;
     }
 
-    public int getPositionY() {
-        return positionY;
+    public int getPositionRow() {
+        return positionRow;
     }
 
-    public void setPositionX(int positionX) {
-        this.positionX = positionX;
+    public void setPositionCol(int positionCol) {
+        this.positionCol = positionCol;
     }
 
-    public void setPositionY(int positionY) {
-        this.positionY = positionY;
+    public void setPositionRow(int positionRow) {
+        this.positionRow = positionRow;
     }
 
     public boolean isSpectator() {

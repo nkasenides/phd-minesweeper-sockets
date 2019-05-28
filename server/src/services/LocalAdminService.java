@@ -90,7 +90,7 @@ public class LocalAdminService implements AdminService {
     }
 
     @Override
-    public Response viewGame(String password, String gameToken, int partialStateWidth, int partialStateHeight, int startX, int startY) {
+    public Response viewGame(String password, String gameToken, int partialStateWidth, int partialStateHeight, int startRow, int startCol) {
         //Authentication check:
         if (!Datastore.checkPassword(password)) {
             AuthErrorResponse errorResponse = new AuthErrorResponse();
@@ -107,7 +107,7 @@ public class LocalAdminService implements AdminService {
         PartialStatePreference partialStatePreference = new PartialStatePreference(partialStateWidth, partialStateHeight);
 
         try {
-            PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), startX, startY, referencedGame.getFullBoardState());
+            PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), startRow, startCol, referencedGame.getFullBoardState());
             Response response = new SuccessResponse("Game state retrieved", "Game state retrieved.");
             Gson gson = new Gson();
             JsonObject data = new JsonObject();

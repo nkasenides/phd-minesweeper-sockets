@@ -23,7 +23,7 @@ public class AdminGameForm extends JFrame {
         //Initialize UI:
         setTitle("View Game | Minesweeper");
         this.client = client;
-        this.buttons = new MinesweeperButton[client.getPartialStatePreference().getWidth()][client.getPartialStatePreference().getHeight()];
+        this.buttons = new MinesweeperButton[client.getPartialStatePreference().getHeight()][client.getPartialStatePreference().getWidth()];
         setSize(WINDOW_SIZE, WINDOW_SIZE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,33 +39,33 @@ public class AdminGameForm extends JFrame {
                         Direction direction = null;
                         switch (e.getKeyCode()) {
                             case KeyEvent.VK_UP:
-                                if (client.xShift - 1 >= 0) {
+                                if (client.rowShift - 1 >= 0) {
                                     direction = Direction.UP;
-                                    client.xShift--;
+                                    client.rowShift--;
                                 }
                                 break;
                             case KeyEvent.VK_DOWN:
-                                if (client.xShift + client.getPartialStatePreference().getWidth() < client.getGameWidth()) {
+                                if (client.rowShift + client.getPartialStatePreference().getWidth() < client.getGameWidth()) {
                                     direction = Direction.DOWN;
-                                    client.xShift++;
+                                    client.rowShift++;
                                 }
                                 break;
                             case KeyEvent.VK_LEFT:
-                                if (client.yShift - 1 >= 0) {
+                                if (client.colShift - 1 >= 0) {
                                     direction = Direction.LEFT;
-                                    client.yShift--;
+                                    client.colShift--;
                                 }
                                 break;
                             case KeyEvent.VK_RIGHT:
-                                if (client.yShift + client.getPartialStatePreference().getHeight() < client.getGameHeight()) {
+                                if (client.colShift + client.getPartialStatePreference().getHeight() < client.getGameHeight()) {
                                     direction = Direction.RIGHT;
-                                    client.yShift++;
+                                    client.colShift++;
                                 }
                                 break;
                         }
-//                        System.out.println("cX: " + client.xShift + ", cY: " + client.yShift);
+//                        System.out.println("cX: " + client.rowShift + ", cY: " + client.colShift);
                         if (direction != null) {
-                            client.viewGame(client.xShift, client.yShift);
+                            client.viewGame(client.rowShift, client.colShift);
                         }
                     }
                 }
@@ -79,11 +79,11 @@ public class AdminGameForm extends JFrame {
 
     public void initialize() {
         gamePanel = new JPanel();
-        gamePanel.setLayout(new GridLayout(client.getPartialStatePreference().getWidth(), client.getPartialStatePreference().getHeight()));
-        for (int x = 0; x < client.getPartialStatePreference().getWidth(); x++) {
-            for (int y = 0; y < client.getPartialStatePreference().getHeight(); y++) {
+        gamePanel.setLayout(new GridLayout(client.getPartialStatePreference().getHeight(), client.getPartialStatePreference().getWidth()));
+        for (int row = 0; row < client.getPartialStatePreference().getHeight(); row++) {
+            for (int col = 0; col < client.getPartialStatePreference().getWidth(); col++) {
                 MinesweeperButton button = new MinesweeperButton();
-                buttons[x][y] = button;
+                buttons[row][col] = button;
                 gamePanel.add(button);
             }
         }
@@ -110,63 +110,63 @@ public class AdminGameForm extends JFrame {
     }
 
     private void updateButtons() {
-        for (int x = 0; x < client.getPartialBoardState().getWidth(); x++) {
-            for (int y = 0; y < client.getPartialBoardState().getHeight(); y++) {
+        for (int row = 0; row < client.getPartialBoardState().getHeight(); row++) {
+            for (int col = 0; col < client.getPartialBoardState().getWidth(); col++) {
 
                 //Set background:
                 switch (client.getGameState()) {
                     case NOT_STARTED:
                         break;
                     case STARTED:
-                        buttons[x][y].setBackground(Color.LIGHT_GRAY);
+                        buttons[row][col].setBackground(Color.LIGHT_GRAY);
                         //Set the background of blank revealed cells to a darker gray:
-                        if (client.getPartialBoardState().getCells()[x][y].getRevealState() == RevealState.REVEALED_0) {
-                            buttons[x][y].setBackground(Color.GRAY);
+                        if (client.getPartialBoardState().getCells()[row][col].getRevealState() == RevealState.REVEALED_0) {
+                            buttons[row][col].setBackground(Color.GRAY);
                         }
                         break;
                     case ENDED_WON:
-                        buttons[x][y].setBackground(Color.GREEN);
+                        buttons[row][col].setBackground(Color.GREEN);
                         break;
                     case ENDED_LOST:
-                        buttons[x][y].setBackground(Color.RED);
+                        buttons[row][col].setBackground(Color.RED);
                         break;
                 }
 
                 //Set the icon:
-                switch (client.getPartialBoardState().getCells()[x][y].getRevealState()) {
+                switch (client.getPartialBoardState().getCells()[row][col].getRevealState()) {
                     case COVERED:
                     case REVEALED_0:
-                        buttons[x][y].setIcon(null);
+                        buttons[row][col].setIcon(null);
                         break;
                     case FLAGGED:
-                        buttons[x][y].setIcon(MinesweeperButton.FLAG);
+                        buttons[row][col].setIcon(MinesweeperButton.FLAG);
                         break;
                     case REVEALED_1:
-                        buttons[x][y].setIcon(MinesweeperButton.ONE);
+                        buttons[row][col].setIcon(MinesweeperButton.ONE);
                         break;
                     case REVEALED_2:
-                        buttons[x][y].setIcon(MinesweeperButton.TWO);
+                        buttons[row][col].setIcon(MinesweeperButton.TWO);
                         break;
                     case REVEALED_3:
-                        buttons[x][y].setIcon(MinesweeperButton.THREE);
+                        buttons[row][col].setIcon(MinesweeperButton.THREE);
                         break;
                     case REVEALED_4:
-                        buttons[x][y].setIcon(MinesweeperButton.FOUR);
+                        buttons[row][col].setIcon(MinesweeperButton.FOUR);
                         break;
                     case REVEALED_5:
-                        buttons[x][y].setIcon(MinesweeperButton.FIVE);
+                        buttons[row][col].setIcon(MinesweeperButton.FIVE);
                         break;
                     case REVEALED_6:
-                        buttons[x][y].setIcon(MinesweeperButton.SIX);
+                        buttons[row][col].setIcon(MinesweeperButton.SIX);
                         break;
                     case REVEALED_7:
-                        buttons[x][y].setIcon(MinesweeperButton.SEVEN);
+                        buttons[row][col].setIcon(MinesweeperButton.SEVEN);
                         break;
                     case REVEALED_8:
-                        buttons[x][y].setIcon(MinesweeperButton.EIGHT);
+                        buttons[row][col].setIcon(MinesweeperButton.EIGHT);
                         break;
                     case REVEALED_MINE:
-                        buttons[x][y].setIcon(MinesweeperButton.MINE);
+                        buttons[row][col].setIcon(MinesweeperButton.MINE);
                         break;
                 }
 

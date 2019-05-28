@@ -40,8 +40,8 @@ public class AdminClient implements Runnable {
     private final int maxPlayers;
 
     //State
-    public int xShift = 0;
-    public int yShift = 0;
+    public int rowShift = 0;
+    public int colShift = 0;
     private GameState gameState;
     private PartialBoardState partialBoardState;
 
@@ -143,8 +143,8 @@ public class AdminClient implements Runnable {
                 Response response = gson.fromJson(reply, Response.class);
                 if (response.getStatus() == OK) {
                     sessionID = response.getData().get("sessionID").getAsString();
-//                    int totalWidth = response.getData().get("totalWidth").getAsInt();
-//                    int totalHeight = response.getData().get("totalHeight").getAsInt();
+//                    System.out.println(response.getData().get("totalWidth").getAsInt());
+//                    System.out.println(response.getData().get("totalHeight").getAsInt());
                     if (GUI) {
                         gameForm = new AdminGameForm(this);
                     }
@@ -205,8 +205,8 @@ public class AdminClient implements Runnable {
         }
     }
 
-    public void viewGame(int startX, int startY) {
-        System.out.println("Viewing game with token '" + token + "' at position (" + startX + "," + startY + ").");
+    public void viewGame(int startRow, int startCol) {
+        System.out.println("Viewing game with token '" + token + "' at position (" + startRow + "," + startCol + ").");
 
         //Create request object:
         JsonObject object = new JsonObject();
@@ -214,8 +214,8 @@ public class AdminClient implements Runnable {
         object.addProperty("gameToken", token);
         object.addProperty("partialStateWidth", partialStatePreference.getWidth());
         object.addProperty("partialStateHeight", partialStatePreference.getHeight());
-        object.addProperty("startX", startX);
-        object.addProperty("startY", startY);
+        object.addProperty("startRow", startRow);
+        object.addProperty("startCol", startCol);
         Command command = new Command(CommandType.ADMIN_SERVICE, "viewGame", object);
 
         //Convert to JSON and send:

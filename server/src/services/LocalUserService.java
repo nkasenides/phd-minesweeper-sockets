@@ -40,7 +40,7 @@ public class LocalUserService implements UserService {
             else {
                 PartialStatePreference partialStatePreference = referencedSession.getPartialStatePreference();
                 try {
-                    PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionX(), referencedSession.getPositionY(), referencedGame.getFullBoardState());
+                    PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionRow(), referencedSession.getPositionCol(), referencedGame.getFullBoardState());
                     Response response = new SuccessResponse("Partial state retrieved", "Partial state retrieved.");
                     Gson gson = new Gson();
                     JsonObject data = new JsonObject();
@@ -59,7 +59,7 @@ public class LocalUserService implements UserService {
     }
 
     @Override
-    public Response move(String sessionID, int x, int y) {
+    public Response move(String sessionID, int row, int col) {
 
         //Retrieve referenced session and check if valid:
         Session referencedSession = Datastore.getSession(sessionID);
@@ -85,37 +85,37 @@ public class LocalUserService implements UserService {
             }
 
 //            //Check for valid points:
-//            if (x + referencedSession.getPartialStatePreference().getWidth() > referencedGame.getGameSpecification().getWidth() || x < 0
-//            || y + referencedSession.getPartialStatePreference().getHeight() > referencedGame.getGameSpecification().getHeight() || y < 0) {
-//                return new ErrorResponse("Invalid move", "The move shift to cell (" + x + ", " + y + ") is out of bounds.");
+//            if (row + referencedSession.getPartialStatePreference().getWidth() > referencedGame.getGameSpecification().getWidth() || row < 0
+//            || col + referencedSession.getPartialStatePreference().getHeight() > referencedGame.getGameSpecification().getHeight() || col < 0) {
+//                return new ErrorResponse("Invalid move", "The move shift to cell (" + row + ", " + col + ") is out of bounds.");
 //            }
 
             //Extract board state:
             PartialStatePreference partialStatePreference = referencedSession.getPartialStatePreference();
             PartialBoardState partialBoardState;
             try {
-                partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), x, y, referencedGame.getFullBoardState());
+                partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), row, col, referencedGame.getFullBoardState());
             } catch (InvalidCellReferenceException e) {
-                return new ErrorResponse("Invalid move", "The move shift to cell (" + x + ", " + y + ") is out of bounds.");
+                return new ErrorResponse("Invalid move", "The move shift to cell (" + row + ", " + col + ") is out of bounds.");
             }
 
             //Set the position of the session:
-            referencedSession.setPositionX(x);
-            referencedSession.setPositionY(y);
+            referencedSession.setPositionCol(col);
+            referencedSession.setPositionRow(row);
 
             //Reply:
             Gson gson = new Gson();
             JsonObject data = new JsonObject();
             data.add("partialBoardState", gson.toJsonTree(partialBoardState));
             data.add("gameState", gson.toJsonTree(referencedGame.getGameState()));
-            return new SuccessResponse("Moved successfully", "The move shift to cell (" + x + ", " + y + ") was successful.", data);
+            return new SuccessResponse("Moved successfully", "The move shift to cell (" + row + ", " + col + ") was successful.", data);
 
         }
 
     }
 
     @Override
-    public Response reveal(String sessionID, int x, int y) {
+    public Response reveal(String sessionID, int row, int col) {
         //Retrieve referenced session and check if valid:
         Session referencedSession = Datastore.getSession(sessionID);
 
@@ -143,8 +143,8 @@ public class LocalUserService implements UserService {
             FullBoardState state = referencedGame.getFullBoardState();
 
             //Check the coordinates for validity:
-            if (x >= state.getWidth() || y >= state.getHeight() || x < 0 || y < 0) {
-                return new ErrorResponse("Invalid coordinates", "The coordinates (" + x + "," + y + ") are out of bounds.");
+            if (row >= state.getHeight() || col >= state.getWidth() || row < 0 || col < 0) {
+                return new ErrorResponse("Invalid coordinates", "The coordinates (" + row + "," + col + ") are out of bounds.");
             }
 
             //Check if the game has started:
@@ -153,26 +153,26 @@ public class LocalUserService implements UserService {
             }
 
             //Check if the cell is revealed:
-            if (referencedGame.getFullBoardState().getCells()[x][y].getRevealState() != RevealState.COVERED) {
+            if (referencedGame.getFullBoardState().getCells()[row][col].getRevealState() != RevealState.COVERED) {
                 try {
-                    SuccessResponse response = new SuccessResponse("Cell already revealed", "The cell (" + x + "," + y + ") has already been revealed.");
-                    PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionX(), referencedSession.getPositionY(), referencedGame.getFullBoardState());
+                    SuccessResponse response = new SuccessResponse("Cell already revealed", "The cell (" + row + "," + col + ") has already been revealed.");
+                    PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionRow(), referencedSession.getPositionCol(), referencedGame.getFullBoardState());
                     Gson gson = new Gson();
                     JsonObject data = new JsonObject();
                     data.add("partialBoardState", gson.toJsonTree(partialBoardState));
                     data.add("gameState", gson.toJsonTree(referencedGame.getGameState()));
-                    data.add("revealState", gson.toJsonTree(referencedGame.getFullBoardState().getCells()[x][y].getRevealState()));
+                    data.add("revealState", gson.toJsonTree(referencedGame.getFullBoardState().getCells()[row][col].getRevealState()));
                     data.addProperty("points", referencedSession.getPoints());
                     response.setData(data);
                     Server.updateClients(referencedSession.getGameToken(), sessionID);
                     return response;
                 } catch (InvalidCellReferenceException e) {
-                    return new ErrorResponse("Failed to fetch partial state", "The cell (" + x + "," + y + ") has been already revealed, but failed to load partial state: " + e.getMessage());
+                    return new ErrorResponse("Failed to fetch partial state", "The cell (" + row + "," + col + ") has been already revealed, but failed to load partial state: " + e.getMessage());
                 }
             }
 
             //Reveal, change points and return partial state:
-            RevealState revealState = referencedGame.reveal(x, y);
+            RevealState revealState = referencedGame.reveal(row, col);
             switch (revealState) {
                 case REVEALED_0:
                 case REVEALED_1:
@@ -197,24 +197,24 @@ public class LocalUserService implements UserService {
             }
 
             try {
-                PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionX(), referencedSession.getPositionY(), referencedGame.getFullBoardState());
+                PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionRow(), referencedSession.getPositionCol(), referencedGame.getFullBoardState());
                 Gson gson  = new Gson();
                 JsonObject data = new JsonObject();
                 data.add("partialBoardState", gson.toJsonTree(partialBoardState));
                 data.add("gameState", gson.toJsonTree(referencedGame.getGameState()));
                 data.addProperty("points", referencedSession.getPoints());
-                SuccessResponse response = new SuccessResponse("Cell revealed", "Cell (" + x + "," + y + ") revealed successfully.");
+                SuccessResponse response = new SuccessResponse("Cell revealed", "Cell (" + row + "," + col + ") revealed successfully.");
                 response.setData(data);
                 Server.updateClients(referencedSession.getGameToken(), sessionID);
                 return response;
             } catch (InvalidCellReferenceException e) {
-                return new ErrorResponse("Cell revealed, failed to fetch partial state", "The cell (" + x + "," + y + ") has been revealed, but failed to load partial state: " + e.getMessage());
+                return new ErrorResponse("Cell revealed, failed to fetch partial state", "The cell (" + row + "," + col + ") has been revealed, but failed to load partial state: " + e.getMessage());
             }
         }
     }
 
     @Override
-    public Response flag(String sessionID, int x, int y) {
+    public Response flag(String sessionID, int row, int col) {
         //Retrieve referenced session and check if valid:
         Session referencedSession = Datastore.getSession(sessionID);
 
@@ -242,8 +242,8 @@ public class LocalUserService implements UserService {
             FullBoardState state = referencedGame.getFullBoardState();
 
             //Check the coordinates for validity:
-            if (x >= state.getWidth() || y >= state.getHeight() || x < 0 || y < 0) {
-                return new ErrorResponse("Invalid coordinates", "The coordinates (" + x + "," + y + ") are out of bounds.");
+            if (row >= state.getHeight() || col >= state.getWidth() || row < 0 || col < 0) {
+                return new ErrorResponse("Invalid coordinates", "The coordinates (" + row + "," + col + ") are out of bounds.");
             }
 
             //Check if the game has started:
@@ -252,11 +252,11 @@ public class LocalUserService implements UserService {
             }
 
             //Check if the cell is already flagged and unflag it:
-            if (referencedGame.getFullBoardState().getCells()[x][y].getRevealState() == RevealState.FLAGGED) {
+            if (referencedGame.getFullBoardState().getCells()[row][col].getRevealState() == RevealState.FLAGGED) {
                 try {
-                    referencedGame.flag(x, y);
-                    PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionX(), referencedSession.getPositionY(), referencedGame.getFullBoardState());
-                    SuccessResponse successResponse = new SuccessResponse("Cell unflagged", "The cell (" + x + "," + y + ") unflagged successfully.");
+                    referencedGame.flag(row, col);
+                    PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionRow(), referencedSession.getPositionCol(), referencedGame.getFullBoardState());
+                    SuccessResponse successResponse = new SuccessResponse("Cell unflagged", "The cell (" + row + "," + col + ") unflagged successfully.");
                     Gson gson = new Gson();
                     JsonObject data = new JsonObject();
                     data.add("gameState", gson.toJsonTree(referencedGame.getGameState()));
@@ -265,37 +265,37 @@ public class LocalUserService implements UserService {
                     Server.updateClients(referencedSession.getGameToken(), sessionID);
                     return successResponse;
                 } catch (InvalidCellReferenceException e) {
-                    return new ErrorResponse("Cell unflagged, failed to fetch partial state", "The cell (" + x + "," + y + ") has been unflagged, but failed to load partial state: " + e.getMessage());
+                    return new ErrorResponse("Cell unflagged, failed to fetch partial state", "The cell (" + row + "," + col + ") has been unflagged, but failed to load partial state: " + e.getMessage());
                 }
             }
 
             //Check if the cell is revealed:
-            if (referencedGame.getFullBoardState().getCells()[x][y].getRevealState() != RevealState.COVERED) {
-                ErrorResponse response = new ErrorResponse("Cell already revealed", "The cell (" + x + "," + y + ") has already been revealed.");
+            if (referencedGame.getFullBoardState().getCells()[row][col].getRevealState() != RevealState.COVERED) {
+                ErrorResponse response = new ErrorResponse("Cell already revealed", "The cell (" + row + "," + col + ") has already been revealed.");
                 Gson gson = new Gson();
                 JsonObject data = new JsonObject();
                 data.add("gameState", gson.toJsonTree(referencedGame.getGameState()));
-                data.add("revealState", gson.toJsonTree(referencedGame.getFullBoardState().getCells()[x][y].getRevealState()));
+                data.add("revealState", gson.toJsonTree(referencedGame.getFullBoardState().getCells()[row][col].getRevealState()));
                 Server.updateClients(referencedSession.getGameToken(), sessionID);
                 response.setData(data);
                 return response;
             }
 
             //Flag and return partial state:
-            referencedGame.flag(x, y);
+            referencedGame.flag(row, col);
 
             try {
-                PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionX(), referencedSession.getPositionY(), referencedGame.getFullBoardState());
+                PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionRow(), referencedSession.getPositionCol(), referencedGame.getFullBoardState());
                 Gson gson  = new Gson();
                 JsonObject data = new JsonObject();
                 data.add("gameState", gson.toJsonTree(referencedGame.getGameState()));
                 data.add("partialBoardState", gson.toJsonTree(partialBoardState));
-                SuccessResponse response = new SuccessResponse("Cell flagged", "Cell (" + x + "," + y + ") flagged successfully.");
+                SuccessResponse response = new SuccessResponse("Cell flagged", "Cell (" + row + "," + col + ") flagged successfully.");
                 response.setData(data);
                 Server.updateClients(referencedSession.getGameToken(), sessionID);
                 return response;
             } catch (InvalidCellReferenceException e) {
-                return new ErrorResponse("Cell flagged, failed to fetch partial state", "The cell (" + x + "," + y + ") has been flagged, but failed to load partial state: " + e.getMessage());
+                return new ErrorResponse("Cell flagged, failed to fetch partial state", "The cell (" + row + "," + col + ") has been flagged, but failed to load partial state: " + e.getMessage());
             }
 
         }

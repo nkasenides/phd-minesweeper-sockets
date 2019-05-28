@@ -31,9 +31,9 @@ public class Game {
     }
 
     private void initializeMatrix() {
-        for (int x = 0; x < fullBoardState.getCells().length; x++) {
-            for (int y = 0; y < fullBoardState.getCells()[x].length; y++) {
-                fullBoardState.getCells()[x][y] = new CellState(false);
+        for (int row = 0; row < fullBoardState.getCells().length; row++) {
+            for (int col = 0; col < fullBoardState.getCells()[row].length; col++) {
+                fullBoardState.getCells()[row][col] = new CellState(false);
             }
         }
     }
@@ -43,10 +43,10 @@ public class Game {
         final int numberOfMines = Math.round(gameSpecification.getWidth() * gameSpecification.getHeight() * gameSpecification.getDifficulty().getMineRatio());
         int generatedMines = 0;
         do {
-            int randomX = random.nextInt(gameSpecification.getWidth());
-            int randomY = random.nextInt(gameSpecification.getHeight());
-            if (!fullBoardState.getCells()[randomX][randomY].isMined()) {
-                fullBoardState.getCells()[randomX][randomY].setMined(true);
+            int randomRow = random.nextInt(gameSpecification.getHeight());
+            int randomCol = random.nextInt(gameSpecification.getWidth());
+            if (!fullBoardState.getCells()[randomRow][randomCol].isMined()) {
+                fullBoardState.getCells()[randomRow][randomCol].setMined(true);
                 generatedMines++;
             }
         } while (generatedMines < numberOfMines);
@@ -70,9 +70,9 @@ public class Game {
 
     private int countFlaggedMines() {
         int count = 0;
-        for (int x = 0; x < fullBoardState.getWidth(); x++) {
-            for (int y = 0; y < fullBoardState.getHeight(); y++) {
-                if (fullBoardState.getCells()[x][y].isMined() && fullBoardState.getCells()[x][y].getRevealState() == RevealState.FLAGGED) {
+        for (int row = 0; row < fullBoardState.getHeight(); row++) {
+            for (int col = 0; col < fullBoardState.getWidth(); col++) {
+                if (fullBoardState.getCells()[row][col].isMined() && fullBoardState.getCells()[row][col].getRevealState() == RevealState.FLAGGED) {
                     count++;
                 }
             }
@@ -82,9 +82,9 @@ public class Game {
 
     private int countMines() {
         int count = 0;
-        for (int x = 0; x < fullBoardState.getWidth(); x++) {
-            for (int y = 0; y < fullBoardState.getHeight(); y++) {
-                if (fullBoardState.getCells()[x][y].isMined()) {
+        for (int row = 0; row < fullBoardState.getHeight(); row++) {
+            for (int col = 0; col < fullBoardState.getWidth(); col++) {
+                if (fullBoardState.getCells()[row][col].isMined()) {
                     count++;
                 }
             }
@@ -99,17 +99,17 @@ public class Game {
             final int flaggedMines = countFlaggedMines();
             final int totalMines = countMines();
 
-            for (int x = 0; x < fullBoardState.getWidth(); x++) {
-                for (int y = 0; y < fullBoardState.getHeight(); y++) {
+            for (int row = 0; row < fullBoardState.getHeight(); row++) {
+                for (int col = 0; col < fullBoardState.getWidth(); col++) {
 
                     //IMPORTANT NOTE: Commented out for simulation purposes (to run the simulation for a longer time). This should be uncommented in a "normal" minesweeper game.
 
-//                    if (fullBoardState.getCells()[x][y].isMined() && fullBoardState.getCells()[x][y].getRevealState() == RevealState.REVEALED_MINE) {
+//                    if (fullBoardState.getCells()[row][col].isMined() && fullBoardState.getCells()[row][col].getRevealState() == RevealState.REVEALED_MINE) {
 //                        gameState = GameState.ENDED_LOST;
 //                        return;
 //                    }
 
-                    if (fullBoardState.getCells()[x][y].getRevealState() == RevealState.COVERED) {
+                    if (fullBoardState.getCells()[row][col].getRevealState() == RevealState.COVERED) {
                         covered++;
                     }
 
@@ -133,21 +133,21 @@ public class Game {
 
     public void revealAll() {
         FullBoardState state = getFullBoardState();
-        for (int x = 0; x < state.getWidth(); x++) {
-            for (int y = 0; y < state.getHeight(); y++) {
-                if (state.getCells()[x][y].isMined()) {
-                    state.getCells()[x][y].setRevealState(RevealState.REVEALED_MINE);
+        for (int row = 0; row < state.getHeight(); row++) {
+            for (int col = 0; col < state.getWidth(); col++) {
+                if (state.getCells()[row][col].isMined()) {
+                    state.getCells()[row][col].setRevealState(RevealState.REVEALED_MINE);
                 }
                 else {
-                    int adjacentMines = getFullBoardState().countAdjacentMines(x, y);
-                    state.getCells()[x][y].setRevealState(RevealState.getRevealStateFromNumberOfAdjacentMines(adjacentMines));
+                    int adjacentMines = getFullBoardState().countAdjacentMines(row, col);
+                    state.getCells()[row][col].setRevealState(RevealState.getRevealStateFromNumberOfAdjacentMines(adjacentMines));
                 }
             }
         }
     }
 
-    public RevealState reveal(int x, int y) {
-        CellState referencedCell = fullBoardState.getCells()[x][y];
+    public RevealState reveal(int row, int col) {
+        CellState referencedCell = fullBoardState.getCells()[row][col];
         if (referencedCell.getRevealState() == RevealState.COVERED) {
             if (referencedCell.isMined()) {
                 referencedCell.setRevealState(RevealState.REVEALED_MINE);
@@ -155,7 +155,7 @@ public class Game {
                 return RevealState.REVEALED_MINE;
             }
             else {
-                int adjacentMines = fullBoardState.countAdjacentMines(x, y);
+                int adjacentMines = fullBoardState.countAdjacentMines(row, col);
                 if (adjacentMines > 0) {
                     RevealState revealState = RevealState.getRevealStateFromNumberOfAdjacentMines(adjacentMines);
                     referencedCell.setRevealState(revealState);
@@ -168,51 +168,51 @@ public class Game {
                     referencedCell.setRevealState(RevealState.REVEALED_0);
 
                     //Scan adjacent cells, recursively:
-                    if (fullBoardState.isValidCell(x - 1, y)) {
-                        if (!fullBoardState.getCells()[x - 1][y].isMined()) {
-                            reveal(x - 1, y);
+                    if (fullBoardState.isValidCell(row - 1, col)) {
+                        if (!fullBoardState.getCells()[row - 1][col].isMined()) {
+                            reveal(row - 1, col);
                         }
                     }
 
-                    if (fullBoardState.isValidCell(x + 1, y)) {
-                        if (!fullBoardState.getCells()[x + 1][y].isMined()) {
-                            reveal(x + 1, y);
+                    if (fullBoardState.isValidCell(row + 1, col)) {
+                        if (!fullBoardState.getCells()[row + 1][col].isMined()) {
+                            reveal(row + 1, col);
                         }
                     }
 
-                    if (fullBoardState.isValidCell(x, y + 1)) {
-                        if (!fullBoardState.getCells()[x][y + 1].isMined()) {
-                            reveal(x, y + 1);
+                    if (fullBoardState.isValidCell(row, col + 1)) {
+                        if (!fullBoardState.getCells()[row][col + 1].isMined()) {
+                            reveal(row, col + 1);
                         }
                     }
 
-                    if (fullBoardState.isValidCell(x, y - 1)) {
-                        if (!fullBoardState.getCells()[x][y - 1].isMined()) {
-                            reveal(x, y - 1);
+                    if (fullBoardState.isValidCell(row, col - 1)) {
+                        if (!fullBoardState.getCells()[row][col - 1].isMined()) {
+                            reveal(row, col - 1);
                         }
                     }
 
-                    if (fullBoardState.isValidCell(x - 1, y + 1)) {
-                        if (!fullBoardState.getCells()[x - 1][y + 1].isMined()) {
-                            reveal(x - 1, y + 1);
+                    if (fullBoardState.isValidCell(row - 1, col + 1)) {
+                        if (!fullBoardState.getCells()[row - 1][col + 1].isMined()) {
+                            reveal(row - 1, col + 1);
                         }
                     }
 
-                    if (fullBoardState.isValidCell(x - 1, y - 1)) {
-                        if (!fullBoardState.getCells()[x - 1][y - 1].isMined()) {
-                            reveal(x - 1, y - 1);
+                    if (fullBoardState.isValidCell(row - 1, col - 1)) {
+                        if (!fullBoardState.getCells()[row - 1][col - 1].isMined()) {
+                            reveal(row - 1, col - 1);
                         }
                     }
 
-                    if (fullBoardState.isValidCell(x + 1, y + 1)) {
-                        if (!fullBoardState.getCells()[x + 1][y + 1].isMined()) {
-                            reveal(x + 1, y + 1);
+                    if (fullBoardState.isValidCell(row + 1, col + 1)) {
+                        if (!fullBoardState.getCells()[row + 1][col + 1].isMined()) {
+                            reveal(row + 1, col + 1);
                         }
                     }
 
-                    if (fullBoardState.isValidCell(x + 1, y - 1)) {
-                        if (!fullBoardState.getCells()[x + 1][y - 1].isMined()) {
-                            reveal(x + 1, y - 1);
+                    if (fullBoardState.isValidCell(row + 1, col - 1)) {
+                        if (!fullBoardState.getCells()[row + 1][col - 1].isMined()) {
+                            reveal(row + 1, col - 1);
                         }
                     }
                     computeGameState();
@@ -225,12 +225,12 @@ public class Game {
         return referencedCell.getRevealState();
     }
 
-    public void flag(int x, int y) {
-        CellState referencedCell = fullBoardState.getCells()[x][y];
-        if (fullBoardState.getCells()[x][y].getRevealState() == RevealState.COVERED) {
+    public void flag(int row, int col) {
+        CellState referencedCell = fullBoardState.getCells()[row][col];
+        if (fullBoardState.getCells()[row][col].getRevealState() == RevealState.COVERED) {
             referencedCell.setRevealState(RevealState.FLAGGED);
         }
-        else if (fullBoardState.getCells()[x][y].getRevealState() == RevealState.FLAGGED) {
+        else if (fullBoardState.getCells()[row][col].getRevealState() == RevealState.FLAGGED) {
             referencedCell.setRevealState(RevealState.COVERED);
         }
         computeGameState();

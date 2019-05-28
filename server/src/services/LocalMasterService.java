@@ -88,7 +88,7 @@ public class LocalMasterService implements MasterService {
         PartialBoardState partialBoardState;
 
         try {
-            partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), session.getPositionX(), session.getPositionY(), referencedGame.getFullBoardState());
+            partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), session.getPositionCol(), session.getPositionRow(), referencedGame.getFullBoardState());
         }
         //If failed to get the partial state, return error:
         catch (InvalidCellReferenceException e) {

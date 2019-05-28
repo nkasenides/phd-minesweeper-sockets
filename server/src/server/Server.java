@@ -83,9 +83,9 @@ public class Server implements Runnable {
                                 String gameTokenView = payload.get("gameToken").getAsString();
                                 int partialStateWidth = payload.get("partialStateWidth").getAsInt();
                                 int partialStateHeight = payload.get("partialStateHeight").getAsInt();
-                                int startX = payload.get("startX").getAsInt();
-                                int startY = payload.get("startY").getAsInt();
-                                response = ADMIN_SERVICE.viewGame(password, gameTokenView, partialStateWidth, partialStateHeight, startX, startY);
+                                int startRow = payload.get("startRow").getAsInt();
+                                int startCol = payload.get("startCol").getAsInt();
+                                response = ADMIN_SERVICE.viewGame(password, gameTokenView, partialStateWidth, partialStateHeight, startRow, startCol);
                                 break;
                             case "subscribe":
                                 String gameTokenSubscribe = payload.get("token").getAsString();
@@ -128,19 +128,19 @@ public class Server implements Runnable {
                                 response = USER_SERVICE.getPartialState(sessionID);
                                 break;
                             case "move":
-                                final int x = payload.get("x").getAsInt();
-                                final int y = payload.get("y").getAsInt();
-                                response = USER_SERVICE.move(sessionID, x, y);
+                                final int row = payload.get("row").getAsInt();
+                                final int col = payload.get("col").getAsInt();
+                                response = USER_SERVICE.move(sessionID, row, col);
                                 break;
                             case "reveal":
-                                int xReveal = payload.get("x").getAsInt();
-                                int yReveal = payload.get("y").getAsInt();
-                                response = USER_SERVICE.reveal(sessionID, xReveal, yReveal);
+                                int rowReveal = payload.get("row").getAsInt();
+                                int colReveal = payload.get("col").getAsInt();
+                                response = USER_SERVICE.reveal(sessionID, rowReveal, colReveal);
                                 break;
                             case "flag":
-                                int xFlag = payload.get("x").getAsInt();
-                                int yFlag = payload.get("y").getAsInt();
-                                response = USER_SERVICE.flag(sessionID, xFlag, yFlag);
+                                int rowFlag = payload.get("row").getAsInt();
+                                int colFlag = payload.get("col").getAsInt();
+                                response = USER_SERVICE.flag(sessionID, rowFlag, colFlag);
                                 break;
                             default:
                                 response = new ErrorResponse("Invalid endpoint", "The endpoint '" + endpointName + "' is not valid.");
@@ -187,7 +187,7 @@ public class Server implements Runnable {
                 PartialStatePreference partialStatePreference = session.getPartialStatePreference();
                 PartialBoardState partialBoardState;
                 try {
-                    partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), session.getPositionX(), session.getPositionY(), game.getFullBoardState());
+                    partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), session.getPositionCol(), session.getPositionRow(), game.getFullBoardState());
                 }
                 catch (InvalidCellReferenceException e) {
                     throw new RuntimeException(e.getMessage());

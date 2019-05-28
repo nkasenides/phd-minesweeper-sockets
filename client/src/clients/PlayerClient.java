@@ -108,7 +108,7 @@ public class PlayerClient implements Runnable {
 
                 Command command = makeMove();
                 System.out.println("[" + name + "]: Decided to make move '" + command.getEndpointName() + "' at cell (" +
-                        command.getPayload().get("x").getAsInt() + "," + command.getPayload().get("y").getAsInt() + ")");
+                        command.getPayload().get("row").getAsInt() + "," + command.getPayload().get("col").getAsInt() + ")");
 
                 //Convert to JSON and send:
                 String moveCommandJSON = gson.toJson(command);
@@ -161,15 +161,15 @@ public class PlayerClient implements Runnable {
     private Command makeMove() {
         //Scan all the cells from partial state and save those who are RevealState.COVERED:
         class UnrevealedCell {
-            public int x;
-            public int y;
-            public UnrevealedCell(int x, int y) { this.x = x; this.y = y; }
+            public int row;
+            public int col;
+            public UnrevealedCell(int row, int col) { this.row = row; this.col = col; }
         }
         ArrayList<UnrevealedCell> unrevealedCells = new ArrayList<>();
-        for (int i = 0; i < partialBoardState.getCells().length; i++) {
-            for (int j = 0; j < partialBoardState.getCells()[i].length; j++) {
-                if (partialBoardState.getCells()[i][j].getRevealState() == RevealState.COVERED) {
-                    unrevealedCells.add(new UnrevealedCell(i, j));
+        for (int row = 0; row < partialBoardState.getCells().length; row++) {
+            for (int col = 0; col < partialBoardState.getCells()[row].length; col++) {
+                if (partialBoardState.getCells()[row][col].getRevealState() == RevealState.COVERED) {
+                    unrevealedCells.add(new UnrevealedCell(row, col));
                 }
             }
         }
@@ -184,31 +184,31 @@ public class PlayerClient implements Runnable {
             final String moveEndpoint = "move";
             final CommandType commandType = CommandType.USER_SERVICE;
 
-            System.out.println("*** NO MORE UNREVEALED CELLS IN RANGE (" + partialBoardState.getStartingX() + "," + partialBoardState.getStartingY() +
-                    ") to (" + (partialBoardState.getStartingX() + partialBoardState.getWidth()) + "," + (partialBoardState.getStartingY() + partialBoardState.getHeight()) + ")***");
+            System.out.println("*** NO MORE UNREVEALED CELLS IN RANGE (" + partialBoardState.getStartingRow() + "," + partialBoardState.getStartingCol() +
+                    ") to (" + (partialBoardState.getStartingRow() + partialBoardState.getHeight()) + "," + (partialBoardState.getStartingCol() + partialBoardState.getWidth()) + ")***");
 
-            final int cellsRight = gameWidth - (partialBoardState.getStartingY() + partialBoardState.getWidth());
+            final int cellsRight = gameWidth - (partialBoardState.getStartingCol() + partialBoardState.getWidth());
 
             if (cellsRight >= partialBoardState.getWidth()) {
-                object.addProperty("x", partialBoardState.getStartingX());
-                object.addProperty("y", partialBoardState.getWidth());
+                object.addProperty("row", partialBoardState.getStartingRow());
+                object.addProperty("col", partialBoardState.getStartingCol() + partialBoardState.getWidth());
                 return new Command(commandType, moveEndpoint, object);
             }
             else if (cellsRight > 0) {
-                object.addProperty("x", partialBoardState.getStartingX());
-                object.addProperty("y", partialBoardState.getStartingY() + cellsRight);
+                object.addProperty("row", partialBoardState.getStartingRow());
+                object.addProperty("col", partialBoardState.getStartingCol() + cellsRight);
                 return new Command(commandType, moveEndpoint, object);
             }
             else {
-                final int cellsDown = gameHeight - (partialBoardState.getStartingX() + partialBoardState.getHeight());
+                final int cellsDown = gameHeight - (partialBoardState.getStartingRow() + partialBoardState.getHeight());
                 if (cellsDown >= partialBoardState.getHeight()) {
-                    object.addProperty("x", partialBoardState.getStartingX() + partialBoardState.getHeight());
-                    object.addProperty("y", 0);
+                    object.addProperty("row", partialBoardState.getStartingRow() + partialBoardState.getHeight());
+                    object.addProperty("col", 0);
                     return new Command(commandType, moveEndpoint, object);
                 }
                 else {
-                    object.addProperty("x", partialBoardState.getStartingX() + cellsDown);
-                    object.addProperty("y", 0);
+                    object.addProperty("row", partialBoardState.getStartingRow() + cellsDown);
+                    object.addProperty("col", 0);
                     return new Command(commandType, moveEndpoint, object);
                 }
             }
@@ -217,14 +217,14 @@ public class PlayerClient implements Runnable {
         //Otherwise, select a random cell from unrevealedCells with a random move and play it:
         else {
 
-            System.out.println("*** FOUND " + unrevealedCells.size() + " UNREVEALED CELLS IN RANGE (" + partialBoardState.getStartingX() + "," + partialBoardState.getStartingY() +
-                    ") to (" + (partialBoardState.getStartingX() + partialBoardState.getWidth()) + "," + (partialBoardState.getStartingY() + partialBoardState.getHeight()) + ")***");
+            System.out.println("*** FOUND " + unrevealedCells.size() + " UNREVEALED CELLS IN RANGE (" + partialBoardState.getStartingRow() + "," + partialBoardState.getStartingCol() +
+                    ") to (" + (partialBoardState.getStartingRow() + partialBoardState.getHeight()) + "," + (partialBoardState.getStartingCol() + partialBoardState.getWidth()) + ")***");
 
             //If there are unrevealed cells, choose a random one out of the list:
             Random random = new Random();
             int randomCellIndex = random.nextInt(unrevealedCells.size());
-            int randomX = unrevealedCells.get(randomCellIndex).x + partialBoardState.getStartingX();
-            int randomY = unrevealedCells.get(randomCellIndex).y + partialBoardState.getStartingY();
+            int randomRow = unrevealedCells.get(randomCellIndex).row + partialBoardState.getStartingRow();
+            int randomCol = unrevealedCells.get(randomCellIndex).col + partialBoardState.getStartingCol();
 
             //Choose which move to make. Currently a 60% reveal vs 40% flag chance.
 //            moveEndpoint = random.nextInt(10) > 6 ? "flag" : "reveal";
@@ -234,8 +234,8 @@ public class PlayerClient implements Runnable {
             unrevealedCells.remove(randomCellIndex);
 
             //Package the move into a command, convert to JSON and send:
-            object.addProperty("x", randomX);
-            object.addProperty("y", randomY);
+            object.addProperty("row", randomRow);
+            object.addProperty("col", randomCol);
             object.addProperty("sessionID", sessionID);
             return new Command(CommandType.USER_SERVICE, moveEndpoint, object);
         }
