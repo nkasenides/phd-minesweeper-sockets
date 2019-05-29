@@ -170,23 +170,26 @@ public class LocalUserService implements UserService {
             }
 
             //Reveal, change points and return partial state:
-            RevealState revealState = referencedGame.reveal(row, col);
-            switch (revealState) {
-                case REVEALED_0:
-                case REVEALED_1:
-                case REVEALED_2:
-                case REVEALED_3:
-                case REVEALED_4:
-                case REVEALED_5:
-                case REVEALED_6:
-                case REVEALED_7:
-                case REVEALED_8:
-                    referencedSession.changePoints(10);
-                    break;
-                case REVEALED_MINE:
-                    referencedSession.changePoints(-5);
-                    break;
+            synchronized (new Object()) {
+                RevealState revealState = referencedGame.reveal(row, col);
+                switch (revealState) {
+                    case REVEALED_0:
+                    case REVEALED_1:
+                    case REVEALED_2:
+                    case REVEALED_3:
+                    case REVEALED_4:
+                    case REVEALED_5:
+                    case REVEALED_6:
+                    case REVEALED_7:
+                    case REVEALED_8:
+                        referencedSession.changePoints(10);
+                        break;
+                    case REVEALED_MINE:
+                        referencedSession.changePoints(-5);
+                        break;
+                }
             }
+
 
 
             //If the game has ended (player won or lost), reveal all of the cells:
@@ -280,7 +283,9 @@ public class LocalUserService implements UserService {
             }
 
             //Flag and return partial state:
-            referencedGame.flag(row, col);
+            synchronized (new Object()) {
+                referencedGame.flag(row, col);
+            }
 
             try {
                 PartialBoardState partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), referencedSession.getPositionRow(), referencedSession.getPositionCol(), referencedGame.getFullBoardState());

@@ -12,15 +12,16 @@ import response.ResponseStatus;
 import services.LocalAdminService;
 import services.LocalMasterService;
 import services.LocalUserService;
+import simulation.MemoryMeasurement;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 public class Server implements Runnable {
 
@@ -44,8 +45,18 @@ public class Server implements Runnable {
 
     @Override
     public void run() {
+
+
+
         try {
             String input;
+
+            long simulationStart = System.currentTimeMillis();
+            final Date date = new Date(simulationStart);
+            final SimpleDateFormat f = new SimpleDateFormat("YYYY-MM-dd HH.mm.ss.SSS");
+            final String filename = "Server-Simulation-[with" + socket.getPort() + "] @ " + f.format(date) + ".json";
+            IO.FileManager.writeFile( filename, "{\"memoryMeasurements\":[");
+
             while ((input = bufferedReader.readLine()) != null) {
 
                 //Receive request:
@@ -153,8 +164,16 @@ public class Server implements Runnable {
                         break;
                 }
 
+                long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+                long timeNow = System.currentTimeMillis() - simulationStart;
+
                 printWriter.println(response.toJSON());
                 printWriter.flush();
+
+                FileWriter fileWriter = new FileWriter(filename, true);
+                PrintWriter printWriter = new PrintWriter(fileWriter);
+                printWriter.print("{\"timestamp\":" + timeNow + ",\"memoryConsumption\":" + memoryUsed + "},");
+                printWriter.close();
 
             }
         } catch (SocketTimeoutException e) {
@@ -188,7 +207,7 @@ public class Server implements Runnable {
                 PartialStatePreference partialStatePreference = session.getPartialStatePreference();
                 PartialBoardState partialBoardState;
                 try {
-                    partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), session.getPositionCol(), session.getPositionRow(), game.getFullBoardState());
+                    partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), session.getPositionRow(), session.getPositionCol(), game.getFullBoardState());
                 }
                 catch (InvalidCellReferenceException e) {
                     throw new RuntimeException(e.getMessage());

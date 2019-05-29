@@ -5,21 +5,26 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import model.*;
+import response.JsonConvert;
 import response.Response;
+import simulation.LatencyMeasurement;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 import static response.ResponseStatus.OK;
 
 public class PlayerClient implements Runnable {
 
     private static final int SERVER_PORT = 12345;
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     private ArrayList<GameSpecification> games = null;
     private GameSpecification gameSpecification = null;
 
@@ -100,6 +105,8 @@ public class PlayerClient implements Runnable {
             }
 
             if (DEBUG) System.out.println(name + ": Starting to play!");
+            ArrayList<LatencyMeasurement> latencyMeasurements = new ArrayList<>();
+            long simulationStart = System.currentTimeMillis();
 
             //While the game is not over, keep making moves:
             while (true) {
@@ -116,8 +123,15 @@ public class PlayerClient implements Runnable {
                 printWriter.println(moveCommandJSON);
                 printWriter.flush();
 
+                //LATENCY TIMER:
+                long now = System.currentTimeMillis();
+
                 //Wait for and print reply:
                 String reply = bufferedReader.readLine();
+
+                long latency = System.currentTimeMillis() - now;
+                latencyMeasurements.add(new LatencyMeasurement(System.currentTimeMillis() - simulationStart, latency));
+
                 if (DEBUG) System.out.println("[" + name + "]: " + reply);
 
                 //Parse reply and refresh the local state, if a response from server:
@@ -146,11 +160,20 @@ public class PlayerClient implements Runnable {
 
                 if (gameState.isEnded()) {
                     if (DEBUG) System.out.println(name + ": GAME ENDED (" + gameState + ")");
-                    return;
+                    break;
                 }
 
                 if (turnInterval > 0) Thread.sleep(turnInterval);
             }
+
+            //Write to file:
+            Date date = new Date(simulationStart);
+            SimpleDateFormat f = new SimpleDateFormat("YYYY-MM-dd HH.mm.ss.SSS");
+//            JsonElement latencyMeasurementsElement = gson.toJsonTree(latencyMeasurements);
+            JsonObject o = new JsonObject();
+            o.add("latencyMeasurements", JsonConvert.listToJsonArray(latencyMeasurements));
+            String json = gson.toJson(o);
+            IO.FileManager.writeFile("PlayerClient-Simulation @ " + f.format(date) + ".json", json);
 
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
