@@ -15,10 +15,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
+
 import static response.ResponseStatus.OK;
 
 public class PlayerClient implements Runnable {
@@ -233,10 +231,14 @@ public class PlayerClient implements Runnable {
                     object.addProperty("col", 0);
                     return new Command(commandType, moveEndpoint, object);
                 }
-                else {
+                else if(cellsDown > 0){
                     object.addProperty("row", partialBoardState.getStartingRow() + cellsDown);
                     object.addProperty("col", 0);
                     return new Command(commandType, moveEndpoint, object);
+                } else {
+                    // todo
+                    if (DEBUG) System.out.println("*** NO MORE UNREVEALED CELLS RIGHT OR DOWN ***");
+                    return new Command(CommandType.USER_SERVICE, moveEndpoint, object);
                 }
             }
         }
@@ -250,20 +252,25 @@ public class PlayerClient implements Runnable {
             //If there are unrevealed cells, choose a random one out of the list:
             Random random = new Random();
             int randomCellIndex = random.nextInt(unrevealedCells.size());
-            int randomRow = unrevealedCells.get(randomCellIndex).row + partialBoardState.getStartingRow();
-            int randomCol = unrevealedCells.get(randomCellIndex).col + partialBoardState.getStartingCol();
+            UnrevealedCell chosenUnrevealedCell = unrevealedCells.get(randomCellIndex);
+
+            if (DEBUG) System.out.println("*** chosenUnrevealedCell: " + chosenUnrevealedCell + "***");
+
+            int globalRow = chosenUnrevealedCell.row + partialBoardState.getStartingRow();
+            int globalCol = chosenUnrevealedCell.col + partialBoardState.getStartingCol();
 
             //Choose which move to make. Currently a 60% reveal vs 40% flag chance.
 //            moveEndpoint = random.nextInt(10) > 6 ? "flag" : "reveal";
             final String moveEndpoint = "reveal"; //TODO CHANGE TO ABOVE
 
             //Remove the cell from the unrevealedCells:
-            unrevealedCells.remove(randomCellIndex);
+//            unrevealedCells.remove(randomCellIndex);
 
             //Package the move into a command, convert to JSON and send:
-            object.addProperty("row", randomRow);
-            object.addProperty("col", randomCol);
+            object.addProperty("row", globalRow);
+            object.addProperty("col", globalCol);
             object.addProperty("sessionID", sessionID);
+
             return new Command(CommandType.USER_SERVICE, moveEndpoint, object);
         }
     }
