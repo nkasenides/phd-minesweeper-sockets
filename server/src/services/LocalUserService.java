@@ -82,12 +82,6 @@ public class LocalUserService implements UserService {
                 return new ErrorResponse("Game ended", "The game with token '" + referencedGame.getGameSpecification().getToken() + "' has ended.");
             }
 
-//            //Check for valid points:
-//            if (row + referencedSession.getPartialStatePreference().getWidth() > referencedGame.getGameSpecification().getWidth() || row < 0
-//            || col + referencedSession.getPartialStatePreference().getHeight() > referencedGame.getGameSpecification().getHeight() || col < 0) {
-//                return new ErrorResponse("Invalid move", "The move shift to cell (" + row + ", " + col + ") is out of bounds.");
-//            }
-
             //Extract board state:
             PartialStatePreference partialStatePreference = referencedSession.getPartialStatePreference();
             PartialBoardState partialBoardState;

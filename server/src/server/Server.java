@@ -170,10 +170,10 @@ public class Server implements Runnable {
                 printWriter.println(response.toJSON());
                 printWriter.flush();
 
-                FileWriter fileWriter = new FileWriter(filename, true);
-                PrintWriter printWriter = new PrintWriter(fileWriter);
-                printWriter.print("{\"timestamp\":" + timeNow + ",\"memoryConsumption\":" + memoryUsed + "},");
-                printWriter.close();
+//                FileWriter fileWriter = new FileWriter(filename, true);
+//                PrintWriter printWriter = new PrintWriter(fileWriter);
+//                printWriter.print("{\"timestamp\":" + timeNow + ",\"memoryConsumption\":" + memoryUsed + "},");
+//                printWriter.close();
 
             }
         } catch (SocketTimeoutException e) {

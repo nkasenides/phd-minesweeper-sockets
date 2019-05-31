@@ -165,13 +165,13 @@ public class PlayerClient implements Runnable {
             }
 
             //Write to file:
-            Date date = new Date(simulationStart);
-            SimpleDateFormat f = new SimpleDateFormat("YYYY-MM-dd HH.mm.ss.SSS");
+//            Date date = new Date(simulationStart);
+//            SimpleDateFormat f = new SimpleDateFormat("YYYY-MM-dd HH.mm.ss.SSS");
 //            JsonElement latencyMeasurementsElement = gson.toJsonTree(latencyMeasurements);
-            JsonObject o = new JsonObject();
-            o.add("latencyMeasurements", JsonConvert.listToJsonArray(latencyMeasurements));
-            String json = gson.toJson(o);
-            IO.FileManager.writeFile("PlayerClient-Simulation @ " + f.format(date) + ".json", json);
+//            JsonObject o = new JsonObject();
+//            o.add("latencyMeasurements", JsonConvert.listToJsonArray(latencyMeasurements));
+//            String json = gson.toJson(o);
+//            IO.FileManager.writeFile("PlayerClient-Simulation @ " + f.format(date) + ".json", json);
 
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
