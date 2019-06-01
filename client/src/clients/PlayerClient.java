@@ -21,7 +21,7 @@ public class PlayerClient implements Runnable {
 
     private static final int SERVER_PORT = 12345;
     private static final boolean DEBUG = false;
-    public static boolean GUI = false;
+    private static boolean gui = false;
     private ArrayList<GameSpecification> games = null;
     private GameSpecification gameSpecification = null;
     private PlayerGameForm gameForm;
@@ -31,7 +31,7 @@ public class PlayerClient implements Runnable {
     private String name;
     private final int turnInterval;
     private final PartialStatePreference partialStatePreference;
-    boolean stateInitialized = false;
+    private boolean stateInitialized = false;
 
     private String sessionID = null;
     private int gameWidth;
@@ -80,66 +80,14 @@ public class PlayerClient implements Runnable {
     public void run() {
         try {
 
-            if (DEBUG) System.out.println(name + ": Acquiring a list of games...");
-
-            //List the games:
-            Command listGamesCommand = new Command(CommandType.MASTER_SERVICE, "listGames", null);
-            Gson gson = new Gson();
-            String commandJSON = gson.toJson(listGamesCommand);
-            printWriter.println(commandJSON);
-            printWriter.flush();
-            String listReply = bufferedReader.readLine();
-            Response listResponse = gson.fromJson(listReply, Response.class);
-            if (listResponse.getStatus() == OK) {
-                JsonArray gamesArray = listResponse.getData().get("games").getAsJsonArray();
-                games = new ArrayList<>();
-                for (JsonElement e : gamesArray) {
-                    GameSpecification s = gson.fromJson(e, GameSpecification.class);
-                    games.add(s);
-                }
-            }
-
-            if (DEBUG) System.out.println(name + ": Games fetched.");
-
-            if (games.size() < 1) {
-                throw new RuntimeException("Error - No games found");
-            }
-
-            if (DEBUG) System.out.println(name + ": Joining game with token '" + games.get(0).getToken() + "'...");
-
-            //Try to join the game:
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("token", games.get(0).getToken());
-            jsonObject.addProperty("playerName", name);
-            jsonObject.addProperty("partialStateWidth", partialStatePreference.getWidth());
-            jsonObject.addProperty("partialStateHeight", partialStatePreference.getHeight());
-            Command joinGameCommand = new Command(CommandType.MASTER_SERVICE, "join", jsonObject);
-            String joinCommandJSON = gson.toJson(joinGameCommand);
-            printWriter.println(joinCommandJSON);
-            printWriter.flush();
-            String joinReply = bufferedReader.readLine();
-            Response joinResponse = gson.fromJson(joinReply, Response.class);
-            if (joinResponse.getStatus() == OK) {
-                gameSpecification = games.get(0);
-                sessionID = joinResponse.getData().get("sessionID").getAsString();
-                gameWidth = joinResponse.getData().get("totalWidth").getAsInt();
-                gameHeight = joinResponse.getData().get("totalHeight").getAsInt();
-                JsonElement gameStateElement = joinResponse.getData().get("gameState");
-                gameState = gson.fromJson(gameStateElement, GameState.class);
-                JsonElement partialBoardStateElement = joinResponse.getData().get("partialBoardState");
-                partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
-                if (GUI) {
-                    gameForm = new PlayerGameForm(this, name);
-                }
-                if (DEBUG) System.out.println(name + ": Joined game with token '" + games.get(0).getToken() + " with session ID '" + sessionID + "'.");
-            }
+            listAllGames();
+            joinFirstGame();
+            initializeState();
 
             if (DEBUG) System.out.println(name + ": Starting to play!");
 
-            //Initialize the state:
-            initializeState();
-
             //While the game is not over, keep making moves:
+            Gson gson = new Gson();
             while (true) {
 
                 if (DEBUG) System.out.println();
@@ -166,7 +114,7 @@ public class PlayerClient implements Runnable {
                             System.out.println(gson.toJson(partialBoardState));
                         }
 
-                        if (GUI) gameForm.update();
+                        if (gui) gameForm.update();
                     }
                 }
                 else {
@@ -180,10 +128,10 @@ public class PlayerClient implements Runnable {
                         this.gameState = gameState;
                         this.partialBoardState = partialBoardState;
                         if (!stateInitialized) {
-                            if (GUI) gameForm.initialize();
+                            if (gui) gameForm.initialize();
                             stateInitialized = true;
                         }
-                        if (GUI) gameForm.update();
+                        if (gui) gameForm.update();
 
                         if (gameState.isEnded()) {
                             if (DEBUG) System.out.println(name + ": GAME ENDED (" + gameState + ")");
@@ -207,6 +155,63 @@ public class PlayerClient implements Runnable {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void joinFirstGame() throws IOException {
+        if (DEBUG) System.out.println(name + ": Joining game with token '" + games.get(0).getToken() + "'...");
+
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("token", games.get(0).getToken());
+        jsonObject.addProperty("playerName", name);
+        jsonObject.addProperty("partialStateWidth", partialStatePreference.getWidth());
+        jsonObject.addProperty("partialStateHeight", partialStatePreference.getHeight());
+        Command joinGameCommand = new Command(CommandType.MASTER_SERVICE, "join", jsonObject);
+        String joinCommandJSON = gson.toJson(joinGameCommand);
+        printWriter.println(joinCommandJSON);
+        printWriter.flush();
+        String joinReply = bufferedReader.readLine();
+        Response joinResponse = gson.fromJson(joinReply, Response.class);
+        if (joinResponse.getStatus() == OK) {
+            gameSpecification = games.get(0);
+            sessionID = joinResponse.getData().get("sessionID").getAsString();
+            gameWidth = joinResponse.getData().get("totalWidth").getAsInt();
+            gameHeight = joinResponse.getData().get("totalHeight").getAsInt();
+            JsonElement gameStateElement = joinResponse.getData().get("gameState");
+            gameState = gson.fromJson(gameStateElement, GameState.class);
+            JsonElement partialBoardStateElement = joinResponse.getData().get("partialBoardState");
+            partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
+            if (gui) {
+                gameForm = new PlayerGameForm(this, name);
+            }
+            if (DEBUG) System.out.println(name + ": Joined game with token '" + games.get(0).getToken() + " with session ID '" + sessionID + "'.");
+        }
+    }
+
+    private void listAllGames() throws IOException {
+        if (DEBUG) System.out.println(name + ": Acquiring a list of games...");
+
+        Command listGamesCommand = new Command(CommandType.MASTER_SERVICE, "listGames", null);
+        Gson gson = new Gson();
+        String commandJSON = gson.toJson(listGamesCommand);
+        printWriter.println(commandJSON);
+        printWriter.flush();
+        String listReply = bufferedReader.readLine();
+        Response listResponse = gson.fromJson(listReply, Response.class);
+        if (listResponse.getStatus() == OK) {
+            JsonArray gamesArray = listResponse.getData().get("games").getAsJsonArray();
+            games = new ArrayList<>();
+            for (JsonElement e : gamesArray) {
+                GameSpecification s = gson.fromJson(e, GameSpecification.class);
+                games.add(s);
+            }
+        }
+
+        if (DEBUG) System.out.println(name + ": Games fetched.");
+
+        if (games.size() < 1) {
+            throw new RuntimeException("Error - No games found");
+        }
     }
 
     private Command makeMove() {
@@ -370,7 +375,7 @@ public class PlayerClient implements Runnable {
         }
 
         if (args.length == 6 && args[5].toLowerCase().equals("gui")) {
-            GUI = true;
+            gui = true;
         }
 
         PlayerClient[] clients = new PlayerClient[numOfClients];

@@ -64,97 +64,7 @@ public class AdminClient implements Runnable {
 
         try {
 
-            //--Create game:
-            {
-
-                if (DEBUG) System.out.println("Creating game...");
-
-                //Create request object:
-                JsonObject object = new JsonObject();
-                object.addProperty("maxNumOfPlayers", maxPlayers);
-                object.addProperty("difficulty", difficulty.toString());
-                object.addProperty("width", gameWidth);
-                object.addProperty("height", gameHeight);
-                object.addProperty("password", "1234");
-                Command command = new Command(CommandType.ADMIN_SERVICE, "createGame", object);
-
-                //Convert to JSON and send:
-                Gson gson = new Gson();
-                String commandJSON = gson.toJson(command);
-                printWriter.println(commandJSON);
-                printWriter.flush();
-
-                //Wait for and print reply:
-                String reply = bufferedReader.readLine();
-
-                Response createResponse = gson.fromJson(reply, Response.class);
-                if (createResponse.getStatus() == OK) {
-                    token = createResponse.getData().get("gameToken").getAsString();
-                    if (DEBUG) System.out.println("Game with token '" + token + "' created.");
-                }
-            }
-
-            //--Start game:
-            {
-
-                if (DEBUG) System.out.println("Starting game with token '" + token + "'.");
-
-                //Create request object:
-                JsonObject object = new JsonObject();
-                object.addProperty("gameToken", token);
-                object.addProperty("password", "1234");
-                Command command = new Command(CommandType.ADMIN_SERVICE, "startGame", object);
-
-                //Convert to JSON and send:
-                Gson gson = new Gson();
-                String commandJSON = gson.toJson(command);
-                printWriter.println(commandJSON);
-                printWriter.flush();
-
-                //Wait for and print reply:
-                String reply = bufferedReader.readLine();
-
-                Response startResponse = gson.fromJson(reply, Response.class);
-                if (startResponse.getStatus() == OK) {
-                    if (DEBUG) System.out.println("Game with token '" + token + "' started.");
-                }
-            }
-
-            //--Subscribe to the game
-            {
-                if (DEBUG) System.out.println("Subscribing to game with token '" + token + "'.");
-
-                //Create request object:
-                JsonObject object = new JsonObject();
-                object.addProperty("token", token);
-                object.addProperty("partialStateWidth", partialStatePreference.getWidth());
-                object.addProperty("partialStateHeight", partialStatePreference.getHeight());
-                object.addProperty("password", "1234");
-                Command command = new Command(CommandType.ADMIN_SERVICE, "subscribe", object);
-
-                //Convert to JSON and send:
-                Gson gson = new Gson();
-                String commandJSON = gson.toJson(command);
-                printWriter.println(commandJSON);
-                printWriter.flush();
-
-                //Wait for and print reply:
-                String reply = bufferedReader.readLine();
-
-                Response response = gson.fromJson(reply, Response.class);
-                if (response.getStatus() == OK) {
-                    sessionID = response.getData().get("sessionID").getAsString();
-//                    System.out.println(response.getData().get("totalWidth").getAsInt());
-//                    System.out.println(response.getData().get("totalHeight").getAsInt());
-                    if (GUI) {
-                        gameForm = new AdminGameForm(this);
-                    }
-                    if (DEBUG) System.out.println("Subscribed to game with token '" + token + "' with session ID '" + sessionID + "'.");
-                }
-            }
-
-            //Update/Initialize the game state:
-            viewGame(0, 0);
+            initialize();
 
             //Wait for a state-update message from the server:
             while (true) {
@@ -203,6 +113,108 @@ public class AdminClient implements Runnable {
                     }
                 }
             }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void initialize() {
+        createGame();
+        startGame();
+        subscribeToGame();
+        viewGame(0,0);
+    }
+
+    private void createGame() {
+        try {
+            if (DEBUG) System.out.println("Creating game...");
+
+            //Create request object:
+            JsonObject object = new JsonObject();
+            object.addProperty("maxNumOfPlayers", maxPlayers);
+            object.addProperty("difficulty", difficulty.toString());
+            object.addProperty("width", gameWidth);
+            object.addProperty("height", gameHeight);
+            object.addProperty("password", "1234");
+            Command command = new Command(CommandType.ADMIN_SERVICE, "createGame", object);
+
+            //Convert to JSON and send:
+            Gson gson = new Gson();
+            String commandJSON = gson.toJson(command);
+            printWriter.println(commandJSON);
+            printWriter.flush();
+
+            //Wait for and print reply:
+            String reply = bufferedReader.readLine();
+
+            Response createResponse = gson.fromJson(reply, Response.class);
+            if (createResponse.getStatus() == OK) {
+                token = createResponse.getData().get("gameToken").getAsString();
+                if (DEBUG) System.out.println("Game with token '" + token + "' created.");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void startGame() {
+        try {
+            if (DEBUG) System.out.println("Starting game with token '" + token + "'.");
+
+            //Create request object:
+            JsonObject object = new JsonObject();
+            object.addProperty("gameToken", token);
+            object.addProperty("password", "1234");
+            Command command = new Command(CommandType.ADMIN_SERVICE, "startGame", object);
+
+            //Convert to JSON and send:
+            Gson gson = new Gson();
+            String commandJSON = gson.toJson(command);
+            printWriter.println(commandJSON);
+            printWriter.flush();
+
+            //Wait for and print reply:
+            String reply = bufferedReader.readLine();
+
+            Response startResponse = gson.fromJson(reply, Response.class);
+            if (startResponse.getStatus() == OK) {
+                if (DEBUG) System.out.println("Game with token '" + token + "' started.");
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void subscribeToGame() {
+        try {
+            if (DEBUG) System.out.println("Subscribing to game with token '" + token + "'.");
+
+            //Create request object:
+            JsonObject object = new JsonObject();
+            object.addProperty("token", token);
+            object.addProperty("partialStateWidth", partialStatePreference.getWidth());
+            object.addProperty("partialStateHeight", partialStatePreference.getHeight());
+            object.addProperty("password", "1234");
+            Command command = new Command(CommandType.ADMIN_SERVICE, "subscribe", object);
+
+            //Convert to JSON and send:
+            Gson gson = new Gson();
+            String commandJSON = gson.toJson(command);
+            printWriter.println(commandJSON);
+            printWriter.flush();
+
+            //Wait for and print reply:
+            String reply = bufferedReader.readLine();
+
+            Response response = gson.fromJson(reply, Response.class);
+            if (response.getStatus() == OK) {
+                sessionID = response.getData().get("sessionID").getAsString();
+                if (GUI) {
+                    gameForm = new AdminGameForm(this);
+                }
+                if (DEBUG) System.out.println("Subscribed to game with token '" + token + "' with session ID '" + sessionID + "'.");
+            }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
