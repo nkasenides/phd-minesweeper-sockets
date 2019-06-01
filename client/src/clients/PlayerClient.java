@@ -5,16 +5,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import model.*;
-import response.JsonConvert;
 import response.Response;
-import simulation.LatencyMeasurement;
+import ui.form.PlayerGameForm;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static response.ResponseStatus.OK;
@@ -23,14 +21,17 @@ public class PlayerClient implements Runnable {
 
     private static final int SERVER_PORT = 12345;
     private static final boolean DEBUG = true;
+    public static boolean GUI = true;
     private ArrayList<GameSpecification> games = null;
     private GameSpecification gameSpecification = null;
+    private PlayerGameForm gameForm;
 
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
     private String name;
     private final int turnInterval;
     private final PartialStatePreference partialStatePreference;
+    boolean stateInitialized = false;
 
     private String sessionID = null;
     private int gameWidth;
@@ -38,6 +39,8 @@ public class PlayerClient implements Runnable {
 
     private GameState gameState;
     private PartialBoardState partialBoardState;
+    public int rowShift = 0;
+    public int colShift = 0;
 
     public PlayerClient(Socket socket, String name, int turnInterval, PartialStatePreference partialStatePreference) throws IOException {
         this.name = name;
@@ -45,6 +48,32 @@ public class PlayerClient implements Runnable {
         this.partialStatePreference = partialStatePreference;
         printWriter = new PrintWriter(socket.getOutputStream());
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    }
+
+    public void initializeState() {
+        //Create request object:
+        JsonObject object = new JsonObject();
+        object.addProperty("sessionID", sessionID);
+        Command command = new Command(CommandType.USER_SERVICE, "getPartialState", object);
+        //Convert to JSON and send:
+        Gson gson = new Gson();
+        String commandJSON = gson.toJson(command);
+        printWriter.println(commandJSON);
+        printWriter.flush();
+    }
+
+    public void move(int row, int col) {
+        //Create request object:
+        JsonObject object = new JsonObject();
+        object.addProperty("sessionID", sessionID);
+        object.addProperty("row", row);
+        object.addProperty("col", col);
+        Command command = new Command(CommandType.USER_SERVICE, "move", object);
+        //Convert to JSON and send:
+        Gson gson = new Gson();
+        String commandJSON = gson.toJson(command);
+        printWriter.println(commandJSON);
+        printWriter.flush();
     }
 
     @Override
@@ -99,12 +128,16 @@ public class PlayerClient implements Runnable {
                 gameState = gson.fromJson(gameStateElement, GameState.class);
                 JsonElement partialBoardStateElement = joinResponse.getData().get("partialBoardState");
                 partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
+                if (GUI) {
+                    gameForm = new PlayerGameForm(this, name);
+                }
                 if (DEBUG) System.out.println(name + ": Joined game with token '" + games.get(0).getToken() + " with session ID '" + sessionID + "'.");
             }
 
             if (DEBUG) System.out.println(name + ": Starting to play!");
-            ArrayList<LatencyMeasurement> latencyMeasurements = new ArrayList<>();
-            long simulationStart = System.currentTimeMillis();
+
+            //Initialize the state:
+            initializeState();
 
             //While the game is not over, keep making moves:
             while (true) {
@@ -112,71 +145,67 @@ public class PlayerClient implements Runnable {
                 if (DEBUG) System.out.println();
                 if (DEBUG) System.out.println();
 
-                Command command = makeMove();
-                if (DEBUG) System.out.println("[" + name + "]: Decided to make move '" + command.getEndpointName() + "' at cell (" +
-                        command.getPayload().get("row").getAsInt() + "," + command.getPayload().get("col").getAsInt() + ")");
-
-                //Convert to JSON and send:
-                String moveCommandJSON = gson.toJson(command);
-                printWriter.println(moveCommandJSON);
-                printWriter.flush();
-
-                //LATENCY TIMER:
-                long now = System.currentTimeMillis();
-
-                //Wait for and print reply:
                 String reply = bufferedReader.readLine();
+                if (DEBUG) System.out.println("[" + name + "] Got: " + reply);
 
-                long latency = System.currentTimeMillis() - now;
-                latencyMeasurements.add(new LatencyMeasurement(System.currentTimeMillis() - simulationStart, latency));
+                Command receivedCommand = gson.fromJson(reply, Command.class);
 
-                if (DEBUG) System.out.println("[" + name + "]: " + reply);
+                if (receivedCommand.getCommandType() != null) {
+                    if (receivedCommand.getCommandType() == CommandType.CLIENT_UPDATE_SERVICE) {
+                        JsonObject payload = receivedCommand.getPayload();
+                        JsonElement gameStateElement = payload.get("gameState");
+                        GameState gameState = gson.fromJson(gameStateElement, GameState.class);
+                        JsonElement partialBoardStateElement = payload.get("partialBoardState");
+                        PartialBoardState partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
+                        this.gameState = gameState;
+                        this.partialBoardState = partialBoardState;
 
-                //Parse reply and refresh the local state, if a response from server:
-                Response playResponse = gson.fromJson(reply, Response.class);
-                if (playResponse != null) {
-                    if (playResponse.getStatus() == OK) {
-                        JsonElement partialBoardStateElement = playResponse.getData().get("partialBoardState");
-                        JsonElement gameStateElement = playResponse.getData().get("gameState");
-                        this.gameState = gson.fromJson(gameStateElement, GameState.class);
-                        this.partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
-                    }
-                }
-                //Or get command from server and update the state:
-                else {
-                    Command updateCommand = gson.fromJson(reply, Command.class);
-                    if (updateCommand.getCommandType() != null) {
-                        if (updateCommand.getCommandType() == CommandType.CLIENT_UPDATE_SERVICE) {
-                            JsonObject payload = updateCommand.getPayload();
-                            JsonElement gameStateElement = payload.get("gameState");
-                            JsonElement partialBoardStateElement = payload.get("partialBoardState");
-                            this.gameState = gson.fromJson(gameStateElement, GameState.class);
-                            this.partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
+                        //DEBUGGING:
+                        if (DEBUG) {
+                            System.out.println(gson.toJson(gameState));
+                            System.out.println(gson.toJson(partialBoardState));
                         }
+
+                        if (GUI) gameForm.update();
                     }
                 }
+                else {
+                    Response response = gson.fromJson(reply, Response.class);
+                    if (response.getStatus() == OK) {
+                        JsonObject data = response.getData();
+                        JsonElement gameStateElement = data.get("gameState");
+                        GameState gameState = gson.fromJson(gameStateElement, GameState.class);
+                        JsonElement partialBoardStateElement = data.get("partialBoardState");
+                        PartialBoardState partialBoardState = gson.fromJson(partialBoardStateElement, PartialBoardState.class);
+                        this.gameState = gameState;
+                        this.partialBoardState = partialBoardState;
+                        if (!stateInitialized) {
+                            if (GUI) gameForm.initialize();
+                            stateInitialized = true;
+                        }
+                        if (GUI) gameForm.update();
 
-                if (gameState.isEnded()) {
-                    if (DEBUG) System.out.println(name + ": GAME ENDED (" + gameState + ")");
-                    break;
+                        if (gameState.isEnded()) {
+                            if (DEBUG) System.out.println(name + ": GAME ENDED (" + gameState + ")");
+                            break;
+                        }
+
+                        Command outgoingCommand = makeMove();
+                        if (DEBUG) System.out.println("[" + name + "]: Decided to make move '" + outgoingCommand.getEndpointName() + "' at cell (" +
+                                outgoingCommand.getPayload().get("row").getAsInt() + "," + outgoingCommand.getPayload().get("col").getAsInt() + ")");
+
+                        //Convert to JSON and send:
+                        String moveCommandJSON = gson.toJson(outgoingCommand);
+                        printWriter.println(moveCommandJSON);
+                        printWriter.flush();
+
+                        if (turnInterval > 0) Thread.sleep(turnInterval);
+                    }
                 }
-
-                if (turnInterval > 0) Thread.sleep(turnInterval);
             }
-
-            //Write to file:
-//            Date date = new Date(simulationStart);
-//            SimpleDateFormat f = new SimpleDateFormat("YYYY-MM-dd HH.mm.ss.SSS");
-//            JsonElement latencyMeasurementsElement = gson.toJsonTree(latencyMeasurements);
-//            JsonObject o = new JsonObject();
-//            o.add("latencyMeasurements", JsonConvert.listToJsonArray(latencyMeasurements));
-//            String json = gson.toJson(o);
-//            IO.FileManager.writeFile("PlayerClient-Simulation @ " + f.format(date) + ".json", json);
-
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
-
 
     }
 
@@ -254,7 +283,7 @@ public class PlayerClient implements Runnable {
             int randomCellIndex = random.nextInt(unrevealedCells.size());
             UnrevealedCell chosenUnrevealedCell = unrevealedCells.get(randomCellIndex);
 
-            if (DEBUG) System.out.println("*** chosenUnrevealedCell: " + chosenUnrevealedCell + "***");
+            if (DEBUG) System.out.println("*** chosenUnrevealedCell: " + chosenUnrevealedCell.row + "," + chosenUnrevealedCell.col + "***");
 
             int globalRow = chosenUnrevealedCell.row + partialBoardState.getStartingRow();
             int globalCol = chosenUnrevealedCell.col + partialBoardState.getStartingCol();
@@ -273,6 +302,30 @@ public class PlayerClient implements Runnable {
 
             return new Command(CommandType.USER_SERVICE, moveEndpoint, object);
         }
+    }
+
+    public int getGameHeight() {
+        return gameHeight;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public int getGameWidth() {
+        return gameWidth;
+    }
+
+    public PartialBoardState getPartialBoardState() {
+        return partialBoardState;
+    }
+
+    public PartialStatePreference getPartialStatePreference() {
+        return partialStatePreference;
+    }
+
+    public String getSessionID() {
+        return sessionID;
     }
 
     public static void main(String[] args) {

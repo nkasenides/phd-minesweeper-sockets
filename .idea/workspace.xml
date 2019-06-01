@@ -2,15 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69a611ff-23d4-450c-bedc-1adc64208b5a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server-Simulation-[with55051] @ 2019-05-31 17.41.20.323.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server-Simulation-[with55057] @ 2019-05-31 17.41.24.477.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server-Simulation-[with55058] @ 2019-05-31 17.41.24.493.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/clients/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/clients/PlayerClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/AdminService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/services/LocalUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/LocalUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/services/LocalMasterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/services/LocalMasterService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,55 +25,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LocalUserService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/services/LocalUserService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1810">
-              <caret line="121" column="47" lean-forward="true" selection-start-line="121" selection-start-column="47" selection-end-line="121" selection-end-column="47" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerClient.java" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="114" selection-start-line="114" selection-end-line="114" />
+            <state relative-caret-position="402">
+              <caret line="205" column="29" selection-start-line="205" selection-start-column="29" selection-end-line="205" selection-end-column="29" />
+              <folding>
+                <element signature="method#makeMove#0;class#PlayerClient#0" />
+                <element signature="e#14591#14592#0" expanded="true" />
+                <element signature="e#14662#14663#0" expanded="true" />
+                <element signature="e#14727#14728#0" expanded="true" />
+                <element signature="e#14822#14823#0" expanded="true" />
+                <element signature="e#14932#14933#0" expanded="true" />
+                <element signature="e#15000#15001#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Server.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/server/src/services/LocalMasterService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-717">
-              <caret line="144" column="57" lean-forward="true" selection-start-line="144" selection-start-column="57" selection-end-line="144" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Response.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/src/response/Response.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="19" selection-start-line="18" selection-start-column="4" selection-end-line="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LocalAdminService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/services/LocalAdminService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1006">
-              <caret line="136" column="31" selection-start-line="136" selection-start-column="31" selection-end-line="136" selection-end-column="31" />
+            <state relative-caret-position="149">
+              <caret line="77" column="13" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#createGame#0;class#LocalAdminService#0" />
-                <element signature="method#startGame#0;class#LocalAdminService#0" />
+                <element signature="method#listGames#0;class#LocalMasterService#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="167" column="24" selection-start-line="167" selection-start-column="24" selection-end-line="167" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/services/LocalUserService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#getPartialState#0;class#LocalUserService#0" />
+                <element signature="method#move#0;class#LocalUserService#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="209">
+              <caret line="83" column="41" lean-forward="true" selection-start-line="83" selection-start-column="41" selection-end-line="83" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -85,7 +108,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>sending</find>
       <find>got</find>
       <find>.toJSON();</find>
       <find>Random</find>
@@ -112,6 +134,10 @@
       <find>with</find>
       <find>(7,0)</find>
       <find>ErrorResponse</find>
+      <find>viewGame</find>
+      <find>stateini</find>
+      <find>Thread.sleep</find>
+      <find>gameForm =</find>
     </findStrings>
     <replaceStrings>
       <replace>;</replace>
@@ -128,7 +154,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Test.java" />
         <option value="$PROJECT_DIR$/src/SecuredGCMUsage.java" />
         <option value="$PROJECT_DIR$/src/AES.java" />
         <option value="$PROJECT_DIR$/src/Client.java" />
@@ -162,7 +187,6 @@
         <option value="$PROJECT_DIR$/common/src/model/BoardState.java" />
         <option value="$PROJECT_DIR$/common/src/model/PartialBoardState.java" />
         <option value="$PROJECT_DIR$/server/src/services/LocalAdminService.java" />
-        <option value="$PROJECT_DIR$/server/src/services/LocalMasterService.java" />
         <option value="$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java" />
         <option value="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" />
         <option value="$PROJECT_DIR$/common/src/io/FileManager.java" />
@@ -176,20 +200,13 @@
         <option value="$PROJECT_DIR$/common/src/example/Test.java" />
         <option value="$PROJECT_DIR$/server/src/api/UserService.java" />
         <option value="$PROJECT_DIR$/server/src/api/AdminService.java" />
-        <option value="$PROJECT_DIR$/client/src/clients/PlayerClient.java" />
-        <option value="$PROJECT_DIR$/server/src/server/Server.java" />
         <option value="$PROJECT_DIR$/server/src/services/LocalUserService.java" />
+        <option value="$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.java" />
+        <option value="$PROJECT_DIR$/server/src/server/Server.java" />
+        <option value="$PROJECT_DIR$/client/src/clients/PlayerClient.java" />
+        <option value="$PROJECT_DIR$/server/src/services/LocalMasterService.java" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-917" />
@@ -202,49 +219,51 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="clients" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
               <item name="form" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
@@ -252,72 +271,65 @@
               <item name="AdminGameForm" type="e9f4de52:FormNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="common" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="example" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="common" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="common" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="simulation" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="minesweeper-sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="minesweeper-sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="server" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="services" type="462c0819:PsiDirectoryNode" />
@@ -327,8 +339,6 @@
         </subPane>
       </pane>
       <pane id="AndroidView" />
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -381,16 +391,25 @@
     <configuration name="AdminClient" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="clients.AdminClient" />
       <module name="client" />
-      <option name="PROGRAM_PARAMETERS" value="localhost 35 20 EASY 3 35 20 gui" />
+      <option name="PROGRAM_PARAMETERS" value="localhost 35 20 EASY 5 35 20 gui" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="PlayerClient" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="clients.PlayerClient" />
       <module name="client" />
-      <option name="PROGRAM_PARAMETERS" value="localhost 2 10 10 0" />
+      <option name="PROGRAM_PARAMETERS" value="localhost 5 10 10 250" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.Server" />
       <module name="server" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="example.Test" />
@@ -401,6 +420,9 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <list>
       <item itemvalue="Application.Server" />
@@ -446,7 +468,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87984000" />
+    <option name="totallyTimeSpent" value="94787000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -458,62 +480,64 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1753" height="954" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.32936078" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20362474" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.34669557" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.19609967" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.5146262" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Application Servers" order="7" />
-      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.34669557" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32936078" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
       <window_info anchor="bottom" id="Version Control" order="13" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.19716647" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20529039" />
-      <window_info anchor="right" id="Database" order="6" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="5" />
-      <window_info anchor="right" id="Theme Preview" order="8" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.514758" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Database" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info anchor="right" id="Maven Projects" order="9" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/client/src/clients/PlayerClient.java</url>
-          <line>114</line>
+          <url>file://$PROJECT_DIR$/server/src/services/LocalMasterService.java</url>
+          <line>70</line>
           <properties />
-          <option name="timeStamp" value="2" />
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="3" />
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>Datastore.getSessions()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>partialBoardState</expression-string>
         <language-id>JAVA</language-id>
@@ -522,8 +546,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/src/ui/form/LocalMainForm.java" />
-    <entry file="file://$PROJECT_DIR$/client/src/ui/form/GameForm.form" />
     <entry file="file://$PROJECT_DIR$/client/src/ui/form/LocalMainForm.form" />
     <entry file="file://$PROJECT_DIR$/client/src/ui/form/LocalGameForm.java" />
     <entry file="file://$PROJECT_DIR$/client/src/ui/form/LocalSimulatedMain.java" />
@@ -556,18 +578,6 @@
     <entry file="file://$PROJECT_DIR$/common/src/model/Move.java" />
     <entry file="file://$PROJECT_DIR$/common/src/model/MoveType.java" />
     <entry file="file://$PROJECT_DIR$/client/src/solver/AbstractSolver.java" />
-    <entry file="file://$PROJECT_DIR$/server/src/services/LocalMasterService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="12" lean-forward="true" selection-start-line="19" selection-start-column="12" selection-end-line="19" selection-end-column="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#listGames#0;class#LocalMasterService#0" />
-            <element signature="method#join#0;class#LocalMasterService#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -599,13 +609,6 @@
             <element signature="e#479#480#0" expanded="true" />
             <element signature="e#553#554#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="24" column="45" selection-start-line="24" selection-start-column="45" selection-end-line="24" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -737,13 +740,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="79" column="19" lean-forward="true" selection-start-line="79" selection-start-column="19" selection-end-line="79" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/model/Session.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -755,34 +751,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Thread.java" />
+    <entry file="file://$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="83" column="41" lean-forward="true" selection-start-line="83" selection-start-column="41" selection-end-line="83" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/services/LocalUserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1810">
-          <caret line="121" column="47" lean-forward="true" selection-start-line="121" selection-start-column="47" selection-end-line="121" selection-end-column="47" />
+        <state relative-caret-position="272">
+          <caret line="16" column="40" lean-forward="true" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#getPartialState#0;class#LocalUserService#0" />
+            <element signature="method#move#0;class#LocalUserService#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-717">
-          <caret line="144" column="57" lean-forward="true" selection-start-line="144" selection-start-column="57" selection-end-line="144" selection-end-column="57" />
+        <state relative-caret-position="-190">
+          <caret line="51" column="25" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Thread.java">
+    <entry file="file://$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="747" selection-start-line="747" selection-end-line="747" />
+        <state relative-caret-position="272">
+          <caret line="25" column="24" lean-forward="true" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="167" column="24" selection-start-line="167" selection-start-column="24" selection-end-line="167" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="114" selection-start-line="114" selection-end-line="114" />
+        <state relative-caret-position="402">
+          <caret line="205" column="29" selection-start-line="205" selection-start-column="29" selection-end-line="205" selection-end-column="29" />
+          <folding>
+            <element signature="method#makeMove#0;class#PlayerClient#0" />
+            <element signature="e#14591#14592#0" expanded="true" />
+            <element signature="e#14662#14663#0" expanded="true" />
+            <element signature="e#14727#14728#0" expanded="true" />
+            <element signature="e#14822#14823#0" expanded="true" />
+            <element signature="e#14932#14933#0" expanded="true" />
+            <element signature="e#15000#15001#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/services/LocalMasterService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="77" column="13" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#listGames#0;class#LocalMasterService#0" />
+          </folding>
         </state>
       </provider>
     </entry>

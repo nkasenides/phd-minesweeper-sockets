@@ -71,8 +71,10 @@ public class LocalMasterService implements MasterService {
         int sessionsInThisGame = 0;
         for (String sID : Datastore.getSessions()) {
             Session s = Datastore.getSession(sID);
-            if (s.getGameToken().equals(token)) {
-                sessionsInThisGame++;
+            if (!s.isSpectator()) {
+                if (s.getGameToken().equals(token)) {
+                    sessionsInThisGame++;
+                }
             }
         }
         if (sessionsInThisGame >= referencedGame.getGameSpecification().getMaxPlayers()) {

@@ -51,12 +51,6 @@ public class Server implements Runnable {
         try {
             String input;
 
-            long simulationStart = System.currentTimeMillis();
-            final Date date = new Date(simulationStart);
-            final SimpleDateFormat f = new SimpleDateFormat("YYYY-MM-dd HH.mm.ss.SSS");
-            final String filename = "Server-Simulation-[with" + socket.getPort() + "] @ " + f.format(date) + ".json";
-            IO.FileManager.writeFile( filename, "{\"memoryMeasurements\":[");
-
             while ((input = bufferedReader.readLine()) != null) {
 
                 //Receive request:
@@ -164,16 +158,9 @@ public class Server implements Runnable {
                         break;
                 }
 
-                long memoryUsed = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-                long timeNow = System.currentTimeMillis() - simulationStart;
 
                 printWriter.println(response.toJSON());
                 printWriter.flush();
-
-//                FileWriter fileWriter = new FileWriter(filename, true);
-//                PrintWriter printWriter = new PrintWriter(fileWriter);
-//                printWriter.print("{\"timestamp\":" + timeNow + ",\"memoryConsumption\":" + memoryUsed + "},");
-//                printWriter.close();
 
             }
         } catch (SocketTimeoutException e) {
