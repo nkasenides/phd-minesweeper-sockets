@@ -20,8 +20,8 @@ import static response.ResponseStatus.OK;
 public class PlayerClient implements Runnable {
 
     private static final int SERVER_PORT = 12345;
-    private static final boolean DEBUG = true;
-    public static boolean GUI = true;
+    private static final boolean DEBUG = false;
+    public static boolean GUI = false;
     private ArrayList<GameSpecification> games = null;
     private GameSpecification gameSpecification = null;
     private PlayerGameForm gameForm;
@@ -330,7 +330,7 @@ public class PlayerClient implements Runnable {
 
     public static void main(String[] args) {
 
-        final String USAGE = "Use: PlayerClient <SERVER_IP_ADDRESS> <NUM_OF_CLIENTS> <PARTIAL_STATE_WIDTH> <PARTIAL_STATE_HEIGHT> <TURN_INTERVAL>";
+        final String USAGE = "Use: PlayerClient <SERVER_IP_ADDRESS> <NUM_OF_CLIENTS> <PARTIAL_STATE_WIDTH> <PARTIAL_STATE_HEIGHT> <TURN_INTERVAL> <optional: gui>";
 
         if (args.length < 5) {
             System.out.println(USAGE);
@@ -367,6 +367,10 @@ public class PlayerClient implements Runnable {
 
         if (turnInterval < 0) {
             System.out.println("Invalid turn interval. The value must be more than or equal to 0 and provided in milliseconds.");
+        }
+
+        if (args.length == 6 && args[5].toLowerCase().equals("gui")) {
+            GUI = true;
         }
 
         PlayerClient[] clients = new PlayerClient[numOfClients];

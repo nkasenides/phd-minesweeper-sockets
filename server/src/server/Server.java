@@ -47,7 +47,6 @@ public class Server implements Runnable {
     public void run() {
 
 
-
         try {
             String input;
 
