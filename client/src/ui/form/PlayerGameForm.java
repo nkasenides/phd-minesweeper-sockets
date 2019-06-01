@@ -30,53 +30,6 @@ public class PlayerGameForm extends JFrame {
         setSize(WINDOW_SIZE, WINDOW_SIZE);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setExtendedState(JFrame.MAXIMIZED_BOTH);
-//        setUndecorated(true);
-
-        //Set key listener:
-        KeyEventDispatcher keyEventDispatcher = new KeyEventDispatcher() {
-            @Override
-            public boolean dispatchKeyEvent(final KeyEvent e) {
-                if (isActive()) {
-                    if (e.getID() == KeyEvent.KEY_PRESSED) {
-                        Direction direction = null;
-                        switch (e.getKeyCode()) {
-                            case KeyEvent.VK_UP:
-                                if (client.rowShift - 1 >= 0) {
-                                    direction = Direction.UP;
-                                    client.rowShift--;
-                                }
-                                break;
-                            case KeyEvent.VK_DOWN:
-                                if (client.rowShift + client.getPartialStatePreference().getWidth() < client.getGameWidth()) {
-                                    direction = Direction.DOWN;
-                                    client.rowShift++;
-                                }
-                                break;
-                            case KeyEvent.VK_LEFT:
-                                if (client.colShift - 1 >= 0) {
-                                    direction = Direction.LEFT;
-                                    client.colShift--;
-                                }
-                                break;
-                            case KeyEvent.VK_RIGHT:
-                                if (client.colShift + client.getPartialStatePreference().getHeight() < client.getGameHeight()) {
-                                    direction = Direction.RIGHT;
-                                    client.colShift++;
-                                }
-                                break;
-                        }
-//                        System.out.println("cX: " + client.rowShift + ", cY: " + client.colShift);
-                        if (direction != null) {
-                            client.move(client.getPartialBoardState().getStartingRow() + client.rowShift, client.getPartialBoardState().getStartingCol() + client.colShift);
-                        }
-                    }
-                }
-
-                return false;
-            }
-        };
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(keyEventDispatcher);
 
         //Resizing:
         addComponentListener(new ComponentAdapter() {

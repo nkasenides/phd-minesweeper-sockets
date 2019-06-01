@@ -6,6 +6,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import model.*;
 import response.Response;
+import solvers.RandomSolver;
+import solvers.Solver;
 import ui.form.PlayerGameForm;
 
 import java.io.BufferedReader;
@@ -32,6 +34,7 @@ public class PlayerClient implements Runnable {
     private final int turnInterval;
     private final PartialStatePreference partialStatePreference;
     private boolean stateInitialized = false;
+    private final Solver solver;
 
     private String sessionID = null;
     private int gameWidth;
@@ -39,12 +42,11 @@ public class PlayerClient implements Runnable {
 
     private GameState gameState;
     private PartialBoardState partialBoardState;
-    public int rowShift = 0;
-    public int colShift = 0;
 
-    public PlayerClient(Socket socket, String name, int turnInterval, PartialStatePreference partialStatePreference) throws IOException {
+    public PlayerClient(Socket socket, String name, int turnInterval, PartialStatePreference partialStatePreference, Solver solver) throws IOException {
         this.name = name;
         this.turnInterval = turnInterval;
+        this.solver = solver;
         this.partialStatePreference = partialStatePreference;
         printWriter = new PrintWriter(socket.getOutputStream());
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -55,20 +57,6 @@ public class PlayerClient implements Runnable {
         JsonObject object = new JsonObject();
         object.addProperty("sessionID", sessionID);
         Command command = new Command(CommandType.USER_SERVICE, "getPartialState", object);
-        //Convert to JSON and send:
-        Gson gson = new Gson();
-        String commandJSON = gson.toJson(command);
-        printWriter.println(commandJSON);
-        printWriter.flush();
-    }
-
-    public void move(int row, int col) {
-        //Create request object:
-        JsonObject object = new JsonObject();
-        object.addProperty("sessionID", sessionID);
-        object.addProperty("row", row);
-        object.addProperty("col", col);
-        Command command = new Command(CommandType.USER_SERVICE, "move", object);
         //Convert to JSON and send:
         Gson gson = new Gson();
         String commandJSON = gson.toJson(command);
@@ -138,7 +126,7 @@ public class PlayerClient implements Runnable {
                             break;
                         }
 
-                        Command outgoingCommand = makeMove();
+                        Command outgoingCommand = solver.solve(partialBoardState, this);
                         if (DEBUG) System.out.println("[" + name + "]: Decided to make move '" + outgoingCommand.getEndpointName() + "' at cell (" +
                                 outgoingCommand.getPayload().get("row").getAsInt() + "," + outgoingCommand.getPayload().get("col").getAsInt() + ")");
 
@@ -211,101 +199,6 @@ public class PlayerClient implements Runnable {
 
         if (games.size() < 1) {
             throw new RuntimeException("Error - No games found");
-        }
-    }
-
-    private Command makeMove() {
-        //Scan all the cells from partial state and save those who are RevealState.COVERED:
-        class UnrevealedCell {
-            private int row;
-            private int col;
-            private UnrevealedCell(int row, int col) { this.row = row; this.col = col; }
-        }
-        ArrayList<UnrevealedCell> unrevealedCells = new ArrayList<>();
-        for (int row = 0; row < partialBoardState.getCells().length; row++) {
-            for (int col = 0; col < partialBoardState.getCells()[row].length; col++) {
-                if (partialBoardState.getCells()[row][col].getRevealState() == RevealState.COVERED) {
-                    unrevealedCells.add(new UnrevealedCell(row, col));
-                }
-            }
-        }
-
-        //Command attributes:
-        JsonObject object = new JsonObject();
-        object.addProperty("sessionID", sessionID);
-
-        //Check if there are any unrevealed cells, if not then the player has to shift position:
-        if (unrevealedCells.size() < 1) {
-
-            final String moveEndpoint = "move";
-            final CommandType commandType = CommandType.USER_SERVICE;
-
-            if (DEBUG) System.out.println("*** NO MORE UNREVEALED CELLS IN RANGE (" + partialBoardState.getStartingRow() + "," + partialBoardState.getStartingCol() +
-                    ") to (" + (partialBoardState.getStartingRow() + partialBoardState.getHeight()) + "," + (partialBoardState.getStartingCol() + partialBoardState.getWidth()) + ")***");
-
-            //Rightward shifting:
-            final int cellsRight = gameWidth - (partialBoardState.getStartingCol() + partialBoardState.getWidth());
-
-            if (cellsRight >= partialBoardState.getWidth()) {
-                object.addProperty("row", partialBoardState.getStartingRow());
-                object.addProperty("col", partialBoardState.getStartingCol() + partialBoardState.getWidth());
-                return new Command(commandType, moveEndpoint, object);
-            }
-            else if (cellsRight > 0) {
-                object.addProperty("row", partialBoardState.getStartingRow());
-                object.addProperty("col", partialBoardState.getStartingCol() + cellsRight);
-                return new Command(commandType, moveEndpoint, object);
-            }
-            else {
-
-                //Downward shifting:
-                final int cellsDown = gameHeight - (partialBoardState.getStartingRow() + partialBoardState.getHeight());
-                if (cellsDown >= partialBoardState.getHeight()) {
-                    object.addProperty("row", partialBoardState.getStartingRow() + partialBoardState.getHeight());
-                    object.addProperty("col", 0);
-                    return new Command(commandType, moveEndpoint, object);
-                }
-                else if(cellsDown > 0){
-                    object.addProperty("row", partialBoardState.getStartingRow() + cellsDown);
-                    object.addProperty("col", 0);
-                    return new Command(commandType, moveEndpoint, object);
-                } else {
-                    // todo
-                    if (DEBUG) System.out.println("*** NO MORE UNREVEALED CELLS RIGHT OR DOWN ***");
-                    return new Command(CommandType.USER_SERVICE, moveEndpoint, object);
-                }
-            }
-        }
-
-        //Otherwise, select a random cell from unrevealedCells with a random move and play it:
-        else {
-
-            if (DEBUG) System.out.println("*** FOUND " + unrevealedCells.size() + " UNREVEALED CELLS IN RANGE (" + partialBoardState.getStartingRow() + "," + partialBoardState.getStartingCol() +
-                    ") to (" + (partialBoardState.getStartingRow() + partialBoardState.getHeight()) + "," + (partialBoardState.getStartingCol() + partialBoardState.getWidth()) + ")***");
-
-            //If there are unrevealed cells, choose a random one out of the list:
-            Random random = new Random();
-            int randomCellIndex = random.nextInt(unrevealedCells.size());
-            UnrevealedCell chosenUnrevealedCell = unrevealedCells.get(randomCellIndex);
-
-            if (DEBUG) System.out.println("*** chosenUnrevealedCell: " + chosenUnrevealedCell.row + "," + chosenUnrevealedCell.col + "***");
-
-            int globalRow = chosenUnrevealedCell.row + partialBoardState.getStartingRow();
-            int globalCol = chosenUnrevealedCell.col + partialBoardState.getStartingCol();
-
-            //Choose which move to make. Currently a 60% reveal vs 40% flag chance.
-//            moveEndpoint = random.nextInt(10) > 6 ? "flag" : "reveal";
-            final String moveEndpoint = "reveal"; //TODO CHANGE TO ABOVE
-
-            //Remove the cell from the unrevealedCells:
-//            unrevealedCells.remove(randomCellIndex);
-
-            //Package the move into a command, convert to JSON and send:
-            object.addProperty("row", globalRow);
-            object.addProperty("col", globalCol);
-            object.addProperty("sessionID", sessionID);
-
-            return new Command(CommandType.USER_SERVICE, moveEndpoint, object);
         }
     }
 
@@ -382,7 +275,7 @@ public class PlayerClient implements Runnable {
         for(int i = 0; i < numOfClients; i++) {
             try {
                 final Socket socket = new Socket(ipAddress, SERVER_PORT);
-                clients[i] = new PlayerClient(socket, "player" + (i + 1), turnInterval, new PartialStatePreference(partialStateWidth, partialStateHeight));
+                clients[i] = new PlayerClient(socket, "player" + (i + 1), turnInterval, new PartialStatePreference(partialStateWidth, partialStateHeight), new RandomSolver()); //TODO GENERALIZE
                 new Thread(clients[i]).start();
             } catch (IOException ioe) {
                 throw new RuntimeException(ioe);
