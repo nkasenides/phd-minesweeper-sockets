@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import model.*;
 import response.Response;
+import simulation.LatencyMeasurement;
 import solvers.RandomSolver;
 import solvers.Solver;
 import ui.form.PlayerGameForm;
@@ -226,7 +227,7 @@ public class PlayerClient implements Runnable {
         return sessionID;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         final String USAGE = "Use: PlayerClient <SERVER_IP_ADDRESS> <NUM_OF_CLIENTS> <PARTIAL_STATE_WIDTH> <PARTIAL_STATE_HEIGHT> <TURN_INTERVAL> <optional: gui>";
 
@@ -272,15 +273,31 @@ public class PlayerClient implements Runnable {
         }
 
         PlayerClient[] clients = new PlayerClient[numOfClients];
+        ArrayList<Thread> threads = new ArrayList<>();
         for(int i = 0; i < numOfClients; i++) {
             try {
                 final Socket socket = new Socket(ipAddress, SERVER_PORT);
                 clients[i] = new PlayerClient(socket, "player" + (i + 1), turnInterval, new PartialStatePreference(partialStateWidth, partialStateHeight), new RandomSolver()); //TODO GENERALIZE
-                new Thread(clients[i]).start();
+                Thread thread = new Thread(clients[i]);
+                threads.add(thread);
+
+
             } catch (IOException ioe) {
                 throw new RuntimeException(ioe);
             }
         }
+
+        //Start all client threads:
+        for (Thread t : threads) {
+            t.start();
+        }
+
+        //Wait for all client threads to finish:
+        for (Thread t : threads) {
+            t.join();
+        }
+
+        System.out.println("Game over");
     }
 }
 

@@ -27,7 +27,7 @@ public class Datastore {
         return new ArrayList<>(games.keySet());
     }
 
-    public static ArrayList<String> getSessions() {
+    public synchronized static ArrayList<String> getSessions() {
         return new ArrayList<>(sessions.keySet());
     }
 

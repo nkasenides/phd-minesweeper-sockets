@@ -180,7 +180,7 @@ public class Server implements Runnable {
      * This method should be called just before returning from a state-changing API call such as reveal & flag.
      * updaterSessionID --> do not re-update the player who initiated the update.
      */
-    public static void updateClients(String gameToken, String updaterSessionID) {
+    public synchronized  static void updateClients(String gameToken, String updaterSessionID) {
         for (Server serverInstance : serverInstances) {
             Session session = Datastore.getSession(serverInstance.clientSessionID);
             if (session == null) throw new RuntimeException("The server instance has an invalid session ID '" + serverInstance.clientSessionID + "'.");

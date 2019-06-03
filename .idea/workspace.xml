@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69a611ff-23d4-450c-bedc-1adc64208b5a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/solvers/RandomSolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/solvers/Solver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/clients/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/clients/PlayerClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/io/FileManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/io/FileManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/datastore/Datastore.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/datastore/Datastore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/server/Server.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,39 +20,64 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-212">
+              <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="313">
-              <caret line="386" column="193" selection-start-line="386" selection-start-column="193" selection-end-line="386" selection-end-column="193" />
+            <state relative-caret-position="532">
+              <caret line="294" column="48" selection-start-line="294" selection-start-column="48" selection-end-line="294" selection-end-column="48" />
               <folding>
-                <element signature="method#move#0;class#PlayerClient#0" />
                 <element signature="method#joinFirstGame#0;class#PlayerClient#0" />
                 <element signature="method#listAllGames#0;class#PlayerClient#0" />
-                <element signature="e#14560#14561#0" expanded="true" />
-                <element signature="e#14593#14594#0" expanded="true" />
-                <element signature="e#14632#14633#0" expanded="true" />
-                <element signature="e#14664#14665#0" expanded="true" />
-                <element signature="e#14697#14698#0" expanded="true" />
-                <element signature="e#14729#14730#0" expanded="true" />
-                <element signature="e#14784#14785#0" expanded="true" />
-                <element signature="e#14824#14825#0" expanded="true" />
-                <element signature="e#14889#14890#0" expanded="true" />
-                <element signature="e#14934#14935#0" expanded="true" />
-                <element signature="e#14970#14971#0" expanded="true" />
-                <element signature="e#15002#15003#0" expanded="true" />
+                <element signature="e#9022#9023#0" expanded="true" />
+                <element signature="e#9055#9056#0" expanded="true" />
+                <element signature="e#9094#9095#0" expanded="true" />
+                <element signature="e#9126#9127#0" expanded="true" />
+                <element signature="e#9159#9160#0" expanded="true" />
+                <element signature="e#9191#9192#0" expanded="true" />
+                <element signature="e#9246#9247#0" expanded="true" />
+                <element signature="e#9286#9287#0" expanded="true" />
+                <element signature="e#9351#9352#0" expanded="true" />
+                <element signature="e#9396#9397#0" expanded="true" />
+                <element signature="e#9432#9433#0" expanded="true" />
+                <element signature="e#9464#9465#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/solvers/RandomSolver.java">
+        <entry file="file://$PROJECT_DIR$/server/src/datastore/Datastore.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1496">
-              <caret line="88" column="71" selection-start-line="88" selection-start-column="71" selection-end-line="88" selection-end-column="71" />
+            <state relative-caret-position="281">
+              <caret line="33" column="10" lean-forward="true" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+              <folding>
+                <element signature="e#795#796#0" expanded="true" />
+                <element signature="e#852#853#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/services/LocalMasterService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="71" column="36" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#listGames#0;class#LocalMasterService#0" />
               </folding>
             </state>
           </provider>
@@ -114,8 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Main.java" />
-        <option value="$PROJECT_DIR$/src/Server.java" />
         <option value="$PROJECT_DIR$/src/ServerManager.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/common/src/Command.java" />
@@ -131,7 +155,6 @@
         <option value="$PROJECT_DIR$/client/src/AdminClient.java" />
         <option value="$PROJECT_DIR$/client/src/PlayerClient.java" />
         <option value="$PROJECT_DIR$/client/src/ui/form/LocalAdminGameForm.java" />
-        <option value="$PROJECT_DIR$/server/src/datastore/Datastore.java" />
         <option value="$PROJECT_DIR$/server/src/api/MasterService.java" />
         <option value="$PROJECT_DIR$/common/src/model/CommandType.java" />
         <option value="$PROJECT_DIR$/server/src/Server.java" />
@@ -143,10 +166,8 @@
         <option value="$PROJECT_DIR$/server/src/model/Session.java" />
         <option value="$PROJECT_DIR$/common/src/model/BoardState.java" />
         <option value="$PROJECT_DIR$/common/src/model/PartialBoardState.java" />
-        <option value="$PROJECT_DIR$/server/src/services/LocalAdminService.java" />
         <option value="$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java" />
         <option value="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" />
-        <option value="$PROJECT_DIR$/common/src/io/FileManager.java" />
         <option value="$PROJECT_DIR$/common/src/simulation/LatencyMeasurement.java" />
         <option value="$PROJECT_DIR$/common/src/simulation/MemoryMeasurement.java" />
         <option value="$PROJECT_DIR$/common/src/example/Response.java" />
@@ -157,13 +178,18 @@
         <option value="$PROJECT_DIR$/server/src/api/UserService.java" />
         <option value="$PROJECT_DIR$/server/src/api/AdminService.java" />
         <option value="$PROJECT_DIR$/server/src/services/LocalUserService.java" />
-        <option value="$PROJECT_DIR$/server/src/server/Server.java" />
         <option value="$PROJECT_DIR$/server/src/services/LocalMasterService.java" />
         <option value="$PROJECT_DIR$/client/src/clients/AdminClient.java" />
-        <option value="$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.java" />
         <option value="$PROJECT_DIR$/client/src/solvers/RandomSolver.java" />
         <option value="$PROJECT_DIR$/client/src/solvers/AbstractSolver.java" />
         <option value="$PROJECT_DIR$/client/src/solvers/Solver.java" />
+        <option value="$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.java" />
+        <option value="$PROJECT_DIR$/server/src/services/LocalAdminService.java" />
+        <option value="$PROJECT_DIR$/simulation/src/simulation/SimulationConfig.java" />
+        <option value="$PROJECT_DIR$/common/src/io/FileManager.java" />
+        <option value="$PROJECT_DIR$/simulation/src/simulation/Main.java" />
+        <option value="$PROJECT_DIR$/server/src/datastore/Datastore.java" />
+        <option value="$PROJECT_DIR$/server/src/server/Server.java" />
         <option value="$PROJECT_DIR$/client/src/clients/PlayerClient.java" />
       </list>
     </option>
@@ -179,7 +205,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -210,35 +235,11 @@
               <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="solvers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
               <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="form" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-              <item name="form" type="462c0819:PsiDirectoryNode" />
-              <item name="PlayerGameForm" type="e9f4de52:FormNode" />
-            </path>
-            <path>
-              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="common" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -246,20 +247,6 @@
               <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
               <item name="common" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="simulation" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
@@ -305,6 +292,7 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -357,7 +345,7 @@
     <configuration name="AdminClient" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="clients.AdminClient" />
       <module name="client" />
-      <option name="PROGRAM_PARAMETERS" value="localhost 35 20 EASY 5 35 20 gui" />
+      <option name="PROGRAM_PARAMETERS" value="localhost 50 50 EASY 100 50 50 gui" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -365,7 +353,7 @@
     <configuration name="PlayerClient" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="clients.PlayerClient" />
       <module name="client" />
-      <option name="PROGRAM_PARAMETERS" value="localhost 5 10 10 0" />
+      <option name="PROGRAM_PARAMETERS" value="localhost 15 10 10 0" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -430,12 +418,14 @@
       <workItem from="1559213950201" duration="2695000" />
       <workItem from="1559216977504" duration="1801000" />
       <workItem from="1559311025711" duration="2854000" />
-      <workItem from="1559394985090" duration="1987000" />
+      <workItem from="1559394985090" duration="3700000" />
+      <workItem from="1559462221192" duration="4492000" />
+      <workItem from="1559566615346" duration="811000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98175000" />
+    <option name="totallyTimeSpent" value="105191000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -450,7 +440,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20575693" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21002132" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -459,13 +449,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.19609967" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.19609967" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5146262" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
       <window_info anchor="bottom" id="Application Servers" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32936078" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.34669557" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32936078" />
@@ -501,32 +491,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/src/ui/form/LocalSimulatedMain.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/javafx-src.zip!/com/sun/media/jfxmedia/events/PlayerStateEvent.java" />
-    <entry file="file://$PROJECT_DIR$/server/src/datastore/Datastore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#503#504#0" expanded="true" />
-            <element signature="e#549#550#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/JsonObject.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/Runnable.java" />
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/Thread.java" />
     <entry file="file://$PROJECT_DIR$/client/src/solver/SimpleSolver.java" />
     <entry file="file://$PROJECT_DIR$/common/src/model/Move.java" />
     <entry file="file://$PROJECT_DIR$/common/src/model/MoveType.java" />
@@ -542,7 +506,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/io/FileManager.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/Runtime.java" />
     <entry file="file://$PROJECT_DIR$/common/src/simulation/LatencyMeasurement.java" />
     <entry file="file://$PROJECT_DIR$/common/src/simulation/MemoryMeasurement.java" />
@@ -620,7 +583,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/common/src/example/Response.java" />
-    <entry file="file://$PROJECT_DIR$/common/src/example/SuccessResponse.java" />
     <entry file="file://$PROJECT_DIR$/common/src/example/ErrorResponse.java" />
     <entry file="file://$PROJECT_DIR$/common/src/model/GameState.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -643,7 +605,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/example/PartialStateResponse.java" />
     <entry file="file://$PROJECT_DIR$/common/src/model/FullBoardState.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -681,18 +642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/services/LocalAdminService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1006">
-          <caret line="136" column="31" selection-start-line="136" selection-start-column="31" selection-end-line="136" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#createGame#0;class#LocalAdminService#0" />
-            <element signature="method#startGame#0;class#LocalAdminService#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/model/Session.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -727,16 +676,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="167" column="18" selection-start-line="167" selection-start-column="18" selection-end-line="167" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -760,34 +699,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/services/LocalMasterService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="85" column="31" selection-start-line="85" selection-start-column="31" selection-end-line="85" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#listGames#0;class#LocalMasterService#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="33" column="31" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/solvers/RandomSolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="88" column="71" selection-start-line="88" selection-start-column="71" selection-end-line="88" selection-end-column="71" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/solvers/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -798,26 +709,135 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1230">
+          <caret line="31" column="55" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/example/SuccessResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/example/PartialStateResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/solvers/RandomSolver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/response/AuthErrorResponse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/services/LocalAdminService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="13" column="56" lean-forward="true" selection-start-line="13" selection-start-column="56" selection-end-line="13" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#viewGame#0;class#LocalAdminService#0" />
+            <element signature="method#subscribe#0;class#LocalAdminService#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/io/FileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="10" selection-start-column="10" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/Gson.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="486" column="84" selection-start-line="486" selection-start-column="65" selection-end-line="486" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simulation/src/simulation/Main.java" />
+    <entry file="file://$PROJECT_DIR$/simulation/src/simulation/Simulation.java" />
+    <entry file="file://$PROJECT_DIR$/simulation/src/simulation/SimulationConfig.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_211/src.zip!/java/lang/Thread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11084">
+          <caret line="707" column="18" selection-start-line="707" selection-start-column="18" selection-end-line="707" selection-end-column="18" />
+          <folding>
+            <element signature="e#15704#15705#0" expanded="true" />
+            <element signature="e#15770#15771#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/services/LocalMasterService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="71" column="36" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#listGames#0;class#LocalMasterService#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/datastore/Datastore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="33" column="10" lean-forward="true" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+          <folding>
+            <element signature="e#795#796#0" expanded="true" />
+            <element signature="e#852#853#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-212">
+          <caret line="174" lean-forward="true" selection-start-line="174" selection-end-line="174" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="386" column="193" selection-start-line="386" selection-start-column="193" selection-end-line="386" selection-end-column="193" />
+        <state relative-caret-position="532">
+          <caret line="294" column="48" selection-start-line="294" selection-start-column="48" selection-end-line="294" selection-end-column="48" />
           <folding>
-            <element signature="method#move#0;class#PlayerClient#0" />
             <element signature="method#joinFirstGame#0;class#PlayerClient#0" />
             <element signature="method#listAllGames#0;class#PlayerClient#0" />
-            <element signature="e#14560#14561#0" expanded="true" />
-            <element signature="e#14593#14594#0" expanded="true" />
-            <element signature="e#14632#14633#0" expanded="true" />
-            <element signature="e#14664#14665#0" expanded="true" />
-            <element signature="e#14697#14698#0" expanded="true" />
-            <element signature="e#14729#14730#0" expanded="true" />
-            <element signature="e#14784#14785#0" expanded="true" />
-            <element signature="e#14824#14825#0" expanded="true" />
-            <element signature="e#14889#14890#0" expanded="true" />
-            <element signature="e#14934#14935#0" expanded="true" />
-            <element signature="e#14970#14971#0" expanded="true" />
-            <element signature="e#15002#15003#0" expanded="true" />
+            <element signature="e#9022#9023#0" expanded="true" />
+            <element signature="e#9055#9056#0" expanded="true" />
+            <element signature="e#9094#9095#0" expanded="true" />
+            <element signature="e#9126#9127#0" expanded="true" />
+            <element signature="e#9159#9160#0" expanded="true" />
+            <element signature="e#9191#9192#0" expanded="true" />
+            <element signature="e#9246#9247#0" expanded="true" />
+            <element signature="e#9286#9287#0" expanded="true" />
+            <element signature="e#9351#9352#0" expanded="true" />
+            <element signature="e#9396#9397#0" expanded="true" />
+            <element signature="e#9432#9433#0" expanded="true" />
+            <element signature="e#9464#9465#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -872,7 +892,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>client</last-edited>
+          <last-edited>simulation</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
