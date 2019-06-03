@@ -44,6 +44,10 @@ public class PlayerClient implements Runnable {
     private GameState gameState;
     private PartialBoardState partialBoardState;
 
+    private long commandSent = 0;
+    private long replyReceived = 0;
+    private ArrayList<LatencyMeasurement> latencyMeasurements = new ArrayList<>();
+
     public PlayerClient(Socket socket, String name, int turnInterval, PartialStatePreference partialStatePreference, Solver solver) throws IOException {
         this.name = name;
         this.turnInterval = turnInterval;
@@ -83,6 +87,11 @@ public class PlayerClient implements Runnable {
                 if (DEBUG) System.out.println();
 
                 String reply = bufferedReader.readLine();
+                long replyReceived = System.currentTimeMillis();
+                if (commandSent != 0) {
+                    long timeElapsed = replyReceived - commandSent;
+                    latencyMeasurements.add(new LatencyMeasurement(System.currentTimeMillis(), timeElapsed));
+                }
                 if (DEBUG) System.out.println("[" + name + "] Got: " + reply);
 
                 Command receivedCommand = gson.fromJson(reply, Command.class);
@@ -135,6 +144,7 @@ public class PlayerClient implements Runnable {
                         String moveCommandJSON = gson.toJson(outgoingCommand);
                         printWriter.println(moveCommandJSON);
                         printWriter.flush();
+                        commandSent = System.currentTimeMillis();
 
                         if (turnInterval > 0) Thread.sleep(turnInterval);
                     }
@@ -227,6 +237,10 @@ public class PlayerClient implements Runnable {
         return sessionID;
     }
 
+    public ArrayList<LatencyMeasurement> getLatencyMeasurements() {
+        return latencyMeasurements;
+    }
+
     public static void main(String[] args) throws InterruptedException {
 
         final String USAGE = "Use: PlayerClient <SERVER_IP_ADDRESS> <NUM_OF_CLIENTS> <PARTIAL_STATE_WIDTH> <PARTIAL_STATE_HEIGHT> <TURN_INTERVAL> <optional: gui>";
@@ -288,6 +302,10 @@ public class PlayerClient implements Runnable {
         }
 
         //Start all client threads:
+
+        System.out.println("Simulation starting...");
+        long startTime = System.currentTimeMillis();
+
         for (Thread t : threads) {
             t.start();
         }
@@ -297,7 +315,27 @@ public class PlayerClient implements Runnable {
             t.join();
         }
 
-        System.out.println("Game over");
+        System.out.println("Simulation ended.");
+        System.out.println("Time taken: " + (System.currentTimeMillis() - startTime) + "ms");
+
+        //Calculate average latency across all clients:
+        double latencySum = 0;
+        int numOfMeasurements = 0;
+        for (PlayerClient c : clients) {
+            numOfMeasurements += c.getLatencyMeasurements().size();
+            for (LatencyMeasurement m : c.getLatencyMeasurements()) {
+                latencySum += m.getLatency();
+            }
+        }
+
+        double averageLatency = latencySum / numOfMeasurements;
+        System.out.println("Average latency: " + String.format("%.3f", averageLatency) + "ms");
+
+        //Display num of moves by all clients:
+        for (PlayerClient c : clients) {
+            System.out.println(c.name + " made " + c.getLatencyMeasurements().size() + " moves");
+        }
+
     }
 }
 
