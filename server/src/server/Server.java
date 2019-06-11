@@ -127,6 +127,9 @@ public class Server implements Runnable {
                         }
                         break;
                     case USER_SERVICE:
+                        if (payload.get("sessionID") == null) {
+                            System.out.println(payload);
+                        }
                         final String sessionID = payload.get("sessionID").getAsString();
                         switch (endpointName) {
                             case "getPartialState":
@@ -180,26 +183,28 @@ public class Server implements Runnable {
      * This method should be called just before returning from a state-changing API call such as reveal & flag.
      * updaterSessionID --> do not re-update the player who initiated the update.
      */
-    public synchronized  static void updateClients(String gameToken, String updaterSessionID) {
+    public static void updateClients(String gameToken, String updaterSessionID) {
+
         for (Server serverInstance : serverInstances) {
-            Session session = Datastore.getSession(serverInstance.clientSessionID);
-            if (session == null) throw new RuntimeException("The server instance has an invalid session ID '" + serverInstance.clientSessionID + "'.");
-            if (session.getGameToken().equals(gameToken) && !session.getSessionID().equals(updaterSessionID)) {
+            if (serverInstance.clientSessionID != null) {
+                Session session = Datastore.getSession(serverInstance.clientSessionID);
+                if (session == null) throw new RuntimeException("The server instance has an invalid session ID '" + serverInstance.clientSessionID + "'.");
+                if (session.getGameToken().equals(gameToken) && !session.getSessionID().equals(updaterSessionID)) {
 
-                //Get the referenced game:
-                Game game = Datastore.getGame(gameToken);
+                    //Get the referenced game:
+                    Game game = Datastore.getGame(gameToken);
 
-                //Get the partial state for this session:
-                PartialStatePreference partialStatePreference = session.getPartialStatePreference();
-                PartialBoardState partialBoardState;
-                try {
-                    partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), session.getPositionRow(), session.getPositionCol(), game.getFullBoardState());
-                }
-                catch (InvalidCellReferenceException e) {
-                    throw new RuntimeException(e.getMessage());
-                }
+                    //Get the partial state for this session:
+                    PartialStatePreference partialStatePreference = session.getPartialStatePreference();
+                    PartialBoardState partialBoardState;
+                    try {
+                        partialBoardState = new PartialBoardState(partialStatePreference.getWidth(), partialStatePreference.getHeight(), session.getPositionRow(), session.getPositionCol(), game.getFullBoardState());
+                    }
+                    catch (InvalidCellReferenceException e) {
+                        throw new RuntimeException(e.getMessage());
+                    }
 
-                //Send the update in format:
+                    //Send the update in format:
                 /*
                     ...
                     "payload": {
@@ -208,15 +213,17 @@ public class Server implements Runnable {
                     }
                  */
 
-                Gson gson = new Gson();
-                JsonObject payload = new JsonObject();
-                payload.add("gameState", gson.toJsonTree(game.getGameState()));
-                payload.add("partialBoardState", gson.toJsonTree(partialBoardState));
-                Command command = new Command(CommandType.CLIENT_UPDATE_SERVICE, "", payload);
-                String commandJSON = gson.toJson(command);
-                serverInstance.getPrintWriter().println(commandJSON);
-                serverInstance.getPrintWriter().flush();
+                    Gson gson = new Gson();
+                    JsonObject payload = new JsonObject();
+                    payload.add("gameState", gson.toJsonTree(game.getGameState()));
+                    payload.add("partialBoardState", gson.toJsonTree(partialBoardState));
+                    Command command = new Command(CommandType.CLIENT_UPDATE_SERVICE, "", payload);
+                    String commandJSON = gson.toJson(command);
+                    serverInstance.getPrintWriter().println(commandJSON);
+                    serverInstance.getPrintWriter().flush();
+                }
             }
+
         }
     }
 

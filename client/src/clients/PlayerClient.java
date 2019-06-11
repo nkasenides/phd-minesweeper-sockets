@@ -23,7 +23,7 @@ import static response.ResponseStatus.OK;
 public class PlayerClient implements Runnable {
 
     private static final int SERVER_PORT = 12345;
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     private static boolean gui = false;
     private ArrayList<GameSpecification> games = null;
     private GameSpecification gameSpecification = null;
@@ -117,8 +117,14 @@ public class PlayerClient implements Runnable {
                             System.out.println(gson.toJson(partialBoardState));
                         }
 
+                        if (gameState.isEnded()) {
+                            if (DEBUG) System.out.println(name + ": GAME ENDED (" + gameState + ")");
+                            break;
+                        }
+
                         if (gui) gameForm.update();
                     }
+                    else throw new RuntimeException("Invalid command type found, expected CLIENT_UPDATE_SERVICE.");
                 }
                 else {
                     Response response = gson.fromJson(reply, Response.class);
