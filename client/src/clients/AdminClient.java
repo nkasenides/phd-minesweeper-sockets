@@ -292,6 +292,16 @@ public class AdminClient implements Runnable {
             return;
         }
 
+        if (partialStateHeight > gameHeight) {
+            System.out.println("Invalid partial state height. The value must be less than or equal to the game height.");
+            return;
+        }
+
+        if (partialStateWidth > gameWidth) {
+            System.out.println("Invalid partial state width. The value must be less than or equal to the game width.");
+            return;
+        }
+
         if (args.length == 8 && args[7].toLowerCase().equals("gui")) {
             gui = true;
         }
