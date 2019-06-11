@@ -6,14 +6,9 @@ import java.util.*;
 
 public class Datastore {
 
-    private static HashMap<String, Game> games;  //  Game token -> Game object
-    private static HashMap<String, Session> sessions;  // Session ID -> Session object
+    private static Map<String, Game> games = Collections.synchronizedMap(new HashMap<>());  //  Game token -> Game object
+    private static Map<String, Session> sessions = Collections.synchronizedMap(new HashMap<>());  // Session ID -> Session object
     private static String adminPassword = "1234"; //Administrator's password, gives access to AdminService.
-
-    static {
-        games = new HashMap<>();
-        sessions = new HashMap<>();
-    }
 
     public static Session getSession(String sessionID) {
         return sessions.get(sessionID);
@@ -27,7 +22,7 @@ public class Datastore {
         return new ArrayList<>(games.keySet());
     }
 
-    public synchronized static ArrayList<String> getSessions() {
+    public static ArrayList<String> getSessions() {
         return new ArrayList<>(sessions.keySet());
     }
 

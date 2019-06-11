@@ -45,8 +45,8 @@ public class PlayerClient implements Runnable {
     private PartialBoardState partialBoardState;
 
     private long commandSent = 0;
-    private long replyReceived = 0;
     private ArrayList<LatencyMeasurement> latencyMeasurements = new ArrayList<>();
+    private int movesMade = 0;
 
     public PlayerClient(Socket socket, String name, int turnInterval, PartialStatePreference partialStatePreference, Solver solver) throws IOException {
         this.name = name;
@@ -91,6 +91,11 @@ public class PlayerClient implements Runnable {
                 if (commandSent != 0) {
                     long timeElapsed = replyReceived - commandSent;
                     latencyMeasurements.add(new LatencyMeasurement(System.currentTimeMillis(), timeElapsed));
+                    movesMade++;
+                    if (movesMade > 1000) {
+                        System.out.print(".");
+                        movesMade = 0;
+                    }
                 }
                 if (DEBUG) System.out.println("[" + name + "] Got: " + reply);
 
