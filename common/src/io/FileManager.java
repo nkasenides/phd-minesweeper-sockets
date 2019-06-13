@@ -10,6 +10,12 @@ public class FileManager {
         writer.close();
     }
 
+    public static void appendToFile(String path, String content) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(path, true));
+        writer.write(content);
+        writer.close();
+    }
+
     public static String readFile(String path) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(path));
         try {

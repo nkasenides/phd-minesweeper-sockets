@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import io.FileManager;
 import model.*;
 import response.Response;
 import simulation.LatencyMeasurement;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static response.ResponseStatus.OK;
@@ -45,8 +47,11 @@ public class PlayerClient implements Runnable {
     private PartialBoardState partialBoardState;
 
     private long commandSent = 0;
-    private ArrayList<LatencyMeasurement> latencyMeasurements = new ArrayList<>();
+//    private ArrayList<Long> latencyMeasurements = new ArrayList<>();
     private int movesMade = 0;
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd@HHmm-ss");
+    private static final String filename = simpleDateFormat.format(new Date()) + ".csv";
+    private final String dirName = "Simulations";
 
     public PlayerClient(Socket socket, String name, int turnInterval, PartialStatePreference partialStatePreference, Solver solver) throws IOException {
         this.name = name;
@@ -55,6 +60,8 @@ public class PlayerClient implements Runnable {
         this.partialStatePreference = partialStatePreference;
         printWriter = new PrintWriter(socket.getOutputStream());
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+        FileManager.createDirectory(dirName, false);
     }
 
     public void initializeState() {
@@ -90,12 +97,23 @@ public class PlayerClient implements Runnable {
                 long replyReceived = System.currentTimeMillis();
                 if (commandSent != 0) {
                     long timeElapsed = replyReceived - commandSent;
-                    latencyMeasurements.add(new LatencyMeasurement(System.currentTimeMillis(), timeElapsed));
-                    movesMade++;
-                    if (movesMade > 1000) {
-                        System.out.print(".");
-                        movesMade = 0;
+//                    latencyMeasurements.add(timeElapsed);
+
+
+                    //Write to file:
+                    if (FileManager.fileIsDirectory(dirName)) {
+                        //Write to file:
+                        try {
+                            FileManager.appendToFile(dirName + "/" + filename, timeElapsed + System.lineSeparator());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
+                    else {
+                        System.out.println("Failed to write results to file - directory 'Simulations' could not be created.");
+                    }
+
+                    movesMade++;
                 }
                 if (DEBUG) System.out.println("[" + name + "] Got: " + reply);
 
@@ -248,9 +266,9 @@ public class PlayerClient implements Runnable {
         return sessionID;
     }
 
-    public ArrayList<LatencyMeasurement> getLatencyMeasurements() {
-        return latencyMeasurements;
-    }
+//    public ArrayList<Long> getLatencyMeasurements() {
+//        return latencyMeasurements;
+//    }
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -305,7 +323,8 @@ public class PlayerClient implements Runnable {
                 clients[i] = new PlayerClient(socket, "player" + (i + 1), turnInterval, new PartialStatePreference(partialStateWidth, partialStateHeight), new RandomSolver()); //TODO GENERALIZE
                 Thread thread = new Thread(clients[i]);
                 threads.add(thread);
-
+                //TODO - SocketException: Not bugger space available (maximum connections reached) when attempting 25k players.
+                //LOOK: https://support.pitneybowes.com/VFP06_KnowledgeWithSidebarTroubleshoot?id=kA280000000PEE1CAO&popup=false&lang=en_US
 
             } catch (IOException ioe) {
                 throw new RuntimeException(ioe);
@@ -314,38 +333,42 @@ public class PlayerClient implements Runnable {
 
         //Start all client threads:
 
-        System.out.println("Simulation starting...");
         long startTime = System.currentTimeMillis();
 
+        System.out.println("Starting simulation...");
         for (Thread t : threads) {
             t.start();
         }
+        System.out.println("Simulation started...");
 
         //Wait for all client threads to finish:
         for (Thread t : threads) {
             t.join();
         }
 
+        long timeTaken = System.currentTimeMillis() - startTime;
+
         System.out.println("Simulation ended.");
-        System.out.println("Time taken: " + (System.currentTimeMillis() - startTime) + "ms");
+        System.out.println("Time taken: " + timeTaken + "ms");
+//
+//        //Calculate average latency across all clients:
+//        double latencySum = 0;
+//        int numOfMeasurements = 0;
+//        for (PlayerClient c : clients) {
+//            numOfMeasurements += c.getLatencyMeasurements().size();
+//            for (Long m : c.getLatencyMeasurements()) {
+//                latencySum += m;
+//            }
+//        }
+//
+//        double averageLatency = latencySum / numOfMeasurements;
+//        System.out.println("Average latency: " + String.format("%.3f", averageLatency) + "ms");
+//
+//        //Display num of moves by all clients:
+//        for (PlayerClient c : clients) {
+//            System.out.println(c.name + " made " + c.getLatencyMeasurements().size() + " moves");
+//        }
 
-        //Calculate average latency across all clients:
-        double latencySum = 0;
-        int numOfMeasurements = 0;
-        for (PlayerClient c : clients) {
-            numOfMeasurements += c.getLatencyMeasurements().size();
-            for (LatencyMeasurement m : c.getLatencyMeasurements()) {
-                latencySum += m.getLatency();
-            }
-        }
-
-        double averageLatency = latencySum / numOfMeasurements;
-        System.out.println("Average latency: " + String.format("%.3f", averageLatency) + "ms");
-
-        //Display num of moves by all clients:
-        for (PlayerClient c : clients) {
-            System.out.println(c.name + " made " + c.getLatencyMeasurements().size() + " moves");
-        }
 
     }
 }
