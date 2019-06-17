@@ -22,7 +22,7 @@ public class AdminClient implements Runnable {
 
     private static final int SERVER_PORT = 12345;
     private static final String PASSWORD = "1234";
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
 
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;

@@ -350,24 +350,6 @@ public class PlayerClient implements Runnable {
 
         System.out.println("Simulation ended.");
         System.out.println("Time taken: " + timeTaken + "ms");
-//
-//        //Calculate average latency across all clients:
-//        double latencySum = 0;
-//        int numOfMeasurements = 0;
-//        for (PlayerClient c : clients) {
-//            numOfMeasurements += c.getLatencyMeasurements().size();
-//            for (Long m : c.getLatencyMeasurements()) {
-//                latencySum += m;
-//            }
-//        }
-//
-//        double averageLatency = latencySum / numOfMeasurements;
-//        System.out.println("Average latency: " + String.format("%.3f", averageLatency) + "ms");
-//
-//        //Display num of moves by all clients:
-//        for (PlayerClient c : clients) {
-//            System.out.println(c.name + " made " + c.getLatencyMeasurements().size() + " moves");
-//        }
 
 
     }
