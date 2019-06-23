@@ -7,8 +7,8 @@ import com.google.gson.JsonObject;
 import io.FileManager;
 import model.*;
 import response.Response;
-import simulation.LatencyMeasurement;
-import solvers.RandomSolver;
+import simulation.SimulationConfig;
+import simulation.SimulationManager;
 import solvers.Solver;
 import ui.form.PlayerGameForm;
 
@@ -26,6 +26,7 @@ public class PlayerClient implements Runnable {
 
     private static final int SERVER_PORT = 12345;
     private static final boolean DEBUG = false;
+    private static SimulationManager simulationManager;
     private static boolean gui = false;
     private ArrayList<GameSpecification> games = null;
     private GameSpecification gameSpecification = null;
@@ -47,7 +48,6 @@ public class PlayerClient implements Runnable {
     private PartialBoardState partialBoardState;
 
     private long commandSent = 0;
-//    private ArrayList<Long> latencyMeasurements = new ArrayList<>();
     private int movesMade = 0;
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-dd@HHmm-ss");
     private static final String filename = simpleDateFormat.format(new Date()) + ".csv";
@@ -62,6 +62,10 @@ public class PlayerClient implements Runnable {
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         FileManager.createDirectory(dirName, false);
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void initializeState() {
@@ -104,7 +108,7 @@ public class PlayerClient implements Runnable {
                     if (FileManager.fileIsDirectory(dirName)) {
                         //Write to file:
                         try {
-                            FileManager.appendToFile(dirName + "/" + filename, timeElapsed + System.lineSeparator());
+                            FileManager.appendToFile(dirName + "/" + filename, simulationManager.getNumberOfActivePlayers() + "," + timeElapsed + System.lineSeparator());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -266,91 +270,29 @@ public class PlayerClient implements Runnable {
         return sessionID;
     }
 
-//    public ArrayList<Long> getLatencyMeasurements() {
-//        return latencyMeasurements;
-//    }
+    public static void main(String[] args) {
 
-    public static void main(String[] args) throws InterruptedException {
+        final String USAGE = "Use: PlayerClient <SERVER_IP_ADDRESS> <SIMULATION_FILEPATH> <optional: gui>";
 
-        final String USAGE = "Use: PlayerClient <SERVER_IP_ADDRESS> <NUM_OF_CLIENTS> <PARTIAL_STATE_WIDTH> <PARTIAL_STATE_HEIGHT> <TURN_INTERVAL> <optional: gui>";
-
-        if (args.length < 5) {
+        if (args.length < 2) {
             System.out.println(USAGE);
         }
 
         String ipAddress = args[0];
-        int numOfClients;
-        int partialStateWidth;
-        int partialStateHeight;
-        int turnInterval;
+        String simulationFilepath;
         try {
-            numOfClients = Integer.parseInt(args[1]);
-            partialStateWidth = Integer.parseInt(args[2]);
-            partialStateHeight = Integer.parseInt(args[3]);
-            turnInterval = Integer.parseInt(args[4]);
+            simulationFilepath = args[1];
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
 
-        if (numOfClients < 1) {
-            System.out.println("Invalid number of clients. The value must be more than or equal to 1.");
-            return;
-        }
-
-        if (partialStateWidth < 5) {
-            System.out.println("Invalid partial state width. The value must be more than or equal to 5.");
-            return;
-        }
-
-        if (partialStateHeight < 5) {
-            System.out.println("Invalid partial state height. The value must be more than or equal to 5.");
-            return;
-        }
-
-        if (turnInterval < 0) {
-            System.out.println("Invalid turn interval. The value must be more than or equal to 0 and provided in milliseconds.");
-        }
-
-        if (args.length == 6 && args[5].toLowerCase().equals("gui")) {
+        if (args.length == 3 && args[2].toLowerCase().equals("gui")) {
             gui = true;
         }
 
-        PlayerClient[] clients = new PlayerClient[numOfClients];
-        ArrayList<Thread> threads = new ArrayList<>();
-        for(int i = 0; i < numOfClients; i++) {
-            try {
-                final Socket socket = new Socket(ipAddress, SERVER_PORT);
-                clients[i] = new PlayerClient(socket, "player" + (i + 1), turnInterval, new PartialStatePreference(partialStateWidth, partialStateHeight), new RandomSolver()); //TODO GENERALIZE
-                Thread thread = new Thread(clients[i]);
-                threads.add(thread);
-                //TODO - SocketException: Not bugger space available (maximum connections reached) when attempting 25k players.
-                //LOOK: https://support.pitneybowes.com/VFP06_KnowledgeWithSidebarTroubleshoot?id=kA280000000PEE1CAO&popup=false&lang=en_US
-
-            } catch (IOException ioe) {
-                throw new RuntimeException(ioe);
-            }
-        }
-
-        //Start all client threads:
-
-        long startTime = System.currentTimeMillis();
-
-        System.out.println("Starting simulation...");
-        for (Thread t : threads) {
-            t.start();
-        }
-        System.out.println("Simulation started...");
-
-        //Wait for all client threads to finish:
-        for (Thread t : threads) {
-            t.join();
-        }
-
-        long timeTaken = System.currentTimeMillis() - startTime;
-
-        System.out.println("Simulation ended.");
-        System.out.println("Time taken: " + timeTaken + "ms");
-
+        simulationManager = new SimulationManager(simulationFilepath, ipAddress, SERVER_PORT);
+        Thread thread = new Thread(simulationManager, "SimulationManagerThread");
+        thread.start();
 
     }
 }
