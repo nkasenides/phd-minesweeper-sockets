@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69a611ff-23d4-450c-bedc-1adc64208b5a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/simulation/AddPlayersEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/simulation/SimulationConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/simulation/SimulationConfigMaker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/simulation/SimulationEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/simulation/SimulationEventType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/simulation/SimulationManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/simulation/AdminSimulationManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/simulation/PlayerSimulationManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/clients/AdminClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/clients/AdminClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/clients/PlayerClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/clients/PlayerClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/simulation/LatencyMeasurement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/simulation/MemoryMeasurement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/server/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/simulation/AddPlayersEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/simulation/AddPlayersEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/simulation/SimulationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/simulation/SimulationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/simulation/SimulationConfigMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/simulation/SimulationEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/simulation/SimulationEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/simulation/SimulationEventType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/simulation/SimulationEventType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/simulation/SimulationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/simulation/SimulationManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,74 +25,104 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="115" column="26" lean-forward="true" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
-              <folding>
-                <element signature="e#2386#2387#0" expanded="true" />
-                <element signature="e#2413#2414#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/simulation/SimulationManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="141" column="32" selection-start-line="141" selection-start-column="32" selection-end-line="141" selection-end-column="32" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/simulation/SimulationEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-              <folding>
-                <element signature="e#363#364#0" expanded="true" />
-                <element signature="e#395#396#0" expanded="true" />
-                <element signature="e#433#434#0" expanded="true" />
-                <element signature="e#469#470#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/simulation/AddPlayersEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-              <folding>
-                <element signature="e#218#219#0" expanded="true" />
-                <element signature="e#281#282#0" expanded="true" />
-                <element signature="e#337#338#0" expanded="true" />
-                <element signature="e#377#378#0" expanded="true" />
-                <element signature="e#440#441#0" expanded="true" />
-                <element signature="e#498#499#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="221">
+                  <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="688">
+                  <caret line="294" lean-forward="true" selection-start-line="294" selection-end-line="294" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/client/src/simulation/PlayerSimulationManager.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="447">
+                  <caret line="81" column="17" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/client/src/simulation/AdminSimulationManager.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="620">
+                  <caret line="58" column="17" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/client/src/simulation/SimulationManager.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="731">
+                  <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                    <element signature="e#434#435#0" expanded="true" />
+                    <element signature="e#479#480#0" expanded="true" />
+                    <element signature="e#515#516#0" expanded="true" />
+                    <element signature="e#547#548#0" expanded="true" />
+                    <element signature="e#575#576#0" expanded="true" />
+                    <element signature="e#602#603#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="190">
+                  <caret line="267" column="5" lean-forward="true" selection-start-line="267" selection-start-column="5" selection-end-line="267" selection-end-column="5" />
+                  <folding>
+                    <element signature="e#2128#2129#0" expanded="true" />
+                    <element signature="e#2155#2156#0" expanded="true" />
+                    <element signature="method#startGame#0;class#AdminClient#0" />
+                    <element signature="method#subscribeToGame#0;class#AdminClient#0" />
+                    <element signature="method#viewGame#0;class#AdminClient#0" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="192">
+                  <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -149,9 +179,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/server/src/model/AuthErrorResponse.java" />
-        <option value="$PROJECT_DIR$/client/src/AdminClient.java" />
-        <option value="$PROJECT_DIR$/client/src/PlayerClient.java" />
         <option value="$PROJECT_DIR$/client/src/ui/form/LocalAdminGameForm.java" />
         <option value="$PROJECT_DIR$/server/src/api/MasterService.java" />
         <option value="$PROJECT_DIR$/common/src/model/CommandType.java" />
@@ -186,20 +213,23 @@
         <option value="$PROJECT_DIR$/simulation/src/simulation/Main.java" />
         <option value="$PROJECT_DIR$/server/src/datastore/Datastore.java" />
         <option value="$PROJECT_DIR$/common/src/io/FileManager.java" />
-        <option value="$PROJECT_DIR$/client/src/clients/AdminClient.java" />
         <option value="$PROJECT_DIR$/client/src/simulation/SimulationEventType.java" />
         <option value="$PROJECT_DIR$/server/src/server/Server.java" />
         <option value="$PROJECT_DIR$/common/src/simulation/AddPlayersEvent.java" />
         <option value="$PROJECT_DIR$/common/src/simulation/SimulationEventType.java" />
         <option value="$PROJECT_DIR$/common/src/simulation/SimulationConfig.java" />
-        <option value="$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java" />
-        <option value="$PROJECT_DIR$/common/src/simulation/SimulationManager.java" />
         <option value="$PROJECT_DIR$/client/src/simulation/SimulationConfig.java" />
         <option value="$PROJECT_DIR$/client/src/simulation/SimulationEvent.java" />
         <option value="$PROJECT_DIR$/client/src/simulation/AddPlayersEvent.java" />
         <option value="$PROJECT_DIR$/client/src/simulation/SimulationConfigMaker.java" />
+        <option value="$PROJECT_DIR$/common/src/simulation/ClientSimulationManager.java" />
+        <option value="$PROJECT_DIR$/common/src/simulation/SimulationManager.java" />
         <option value="$PROJECT_DIR$/client/src/simulation/SimulationManager.java" />
+        <option value="$PROJECT_DIR$/client/src/simulation/ClientSimulationManager.java" />
+        <option value="$PROJECT_DIR$/client/src/simulation/AdminSimulationManager.java" />
         <option value="$PROJECT_DIR$/client/src/clients/PlayerClient.java" />
+        <option value="$PROJECT_DIR$/client/src/clients/AdminClient.java" />
+        <option value="$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java" />
       </list>
     </option>
   </component>
@@ -215,7 +245,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -266,10 +295,34 @@
               <item name="common" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="simulation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="SimulationConfigs" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -322,7 +375,7 @@
     <configuration name="AdminClient" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="clients.AdminClient" />
       <module name="client" />
-      <option name="PROGRAM_PARAMETERS" value="localhost 50 40 EASY 10 50 40" />
+      <option name="PROGRAM_PARAMETERS" value="localhost myConfig.sim gui" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -423,12 +476,13 @@
       <workItem from="1560668438714" duration="3586000" />
       <workItem from="1560672097180" duration="111000" />
       <workItem from="1560764361414" duration="6832000" />
-      <workItem from="1561272575918" duration="11119000" />
+      <workItem from="1561272575918" duration="11155000" />
+      <workItem from="1561403871592" duration="3628000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="144651000" />
+    <option name="totallyTimeSpent" value="148315000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -443,7 +497,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24253732" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24520256" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -452,7 +506,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.32502708" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.32502708" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5146262" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -494,35 +548,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/common/src/model/Command.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" column="37" selection-start-line="20" selection-start-column="37" selection-end-line="20" selection-end-column="37" />
-          <folding>
-            <element signature="e#445#446#0" expanded="true" />
-            <element signature="e#479#480#0" expanded="true" />
-            <element signature="e#553#554#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/api/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/response/ResponseStatus.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/src/response/SuccessResponse.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -710,19 +735,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="29" column="35" selection-start-line="29" selection-start-column="35" selection-end-line="29" selection-end-column="35" />
-          <folding>
-            <element signature="method#initialize#0;class#AdminClient#0" />
-            <element signature="method#startGame#0;class#AdminClient#0" />
-            <element signature="method#subscribeToGame#0;class#AdminClient#0" />
-            <element signature="method#viewGame#0;class#AdminClient#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/services/LocalAdminService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="476">
@@ -780,28 +792,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/simulation/LatencyMeasurement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/simulation/MemoryMeasurement.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/simulation/SimulationEventType.java">
+    <entry file="file://$PROJECT_DIR$/common/src/simulation/LatencyMeasurement.java" />
+    <entry file="file://$PROJECT_DIR$/common/src/simulation/MemoryMeasurement.java" />
+    <entry file="file://$PROJECT_DIR$/common/src/simulation/SimulationEventType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="18" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="18" />
@@ -815,7 +808,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/simulation/SimulationConfig.java">
+    <entry file="file://$PROJECT_DIR$/common/src/simulation/SimulationConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="714">
           <caret line="87" column="36" selection-start-line="87" selection-start-column="36" selection-end-line="87" selection-end-column="36" />
@@ -825,48 +818,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/simulation/SimulationConfigMaker.java">
+    <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="221">
+          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/simulation/SimulationManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#434#435#0" expanded="true" />
+            <element signature="e#479#480#0" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
+            <element signature="e#547#548#0" expanded="true" />
+            <element signature="e#575#576#0" expanded="true" />
+            <element signature="e#602#603#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/simulation/SimulationEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/simulation/AddPlayersEvent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/simulation/AdminSimulationManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="58" column="17" selection-start-line="58" selection-start-column="17" selection-end-line="58" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/simulation/AddPlayersEvent.java">
+    <entry file="file://$PROJECT_DIR$/client/src/simulation/PlayerSimulationManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#218#219#0" expanded="true" />
-            <element signature="e#281#282#0" expanded="true" />
-            <element signature="e#337#338#0" expanded="true" />
-            <element signature="e#377#378#0" expanded="true" />
-            <element signature="e#440#441#0" expanded="true" />
-            <element signature="e#498#499#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/simulation/SimulationEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-          <folding>
-            <element signature="e#363#364#0" expanded="true" />
-            <element signature="e#395#396#0" expanded="true" />
-            <element signature="e#433#434#0" expanded="true" />
-            <element signature="e#469#470#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/simulation/SimulationManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="141" column="32" selection-start-line="141" selection-start-column="32" selection-end-line="141" selection-end-column="32" />
+        <state relative-caret-position="447">
+          <caret line="81" column="17" selection-start-line="81" selection-start-column="17" selection-end-line="81" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -875,11 +877,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="115" column="26" lean-forward="true" selection-start-line="115" selection-start-column="26" selection-end-line="115" selection-end-column="26" />
+        <state relative-caret-position="688">
+          <caret line="294" lean-forward="true" selection-start-line="294" selection-end-line="294" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimulationConfigs/myConfig.sim">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="267" column="5" lean-forward="true" selection-start-line="267" selection-start-column="5" selection-end-line="267" selection-end-column="5" />
           <folding>
-            <element signature="e#2386#2387#0" expanded="true" />
-            <element signature="e#2413#2414#0" expanded="true" />
+            <element signature="e#2128#2129#0" expanded="true" />
+            <element signature="e#2155#2156#0" expanded="true" />
+            <element signature="method#startGame#0;class#AdminClient#0" />
+            <element signature="method#subscribeToGame#0;class#AdminClient#0" />
+            <element signature="method#viewGame#0;class#AdminClient#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

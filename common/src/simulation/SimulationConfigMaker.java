@@ -13,8 +13,8 @@ public class SimulationConfigMaker {
         //Create config object:
         SimulationConfig config = new SimulationConfig(
                 10,
+                75,
                 50,
-                40,
                 10,
                 10,
                 0,

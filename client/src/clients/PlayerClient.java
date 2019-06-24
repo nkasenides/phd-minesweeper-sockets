@@ -7,8 +7,7 @@ import com.google.gson.JsonObject;
 import io.FileManager;
 import model.*;
 import response.Response;
-import simulation.SimulationConfig;
-import simulation.SimulationManager;
+import simulation.PlayerSimulationManager;
 import solvers.Solver;
 import ui.form.PlayerGameForm;
 
@@ -26,7 +25,7 @@ public class PlayerClient implements Runnable {
 
     private static final int SERVER_PORT = 12345;
     private static final boolean DEBUG = false;
-    private static SimulationManager simulationManager;
+    private static PlayerSimulationManager playerSimulationManager;
     private static boolean gui = false;
     private ArrayList<GameSpecification> games = null;
     private GameSpecification gameSpecification = null;
@@ -108,7 +107,7 @@ public class PlayerClient implements Runnable {
                     if (FileManager.fileIsDirectory(dirName)) {
                         //Write to file:
                         try {
-                            FileManager.appendToFile(dirName + "/" + filename, simulationManager.getNumberOfActivePlayers() + "," + timeElapsed + System.lineSeparator());
+                            FileManager.appendToFile(dirName + "/" + filename, playerSimulationManager.getNumberOfActivePlayers() + "," + timeElapsed + System.lineSeparator());
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -290,8 +289,8 @@ public class PlayerClient implements Runnable {
             gui = true;
         }
 
-        simulationManager = new SimulationManager(simulationFilepath, ipAddress, SERVER_PORT);
-        Thread thread = new Thread(simulationManager, "SimulationManagerThread");
+        playerSimulationManager = new PlayerSimulationManager(simulationFilepath, ipAddress, SERVER_PORT);
+        Thread thread = new Thread(playerSimulationManager, "PlayerSimulationManager-Thread");
         thread.start();
 
     }

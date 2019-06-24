@@ -3,13 +3,11 @@ package clients;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import model.*;
 import response.Response;
-import response.ResponseStatus;
+import simulation.AdminSimulationManager;
 import ui.form.AdminGameForm;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,7 +26,8 @@ public class AdminClient implements Runnable {
     private BufferedReader bufferedReader;
     private final String name;
     private AdminGameForm gameForm;
-    private final boolean GUI;
+    private static AdminSimulationManager adminSimulationManager;
+    private static boolean gui = false;
     private boolean stateInitialized = false;
 
     //Properties
@@ -47,16 +46,19 @@ public class AdminClient implements Runnable {
     private PartialBoardState partialBoardState;
 
     public AdminClient(Socket socket, String name, Difficulty difficulty, int gameWidth, int gameHeight, int maxPlayers,
-                       PartialStatePreference partialStatePreference, boolean gui) throws IOException {
+                       PartialStatePreference partialStatePreference) throws IOException {
         this.name = name;
         this.partialStatePreference = partialStatePreference;
         this.difficulty = difficulty;
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
         this.maxPlayers = maxPlayers;
-        this.GUI = gui;
         printWriter = new PrintWriter(socket.getOutputStream());
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -92,7 +94,7 @@ public class AdminClient implements Runnable {
                         this.gameState = gameState;
                         this.partialBoardState = partialBoardState;
 
-                        if (GUI) gameForm.update();
+                        if (gui) gameForm.update();
                     }
                 }
                 else {
@@ -106,10 +108,10 @@ public class AdminClient implements Runnable {
                         this.gameState = gameState;
                         this.partialBoardState = partialBoardState;
                         if (!stateInitialized) {
-                            if (GUI) gameForm.initialize();
+                            if (gui) gameForm.initialize();
                             stateInitialized = true;
                         }
-                        if (GUI) gameForm.update();
+                        if (gui) gameForm.update();
                     }
                 }
             }
@@ -209,7 +211,7 @@ public class AdminClient implements Runnable {
             Response response = gson.fromJson(reply, Response.class);
             if (response.getStatus() == OK) {
                 sessionID = response.getData().get("sessionID").getAsString();
-                if (GUI) {
+                if (gui) {
                     gameForm = new AdminGameForm(this);
                 }
                 if (DEBUG) System.out.println("Subscribed to game with token '" + token + "' with session ID '" + sessionID + "'.");
@@ -242,81 +244,27 @@ public class AdminClient implements Runnable {
 
     public static void main(String[] args) {
 
-        final String USAGE = "Use: AdminClient <SERVER_IP_ADDRESS> <GAME_WIDTH> <GAME_HEIGHT> <DIFFICULTY> <MAX_PLAYERS> <PARTIAL_STATE_WIDTH> <PARTIAL_STATE_HEIGHT> <UI>";
+        final String USAGE = "Use: AdminClient <SERVER_IP_ADDRESS> <SIMULATION_FILEPATH> <optional: gui>";
 
-        if (args.length < 7) {
+        if (args.length < 2) {
             if (DEBUG) System.out.println(USAGE);
         }
 
         String ipAddress = args[0];
-        int gameWidth;
-        int gameHeight;
-        Difficulty difficulty;
-        int maxPlayers;
-        int partialStateWidth;
-        int partialStateHeight;
-        boolean gui = false;
+        String simulationFilepath;
         try {
-            gameWidth = Integer.parseInt(args[1]);
-            gameHeight = Integer.parseInt(args[2]);
-            difficulty = Difficulty.valueOf(args[3]);
-            maxPlayers = Integer.parseInt(args[4]);
-            partialStateWidth = Integer.parseInt(args[5]);
-            partialStateHeight = Integer.parseInt(args[6]);
+            simulationFilepath = args[1];
         } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
 
-        if (gameWidth < 5) {
-            System.out.println("Invalid game width. The value must be more than or equal to 5.");
-            return;
-        }
-
-        if (gameHeight < 5) {
-            System.out.println("Invalid game height. The value must be more than or equal to 5.");
-            return;
-        }
-
-        if (maxPlayers < 1) {
-            System.out.println("Invalid max players. The value must be more than or equal to 1.");
-            return;
-        }
-
-        if (partialStateWidth < 5) {
-            System.out.println("Invalid partial state width. The value must be more than or equal to 5.");
-            return;
-        }
-
-        if (partialStateHeight < 5) {
-            System.out.println("Invalid partial state height. The value must be more than or equal to 5.");
-            return;
-        }
-
-        if (partialStateHeight > gameHeight) {
-            System.out.println("Invalid partial state height. The value must be less than or equal to the game height.");
-            return;
-        }
-
-        if (partialStateWidth > gameWidth) {
-            System.out.println("Invalid partial state width. The value must be less than or equal to the game width.");
-            return;
-        }
-
-        if (args.length == 8 && args[7].toLowerCase().equals("gui")) {
+        if (args.length == 3 && args[2].toLowerCase().equals("gui")) {
             gui = true;
         }
 
-        final int numOfClients = 1;
-        AdminClient[] clients = new AdminClient[numOfClients];
-        for(int i = 0; i < numOfClients; i++) {
-            try {
-                final Socket socket = new Socket(ipAddress, SERVER_PORT);
-                clients[i] = new AdminClient(socket, "adminClient" + (i + 1), difficulty, gameWidth, gameHeight, maxPlayers, new PartialStatePreference(partialStateWidth, partialStateHeight), gui);
-                new Thread(clients[i]).start();
-            } catch (IOException ioe) {
-                throw new RuntimeException(ioe);
-            }
-        }
+        adminSimulationManager = new AdminSimulationManager(simulationFilepath, ipAddress, SERVER_PORT);
+        Thread thread = new Thread(adminSimulationManager, "AdminSimulationManager-Thread");
+        thread.start();
     }
 
     public PartialStatePreference getPartialStatePreference() {
