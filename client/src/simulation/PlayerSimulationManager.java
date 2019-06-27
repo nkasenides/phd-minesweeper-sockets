@@ -45,7 +45,7 @@ public class PlayerSimulationManager extends SimulationManager<PlayerClient> imp
                             final Socket socket = new Socket(ipAddress, port);
                             PlayerClient playerClient = new PlayerClient(socket, "player" + nameCounter, simulationConfiguration.getTimeInterval(), new PartialStatePreference(simulationConfiguration.getPlayerPartialStateWidth(), simulationConfiguration.getPlayerPartialStateHeight()), new RandomSolver()); //TODO GENERALIZE
                             instances.add(playerClient);
-                            System.out.println("[" + currentTime + "] - Player '" + playerClient.getName() + "' added.");
+//                            System.out.println("[" + currentTime + "] - Player '" + playerClient.getName() + "' added.");
                             Thread thread = new Thread(playerClient, playerClient.getName() + "-Thread");
                             threads.add(thread);
                             thread.start();

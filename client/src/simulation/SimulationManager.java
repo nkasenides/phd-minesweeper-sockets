@@ -7,6 +7,7 @@ import io.FileManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public abstract class SimulationManager <ClientType> {
 
@@ -17,8 +18,8 @@ public abstract class SimulationManager <ClientType> {
     protected long startTime = Integer.MIN_VALUE;
     protected long endTime = Integer.MIN_VALUE;
     protected SimulationConfig simulationConfiguration;
-    protected ArrayList<Thread> threads = new ArrayList<>();
-    protected ArrayList<ClientType> instances = new ArrayList<>();
+    protected CopyOnWriteArrayList<Thread> threads = new CopyOnWriteArrayList<>();
+    protected CopyOnWriteArrayList<ClientType> instances = new CopyOnWriteArrayList<>();
     protected int nameCounter = 1;
 
     public SimulationManager(String configurationFilepath, String ipAddress, int port) {
