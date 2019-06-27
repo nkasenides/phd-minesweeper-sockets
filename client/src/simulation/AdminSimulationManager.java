@@ -1,13 +1,10 @@
 package simulation;
 
 import clients.AdminClient;
-import clients.PlayerClient;
 import model.PartialStatePreference;
-import solvers.RandomSolver;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class AdminSimulationManager extends SimulationManager<AdminClient> implements Runnable {
 
@@ -30,7 +27,7 @@ public class AdminSimulationManager extends SimulationManager<AdminClient> imple
         for (int i = 0; i < numOfClients; i++) {
             try {
                 final Socket socket = new Socket(ipAddress, port);
-                AdminClient adminClient = new AdminClient(socket, "admin" + nameCounter, simulationConfiguration.getDifficulty(), simulationConfiguration.getGameWidth(), simulationConfiguration.getGameHeight(), simulationConfiguration.getMaxPlayers(), new PartialStatePreference(simulationConfiguration.getClientPartialStateWidth(), simulationConfiguration.getClientPartialStateHeight()));
+                AdminClient adminClient = new AdminClient(socket, "admin" + nameCounter, simulationConfiguration.getDifficulty(), simulationConfiguration.getGameWidth(), simulationConfiguration.getGameHeight(), simulationConfiguration.getMaxPlayers(), new PartialStatePreference(simulationConfiguration.getPlayerPartialStateWidth(), simulationConfiguration.getPlayerPartialStateHeight()));
                 instances.add(adminClient);
                 System.out.println("Admin '" + adminClient.getName() + "' added.");
                 Thread thread = new Thread(adminClient, adminClient.getName() + "-Thread");

@@ -1,9 +1,6 @@
 package simulation;
 
 import clients.PlayerClient;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import io.FileManager;
 import model.PartialStatePreference;
 import solvers.RandomSolver;
 
@@ -46,7 +43,7 @@ public class PlayerSimulationManager extends SimulationManager<PlayerClient> imp
                     for (int iP = 0; iP < playersToAdd; iP++) {
                         try {
                             final Socket socket = new Socket(ipAddress, port);
-                            PlayerClient playerClient = new PlayerClient(socket, "player" + nameCounter, simulationConfiguration.getTimeInterval(), new PartialStatePreference(simulationConfiguration.getClientPartialStateWidth(), simulationConfiguration.getClientPartialStateHeight()), new RandomSolver()); //TODO GENERALIZE
+                            PlayerClient playerClient = new PlayerClient(socket, "player" + nameCounter, simulationConfiguration.getTimeInterval(), new PartialStatePreference(simulationConfiguration.getPlayerPartialStateWidth(), simulationConfiguration.getPlayerPartialStateHeight()), new RandomSolver()); //TODO GENERALIZE
                             instances.add(playerClient);
                             System.out.println("[" + currentTime + "] - Player '" + playerClient.getName() + "' added.");
                             Thread thread = new Thread(playerClient, playerClient.getName() + "-Thread");

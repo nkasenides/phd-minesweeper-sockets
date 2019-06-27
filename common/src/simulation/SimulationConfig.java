@@ -10,18 +10,23 @@ public class SimulationConfig {
     private int maxPlayers;
     private int gameWidth;
     private int gameHeight;
-    private int clientPartialStateWidth;
-    private int clientPartialStateHeight;
+    private int playerPartialStateWidth;
+    private int playerPartialStateHeight;
+    private int adminPartialStateWidth;
+    private int adminPartialStateHeight;
     private int timeInterval;
     private Difficulty difficulty;
     private ArrayList<AddPlayersEvent> addPlayerEvents;
 
-    public SimulationConfig(int maxPlayers, int gameWidth, int gameHeight, int clientPartialStateWidth, int clientPartialStateHeight, int timeInterval, Difficulty difficulty) {
+    public SimulationConfig(int maxPlayers, int gameWidth, int gameHeight, int playerPartialStateWidth, int playerPartialStateHeight,
+                            int adminPartialStateWidth, int adminPartialStateHeight, int timeInterval, Difficulty difficulty) {
         this.maxPlayers = maxPlayers;
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
-        this.clientPartialStateWidth = clientPartialStateWidth;
-        this.clientPartialStateHeight = clientPartialStateHeight;
+        this.playerPartialStateWidth = playerPartialStateWidth;
+        this.playerPartialStateHeight = playerPartialStateHeight;
+        this.adminPartialStateWidth = adminPartialStateWidth;
+        this.adminPartialStateHeight = adminPartialStateHeight;
         this.timeInterval = timeInterval;
         this.difficulty = difficulty;
         this.addPlayerEvents = new ArrayList<>();
@@ -53,20 +58,20 @@ public class SimulationConfig {
         this.gameHeight = gameHeight;
     }
 
-    public int getClientPartialStateWidth() {
-        return clientPartialStateWidth;
+    public int getPlayerPartialStateWidth() {
+        return playerPartialStateWidth;
     }
 
-    public void setClientPartialStateWidth(int clientPartialStateWidth) {
-        this.clientPartialStateWidth = clientPartialStateWidth;
+    public void setPlayerPartialStateWidth(int playerPartialStateWidth) {
+        this.playerPartialStateWidth = playerPartialStateWidth;
     }
 
-    public int getClientPartialStateHeight() {
-        return clientPartialStateHeight;
+    public int getPlayerPartialStateHeight() {
+        return playerPartialStateHeight;
     }
 
-    public void setClientPartialStateHeight(int clientPartialStateHeight) {
-        this.clientPartialStateHeight = clientPartialStateHeight;
+    public void setPlayerPartialStateHeight(int playerPartialStateHeight) {
+        this.playerPartialStateHeight = playerPartialStateHeight;
     }
 
     public int getTimeInterval() {
@@ -91,6 +96,22 @@ public class SimulationConfig {
 
     public void setAddPlayerEvents(ArrayList<AddPlayersEvent> addPlayerEvents) {
         this.addPlayerEvents = addPlayerEvents;
+    }
+
+    public int getAdminPartialStateWidth() {
+        return adminPartialStateWidth;
+    }
+
+    public int getAdminPartialStateHeight() {
+        return adminPartialStateHeight;
+    }
+
+    public void setAdminPartialStateWidth(int adminPartialStateWidth) {
+        this.adminPartialStateWidth = adminPartialStateWidth;
+    }
+
+    public void setAdminPartialStateHeight(int adminPartialStateHeight) {
+        this.adminPartialStateHeight = adminPartialStateHeight;
     }
 
 }

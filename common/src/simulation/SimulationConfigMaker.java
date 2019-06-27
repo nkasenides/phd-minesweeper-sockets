@@ -13,8 +13,10 @@ public class SimulationConfigMaker {
         //Create config object:
         SimulationConfig config = new SimulationConfig(
                 10,
-                75,
                 50,
+                50,
+                10,
+                10,
                 10,
                 10,
                 0,
@@ -22,12 +24,12 @@ public class SimulationConfigMaker {
         );
 
         //Config name:
-        final String configFileName = "myConfig.sim";
+        final String configFileName = "stresstest.sim";
 
         //Config events:
-        config.getEvents().add(new AddPlayersEvent(1000, 3));
-        config.getEvents().add(new AddPlayersEvent(2000, 3));
-        config.getEvents().add(new AddPlayersEvent(3000, 3));
+        config.getEvents().add(new AddPlayersEvent(1000, 2));
+        config.getEvents().add(new AddPlayersEvent(2000, 2));
+        config.getEvents().add(new AddPlayersEvent(3000, 2));
 
         //Convert to JSON:
         Gson gson = new Gson();
