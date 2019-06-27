@@ -27,9 +27,7 @@ public class SimulationConfigMaker {
         final String configFileName = "stresstest.sim";
 
         //Config events:
-        config.getEvents().add(new AddPlayersEvent(1000, 2));
-        config.getEvents().add(new AddPlayersEvent(2000, 2));
-        config.getEvents().add(new AddPlayersEvent(3000, 2));
+        config.getEvents().add(new AddPlayersEvent(50, 10000));
 
         //Convert to JSON:
         Gson gson = new Gson();
