@@ -12,32 +12,32 @@ import response.ResponseStatus;
 import services.LocalAdminService;
 import services.LocalMasterService;
 import services.LocalUserService;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Server implements Runnable {
 
-    public static final int SERVER_PORT = 12345;
+    private static final int SERVER_PORT = 12345;
     private static final boolean DEBUG = false;
     private static final LocalAdminService ADMIN_SERVICE = new LocalAdminService();
     private static final LocalMasterService MASTER_SERVICE = new LocalMasterService();
     private static final LocalUserService USER_SERVICE = new LocalUserService();
+    private static final CopyOnWriteArrayList<Server> serverInstances = new CopyOnWriteArrayList<>(); //See: https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/CopyOnWriteArrayList.html
+//    private static final List<Server> serverInstances = Collections.synchronizedList(new ArrayList<>());
+    private static int nameCounter = 1;
 
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
     private Socket socket;
-
+    private String name;
     private String clientSessionID;
 
-    public  Server(Socket socket) throws IOException {
+    private  Server(Socket socket, String name) throws IOException {
         this.socket = socket;
+        this.name = name;
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         printWriter = new PrintWriter(socket.getOutputStream());
     }
@@ -167,15 +167,13 @@ public class Server implements Runnable {
         } catch (SocketTimeoutException e) {
             System.out.println("Client disconnected.");
         } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
+            System.out.println("Client with IP " + socket.getInetAddress() + " has disconnected.");
         }
     }
 
-    public PrintWriter getPrintWriter() {
+    private PrintWriter getPrintWriter() {
         return printWriter;
     }
-
-    public static ArrayList<Server> serverInstances = new ArrayList<>();
 
     /**
      * Find when serverInstances need an update and send the appropriate partial game state back to them.
@@ -184,7 +182,7 @@ public class Server implements Runnable {
      */
     public static void updateClients(String gameToken, String updaterSessionID) {
 
-        for (Server serverInstance : serverInstances) {
+        for (final Server serverInstance : serverInstances) {
             if (serverInstance.clientSessionID != null) {
                 Session session = Datastore.getSession(serverInstance.clientSessionID);
                 if (session == null) throw new RuntimeException("The server instance has an invalid session ID '" + serverInstance.clientSessionID + "'.");
@@ -237,9 +235,11 @@ public class Server implements Runnable {
                 if (DEBUG) System.out.println("Waiting for inbound connection...");
                 Socket socket = serverSocket.accept();
                 if (DEBUG) System.out.println("New connection from: " + socket.getInetAddress() + ":" + socket.getPort());
-                Server server = new Server(socket);
+                Server server = new Server(socket, "Server-" + nameCounter + "-Thread");
                 serverInstances.add(server);
-                new Thread(server).start();
+                Thread t = new Thread(server, server.name);
+                t.start();
+                nameCounter++;
             }
         } catch (IOException ioe) {
             throw new RuntimeException(ioe);
