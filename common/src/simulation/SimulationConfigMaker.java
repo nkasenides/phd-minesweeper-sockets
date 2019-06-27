@@ -17,8 +17,8 @@ public class SimulationConfigMaker {
                 50,
                 10,
                 10,
-                10,
-                10,
+                50,
+                50,
                 0,
                 Difficulty.EASY
         );
