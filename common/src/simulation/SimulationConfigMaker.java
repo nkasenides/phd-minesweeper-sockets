@@ -12,13 +12,13 @@ public class SimulationConfigMaker {
 
         //Create config object:
         SimulationConfig config = new SimulationConfig(
+                10000,
+                1000,
+                1000,
                 10,
-                50,
-                50,
                 10,
                 10,
-                50,
-                50,
+                10,
                 0,
                 Difficulty.EASY
         );

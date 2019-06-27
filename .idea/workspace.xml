@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="69a611ff-23d4-450c-bedc-1adc64208b5a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/simulation/AdminSimulationManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/simulation/AdminSimulationManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SimulationConfigs/stresstest.sim" beforeDir="false" afterPath="$PROJECT_DIR$/SimulationConfigs/stresstest.sim" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/simulation/AdminSimulationManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+            <state relative-caret-position="-336">
+              <caret line="18" column="39" lean-forward="true" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -60,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="22" column="46" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
+            <state relative-caret-position="204">
+              <caret line="73" column="77" selection-start-line="73" selection-start-column="77" selection-end-line="73" selection-end-column="77" />
               <folding>
                 <element signature="method#startGame#0;class#AdminClient#0" />
                 <element signature="method#subscribeToGame#0;class#AdminClient#0" />
@@ -72,10 +71,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="29" column="36" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-17">
-              <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+            <state relative-caret-position="56">
+              <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -173,7 +181,6 @@
         <option value="$PROJECT_DIR$/common/src/model/BoardState.java" />
         <option value="$PROJECT_DIR$/common/src/model/PartialBoardState.java" />
         <option value="$PROJECT_DIR$/client/src/ui/component/MinesweeperButton.java" />
-        <option value="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" />
         <option value="$PROJECT_DIR$/common/src/simulation/LatencyMeasurement.java" />
         <option value="$PROJECT_DIR$/common/src/simulation/MemoryMeasurement.java" />
         <option value="$PROJECT_DIR$/common/src/example/Response.java" />
@@ -210,8 +217,9 @@
         <option value="$PROJECT_DIR$/server/src/server/Server.java" />
         <option value="$PROJECT_DIR$/client/src/clients/AdminClient.java" />
         <option value="$PROJECT_DIR$/common/src/simulation/SimulationConfig.java" />
-        <option value="$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java" />
         <option value="$PROJECT_DIR$/client/src/simulation/AdminSimulationManager.java" />
+        <option value="$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java" />
+        <option value="$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java" />
       </list>
     </option>
   </component>
@@ -264,6 +272,23 @@
               <item name="client" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="form" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Minesweeper Sockets" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="form" type="462c0819:PsiDirectoryNode" />
+              <item name="AdminGameForm" type="e9f4de52:FormNode" />
             </path>
             <path>
               <item name="Minesweeper Sockets" type="b2602c69:ProjectViewProjectNode" />
@@ -365,11 +390,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.AdminClient">
+  <component name="RunManager" selected="Application.SimulationConfigMaker">
     <configuration name="AdminClient" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="clients.AdminClient" />
       <module name="client" />
-      <option name="PROGRAM_PARAMETERS" value="localhost stresstest.sim gui" />
+      <option name="PROGRAM_PARAMETERS" value="localhost stresstest.sim" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -473,12 +498,12 @@
       <workItem from="1561272575918" duration="11155000" />
       <workItem from="1561403871592" duration="4056000" />
       <workItem from="1561450959933" duration="626000" />
-      <workItem from="1561618233144" duration="4879000" />
+      <workItem from="1561618233144" duration="5882000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="154248000" />
+    <option name="totallyTimeSpent" value="155251000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -493,7 +518,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25053304" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25053304" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -502,7 +527,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32936078" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.32502708" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.32502708" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5146262" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -544,7 +569,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/common/src/example/Response.java" />
     <entry file="file://$PROJECT_DIR$/common/src/example/ErrorResponse.java" />
     <entry file="file://$PROJECT_DIR$/common/src/model/GameState.java" />
     <entry file="file://$PROJECT_DIR$/Server-Simulation-[with50631] @ 2019-05-30 14.11.37.454.json" />
@@ -577,13 +601,6 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_131/src.zip!/java/lang/Thread.java" />
     <entry file="file://$PROJECT_DIR$/client/src/ui/form/PlayerGameForm.form">
       <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="83" column="41" selection-start-line="83" selection-start-column="41" selection-end-line="83" selection-end-column="41" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/solvers/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -817,18 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="22" column="46" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
-          <folding>
-            <element signature="method#startGame#0;class#AdminClient#0" />
-            <element signature="method#subscribeToGame#0;class#AdminClient#0" />
-            <element signature="method#viewGame#0;class#AdminClient#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -856,16 +861,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-17">
-          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/clients/PlayerClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-326">
@@ -885,8 +880,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/simulation/AdminSimulationManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="25" selection-start-line="34" selection-start-column="25" selection-end-line="34" selection-end-column="25" />
+        <state relative-caret-position="-336">
+          <caret line="18" column="39" lean-forward="true" selection-start-line="18" selection-start-column="39" selection-end-line="18" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SimulationConfigs/stresstest.sim">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/clients/AdminClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="73" column="77" selection-start-line="73" selection-start-column="77" selection-end-line="73" selection-end-column="77" />
+          <folding>
+            <element signature="method#startGame#0;class#AdminClient#0" />
+            <element signature="method#subscribeToGame#0;class#AdminClient#0" />
+            <element signature="method#viewGame#0;class#AdminClient#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/ui/form/AdminGameForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="29" column="36" lean-forward="true" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/simulation/SimulationConfigMaker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
