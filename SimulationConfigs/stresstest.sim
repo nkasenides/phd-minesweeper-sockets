@@ -1,1 +1,2513 @@
-{"maxPlayers":1000,"gameWidth":1000,"gameHeight":1000,"playerPartialStateWidth":10,"playerPartialStateHeight":10,"adminPartialStateWidth":10,"adminPartialStateHeight":10,"timeInterval":0,"difficulty":"EASY","addPlayerEvents":[{"numOfPlayersToAdd":10000,"eventType":"ADD_PLAYERS_EVENT","executionTime":50}]}
+{
+  "maxPlayers": 100000,
+  "gameWidth": 1280,
+  "gameHeight": 1280,
+  "playerPartialStateWidth": 10,
+  "playerPartialStateHeight": 10,
+  "adminPartialStateWidth": 10,
+  "adminPartialStateHeight": 10,
+  "timeInterval": 0,
+  "difficulty": "EASY",
+  "addPlayerEvents": [
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 0
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 1000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 2000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 3000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 4000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 5000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 6000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 7000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 8000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 9000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 10000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 11000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 12000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 13000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 14000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 15000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 16000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 17000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 18000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 19000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 20000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 21000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 22000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 23000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 24000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 25000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 26000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 27000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 28000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 29000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 30000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 31000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 32000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 33000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 34000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 35000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 36000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 37000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 38000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 39000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 40000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 41000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 42000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 43000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 44000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 45000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 46000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 47000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 48000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 49000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 50000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 51000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 52000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 53000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 54000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 55000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 56000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 57000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 58000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 59000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 60000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 61000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 62000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 63000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 64000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 65000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 66000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 67000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 68000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 69000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 70000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 71000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 72000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 73000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 74000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 75000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 76000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 77000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 78000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 79000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 80000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 81000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 82000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 83000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 84000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 85000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 86000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 87000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 88000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 89000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 90000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 91000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 92000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 93000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 94000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 95000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 96000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 97000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 98000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 99000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 100000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 101000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 102000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 103000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 104000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 105000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 106000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 107000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 108000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 109000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 110000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 111000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 112000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 113000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 114000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 115000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 116000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 117000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 118000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 119000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 120000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 121000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 122000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 123000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 124000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 125000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 126000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 127000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 128000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 129000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 130000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 131000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 132000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 133000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 134000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 135000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 136000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 137000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 138000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 139000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 140000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 141000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 142000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 143000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 144000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 145000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 146000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 147000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 148000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 149000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 150000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 151000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 152000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 153000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 154000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 155000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 156000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 157000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 158000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 159000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 160000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 161000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 162000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 163000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 164000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 165000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 166000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 167000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 168000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 169000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 170000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 171000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 172000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 173000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 174000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 175000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 176000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 177000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 178000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 179000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 180000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 181000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 182000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 183000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 184000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 185000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 186000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 187000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 188000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 189000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 190000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 191000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 192000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 193000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 194000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 195000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 196000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 197000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 198000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 199000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 200000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 201000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 202000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 203000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 204000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 205000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 206000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 207000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 208000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 209000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 210000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 211000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 212000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 213000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 214000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 215000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 216000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 217000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 218000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 219000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 220000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 221000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 222000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 223000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 224000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 225000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 226000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 227000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 228000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 229000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 230000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 231000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 232000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 233000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 234000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 235000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 236000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 237000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 238000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 239000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 240000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 241000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 242000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 243000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 244000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 245000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 246000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 247000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 248000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 249000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 250000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 251000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 252000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 253000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 254000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 255000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 256000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 257000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 258000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 259000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 260000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 261000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 262000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 263000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 264000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 265000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 266000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 267000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 268000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 269000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 270000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 271000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 272000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 273000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 274000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 275000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 276000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 277000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 278000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 279000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 280000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 281000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 282000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 283000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 284000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 285000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 286000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 287000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 288000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 289000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 290000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 291000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 292000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 293000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 294000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 295000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 296000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 297000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 298000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 299000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 300000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 301000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 302000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 303000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 304000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 305000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 306000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 307000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 308000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 309000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 310000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 311000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 312000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 313000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 314000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 315000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 316000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 317000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 318000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 319000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 320000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 321000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 322000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 323000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 324000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 325000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 326000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 327000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 328000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 329000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 330000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 331000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 332000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 333000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 334000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 335000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 336000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 337000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 338000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 339000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 340000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 341000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 342000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 343000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 344000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 345000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 346000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 347000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 348000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 349000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 350000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 351000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 352000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 353000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 354000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 355000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 356000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 357000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 358000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 359000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 360000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 361000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 362000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 363000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 364000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 365000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 366000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 367000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 368000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 369000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 370000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 371000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 372000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 373000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 374000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 375000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 376000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 377000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 378000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 379000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 380000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 381000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 382000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 383000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 384000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 385000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 386000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 387000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 388000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 389000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 390000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 391000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 392000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 393000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 394000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 395000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 396000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 397000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 398000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 399000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 400000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 401000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 402000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 403000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 404000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 405000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 406000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 407000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 408000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 409000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 410000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 411000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 412000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 413000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 414000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 415000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 416000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 417000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 418000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 419000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 420000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 421000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 422000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 423000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 424000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 425000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 426000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 427000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 428000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 429000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 430000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 431000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 432000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 433000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 434000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 435000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 436000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 437000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 438000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 439000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 440000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 441000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 442000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 443000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 444000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 445000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 446000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 447000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 448000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 449000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 450000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 451000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 452000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 453000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 454000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 455000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 456000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 457000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 458000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 459000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 460000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 461000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 462000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 463000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 464000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 465000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 466000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 467000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 468000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 469000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 470000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 471000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 472000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 473000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 474000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 475000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 476000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 477000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 478000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 479000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 480000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 481000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 482000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 483000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 484000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 485000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 486000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 487000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 488000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 489000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 490000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 491000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 492000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 493000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 494000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 495000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 496000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 497000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 498000
+    },
+    {
+      "numOfPlayersToAdd": 50,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 499000
+    }
+  ]
+}

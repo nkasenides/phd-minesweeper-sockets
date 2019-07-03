@@ -33,6 +33,7 @@ public class PlayerClient implements Runnable {
 
     private PrintWriter printWriter;
     private BufferedReader bufferedReader;
+    private Socket socket;
     private String name;
     private final int turnInterval;
     private final PartialStatePreference partialStatePreference;
@@ -54,6 +55,7 @@ public class PlayerClient implements Runnable {
 
     public PlayerClient(Socket socket, String name, int turnInterval, PartialStatePreference partialStatePreference, Solver solver) throws IOException {
         this.name = name;
+        this.socket = socket;
         this.turnInterval = turnInterval;
         this.solver = solver;
         this.partialStatePreference = partialStatePreference;
@@ -61,6 +63,10 @@ public class PlayerClient implements Runnable {
         bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
         FileManager.createDirectory(dirName, false);
+    }
+
+    public Socket getSocket() {
+        return socket;
     }
 
     public String getName() {
@@ -88,6 +94,18 @@ public class PlayerClient implements Runnable {
             initializeState();
 
             if (DEBUG) System.out.println(name + ": Starting to play!");
+
+            if (FileManager.fileIsDirectory(dirName)) {
+                //Write to file:
+                try {
+                    FileManager.writeFile(dirName + "/" + filename, "players,latency");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                System.out.println("Failed to write results to file - directory 'Simulations' could not be created.");
+            }
 
             //While the game is not over, keep making moves:
             Gson gson = new Gson();
@@ -291,6 +309,7 @@ public class PlayerClient implements Runnable {
 
         playerSimulationManager = new PlayerSimulationManager(simulationFilepath, ipAddress, SERVER_PORT);
         Thread thread = new Thread(playerSimulationManager, "PlayerSimulationManager-Thread");
+        thread.setPriority(10);
         thread.start();
 
     }

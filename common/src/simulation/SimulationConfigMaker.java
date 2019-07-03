@@ -1,6 +1,7 @@
 package simulation;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.FileManager;
 import model.Difficulty;
 
@@ -12,9 +13,9 @@ public class SimulationConfigMaker {
 
         //Create config object:
         SimulationConfig config = new SimulationConfig(
-                10000,
-                1000,
-                1000,
+                100000,
+                1280,
+                1280,
                 10,
                 10,
                 10,
@@ -27,10 +28,19 @@ public class SimulationConfigMaker {
         final String configFileName = "stresstest.sim";
 
         //Config events:
-        config.getEvents().add(new AddPlayersEvent(50, 10000));
+        int seconds = 0;
+        int addedPlayers = 0;
+        final int playersToAdd = 50;
+        final int interval = 1000;
+
+        while (addedPlayers < 25000) {
+            config.getEvents().add(new AddPlayersEvent(seconds, playersToAdd));
+            seconds += interval;
+            addedPlayers += playersToAdd;
+        }
 
         //Convert to JSON:
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String configJSON = gson.toJson(config);
 
         //Check simulation config directory and create it:

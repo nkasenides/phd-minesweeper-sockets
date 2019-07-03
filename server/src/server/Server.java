@@ -21,7 +21,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Server implements Runnable {
 
     private static final int SERVER_PORT = 12345;
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     private static final LocalAdminService ADMIN_SERVICE = new LocalAdminService();
     private static final LocalMasterService MASTER_SERVICE = new LocalMasterService();
     private static final LocalUserService USER_SERVICE = new LocalUserService();
@@ -167,7 +167,7 @@ public class Server implements Runnable {
         } catch (SocketTimeoutException e) {
             System.out.println("Client disconnected.");
         } catch (IOException ioe) {
-            System.out.println("Client with IP " + socket.getInetAddress() + " has disconnected.");
+            System.out.println("Client with IP " + socket.getInetAddress() + socket.getPort() + " has disconnected.");
         }
     }
 
@@ -228,7 +228,7 @@ public class Server implements Runnable {
         try {
             System.out.println("Starting server...");
             System.out.println("Creating server socket at: " + SERVER_PORT);
-            final ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
+            final ServerSocket serverSocket = new ServerSocket(SERVER_PORT, 500);
             System.out.println("Socket created, port " + SERVER_PORT);
 
             while (true) {

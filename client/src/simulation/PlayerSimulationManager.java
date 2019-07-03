@@ -10,6 +10,13 @@ import java.util.ArrayList;
 
 public class PlayerSimulationManager extends SimulationManager<PlayerClient> implements Runnable {
 
+    private static final boolean SHOW_PROGRESS = true;
+    public static final int PROGRESS_TIME = 5000; //Show progress every 5 seconds.
+    private long delay = 0;
+    private long lastTickTime = 0;
+    private boolean progressSymbol = true;
+    private int progressLineWidth = 0;
+
     public PlayerSimulationManager(String configurationFilepath, String ipAddress, int port) {
         super(configurationFilepath, ipAddress, port);
     }
@@ -22,16 +29,37 @@ public class PlayerSimulationManager extends SimulationManager<PlayerClient> imp
             return;
         }
 
-        System.out.println("Simulation '" + CONFIGURATION_FILEPATH + "' started");
+        System.out.println("Simulation '" + CONFIGURATION_FILEPATH + "' started" + System.lineSeparator());
+
         startTime = System.currentTimeMillis();
 
         while (true) {
 
+            //Time management:
             final long currentTime = System.currentTimeMillis() - startTime;
+
+            if (SHOW_PROGRESS) {
+                delay += currentTime - lastTickTime;
+                if (delay >= PROGRESS_TIME) {
+                    if (lastTickTime != 0) {
+                        if (progressSymbol) {
+                            System.out.print("+");
+                        } else {
+                            System.out.print("O");
+                        }
+                        progressSymbol = !progressSymbol;
+                        progressLineWidth++;
+                        if (progressLineWidth % 80 == 0) System.out.println();
+                    }
+                    delay = 0;
+                }
+                lastTickTime = currentTime;
+            }
+
 
             ArrayList<Integer> executedEventIndexes = new ArrayList<>();
 
-            //Check all events and execute them if their time has come up:
+            //Check all events and execute them if their time is <= current time:
             for (int i = 0; i < simulationConfiguration.getEvents().size(); i++) {
                 if (currentTime >= simulationConfiguration.getEvents().get(i).getExecutionTime()) {
 
@@ -39,20 +67,25 @@ public class PlayerSimulationManager extends SimulationManager<PlayerClient> imp
                     executedEventIndexes.add(i);
 
                     AddPlayersEvent addPlayersEvent = simulationConfiguration.getEvents().get(i);
+                    final ArrayList<Thread> currentThreadAddList = new ArrayList<>();
                     int playersToAdd = (addPlayersEvent.getNumOfPlayersToAdd() > simulationConfiguration.getMaxPlayers() - instances.size()) ? simulationConfiguration.getMaxPlayers() - instances.size() : addPlayersEvent.getNumOfPlayersToAdd();
                     for (int iP = 0; iP < playersToAdd; iP++) {
                         try {
                             final Socket socket = new Socket(ipAddress, port);
                             PlayerClient playerClient = new PlayerClient(socket, "player" + nameCounter, simulationConfiguration.getTimeInterval(), new PartialStatePreference(simulationConfiguration.getPlayerPartialStateWidth(), simulationConfiguration.getPlayerPartialStateHeight()), new RandomSolver()); //TODO GENERALIZE
                             instances.add(playerClient);
-//                            System.out.println("[" + currentTime + "] - Player '" + playerClient.getName() + "' added.");
+                            System.out.println("[" + currentTime + "] - Player '" + playerClient.getName() + "' added.");
                             Thread thread = new Thread(playerClient, playerClient.getName() + "-Thread");
                             threads.add(thread);
-                            thread.start();
+                            currentThreadAddList.add(thread);
                             nameCounter++;
                         } catch (IOException ioe) {
-                            throw new RuntimeException(ioe);
+                            System.out.println("Failed to instantiate player " + nameCounter + ". The backlog is probably full, waiting...");
                         }
+                    }
+
+                    for (final Thread t : currentThreadAddList) {
+                        t.start();
                     }
 
                 }
