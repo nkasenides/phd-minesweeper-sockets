@@ -143,11 +143,13 @@ public class AdminClient implements Runnable {
             //Convert to JSON and send:
             Gson gson = new Gson();
             String commandJSON = gson.toJson(command);
+            final long requestTime = System.currentTimeMillis();
             printWriter.println(commandJSON);
             printWriter.flush();
 
             //Wait for and print reply:
             String reply = bufferedReader.readLine();
+            System.out.println("Create game latency: " + (System.currentTimeMillis() - requestTime));
 
             Response createResponse = gson.fromJson(reply, Response.class);
             if (createResponse.getStatus() == OK) {

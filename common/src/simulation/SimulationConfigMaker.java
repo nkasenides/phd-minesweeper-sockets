@@ -13,27 +13,27 @@ public class SimulationConfigMaker {
 
         //Create config object:
         SimulationConfig config = new SimulationConfig(
-                100000,
-                1280,
-                1280,
+                5,
                 10,
                 10,
-                10,
-                10,
+                5,
+                5,
+                5,
+                5,
                 0,
                 Difficulty.EASY
         );
 
         //Config name:
-        final String configFileName = "stresstest.sim";
+        final String configFileName = "simulation.sim";
 
         //Config events:
         int seconds = 0;
         int addedPlayers = 0;
-        final int playersToAdd = 50;
+        final int playersToAdd = 2;
         final int interval = 1000;
 
-        while (addedPlayers < 25000) {
+        while (addedPlayers < 2) {
             config.getEvents().add(new AddPlayersEvent(seconds, playersToAdd));
             seconds += interval;
             addedPlayers += playersToAdd;

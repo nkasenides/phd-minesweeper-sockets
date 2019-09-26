@@ -1,0 +1,18 @@
+{
+  "maxPlayers": 5,
+  "gameWidth": 10,
+  "gameHeight": 10,
+  "playerPartialStateWidth": 5,
+  "playerPartialStateHeight": 5,
+  "adminPartialStateWidth": 5,
+  "adminPartialStateHeight": 5,
+  "timeInterval": 0,
+  "difficulty": "EASY",
+  "addPlayerEvents": [
+    {
+      "numOfPlayersToAdd": 2,
+      "eventType": "ADD_PLAYERS_EVENT",
+      "executionTime": 0
+    }
+  ]
+}
